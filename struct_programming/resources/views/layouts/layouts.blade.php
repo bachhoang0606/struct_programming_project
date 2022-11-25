@@ -13,6 +13,9 @@
     <div class="container bg-info">
         <h1 >Heare is the layout</h1>
         <p>here is some thing dis play nav, section, ....</p>
+        <div class = "header">
+           
+        </div>
     </div>
     <hr>
     <div class="container bg-warning">
