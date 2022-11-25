@@ -1,13 +1,19 @@
 @extends('layouts.layouts')
-
+@vite(['resources/css/demo.css'])
 @section('content')
-    <h1>Heare is the index page <br>{{$data}}</h1>
-    <div class="container">
-        <div class="row">
-            <div class="col-3 p-3 bg-primary text-white">.col</div>
-            <div class="col-3 p-3 bg-dark text-white">.col</div>
-            <div class="col-3 p-3 bg-primary text-white">.col</div>
-          </div>
+
+    <div class="container-voucher">
+        <div class="voucher-name">
+            <span>Mien phi van chuyen</span>
+        </div>
+        <div class="voucher-body">
+            <div class="voucher-conent">
+                <h3>don hang dau tien</h3>
+                <h4>khong gioi han gia tri khuyen mai toi da</h4>
+                <h4>co hieu luc tu 21.11</h4>
+            </div>
+           <button class="btn">Luu</button>
+        </div>
     </div>
     
 @endsection
