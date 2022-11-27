@@ -19,8 +19,6 @@
     <div class="container-wrap">
 
         @yield('content')
-        @yield('content')
-        @yield('content')
     </div>
     
 <hr>
