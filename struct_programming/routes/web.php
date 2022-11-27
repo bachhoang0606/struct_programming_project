@@ -22,3 +22,4 @@ Route::get('/', function () {
 Route::resource('vouchers', VoucherController::class);
 
 Route::get('index', [VoucherController::class, 'index']);
+Route::get('/poin_card', [VoucherController::class, 'poin_card']);

@@ -1,5 +1,5 @@
 @extends('layouts.layouts')
-@vite(['resources/css/demo.css'])
+{{-- @vite(['resources/css/demo.css']) --}}
 @section('content')
     <div class="container-voucher">
         <div class="voucher-name">
