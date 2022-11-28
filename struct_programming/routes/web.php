@@ -26,7 +26,6 @@ Route::get('index', [VoucherController::class, 'index']);
 
 Route::get('vouchers', [VoucherController::class, 'create']);
 
-Route::get('test', function () {
-    return view('vouchers.test');
-    //return view('vouchers.create');
-});
+
+Route::get('/poin_card', [VoucherController::class, 'poin_card']);
+
