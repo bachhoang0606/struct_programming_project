@@ -15,5 +15,10 @@
         </div>
 
     </div>
+    @foreach ($voucher_list as $item)
+        @php
+            dd($item);
+        @endphp
+    @endforeach
     
 @endsection

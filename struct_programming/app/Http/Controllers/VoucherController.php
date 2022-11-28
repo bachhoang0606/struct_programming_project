@@ -2,7 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Freeship;
+use App\Models\PercentDiscount;
 use App\Models\PoinCard;
+use App\Models\PriceDiscount;
+use App\Models\Voucher;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\View;
 
@@ -17,7 +21,10 @@ class VoucherController extends Controller
     public function index()
     {
         //
-        return view("vouchers.index", ['data' => 'is index']);
+        $freeships = Freeship::all();
+        $priceDiscount = $freeships->merge(PriceDiscount::all());
+        $voucher_list = $priceDiscount->merge(PercentDiscount::all());
+        return view("vouchers.index", ['voucher_list' => $voucher_list]);
     }
 
     /**
@@ -28,7 +35,7 @@ class VoucherController extends Controller
     public function create()
     {
         //
-        return view("vouchers.create", ['data' => 'is create']);
+        return view("vouchers.create");
     }
 
     /**
