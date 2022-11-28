@@ -1,5 +1,4 @@
 @extends('layouts.layouts')
-{{-- @vite(['resources/css/demo.css']) --}}
 @section('content')
 
     <div class="container-voucher">
@@ -16,5 +15,10 @@
         </div>
 
     </div>
+    @foreach ($voucher_list as $item)
+        @php
+            dd($item);
+        @endphp
+    @endforeach
     
 @endsection
