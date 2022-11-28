@@ -1,5 +1,4 @@
 @extends('layouts.layouts')
-@vite(['resources/css/demo.css'])
 @section('content')
     <div class="container-voucher">
         <div class="voucher-name">
@@ -11,7 +10,7 @@
                 <h4>khong gioi han gia tri khuyen mai toi da</h4>
                 <h4>co hieu luc tu 21.11</h4>
             </div>
-           <button class="btn">Luu</button>
+           <a class="link">chi tiet</a>
         </div>
     </div>
     
