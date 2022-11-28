@@ -16,6 +16,7 @@ use App\Http\Controllers\VoucherController;
 */
 
 Route::get('/', function () {
+
     return view('welcome');
     //return view('vouchers.create');
 });
