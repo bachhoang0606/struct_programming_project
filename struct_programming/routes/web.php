@@ -17,8 +17,16 @@ use App\Http\Controllers\VoucherController;
 
 Route::get('/', function () {
     return view('welcome');
+    //return view('vouchers.create');
 });
 
 Route::resource('vouchers', VoucherController::class);
 
 Route::get('index', [VoucherController::class, 'index']);
+
+Route::get('vouchers', [VoucherController::class, 'create']);
+
+Route::get('test', function () {
+    return view('vouchers.test');
+    //return view('vouchers.create');
+});

@@ -8,6 +8,14 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <title>Document</title>
+    <style>
+        .center {
+            margin: auto;
+            width: 30%;
+            border: 3px solid white;
+            padding: 10px; 
+        }
+    </style>
 </head>
 <body>
     <div class="container bg-info">
@@ -15,8 +23,7 @@
         <p>here is some thing dis play nav, section, ....</p>
     </div>
     <hr>
-    <div class="container bg-warning">
-
+    <div class="center">
         @yield('content')
     </div>
     
