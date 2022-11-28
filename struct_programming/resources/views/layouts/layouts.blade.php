@@ -8,7 +8,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
     <title>Document</title>
     <link rel="stylesheet" type="text/css" href="/css/style.css">
-    
+
 </head>
 <body>
     <div class="container bg-info">

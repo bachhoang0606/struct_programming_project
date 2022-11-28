@@ -17,7 +17,6 @@ class VoucherController extends Controller
     public function index()
     {
         //
-        
         return view("vouchers.index", ['data' => 'is index']);
     }
 
