@@ -1,5 +1,6 @@
 @extends('layouts.layouts')
 @section('content')
+
     <div class="container-voucher">
         <div class="voucher-name">
             <span>Mien phi van chuyen</span>
@@ -12,6 +13,7 @@
             </div>
            <a class="link">chi tiet</a>
         </div>
+
     </div>
     
 @endsection
