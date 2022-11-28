@@ -166,7 +166,7 @@
 
     <!--     
     <hr>
-    <div class="container bg-warning">
+    <div class="container-wrap">
 
         @yield('content')
     </div>

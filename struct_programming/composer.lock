@@ -4,8 +4,70 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "ccbd816a07b206f971042295b899d1ba",
+    "content-hash": "0750c0a719c32191eb88dd6771e6d7b1",
     "packages": [
+        {
+            "name": "botble/assets",
+            "version": "1.0.23",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/botble/laravel-assets.git",
+                "reference": "187a12d43717e6455e63127af751240f97e183cc"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/botble/laravel-assets/zipball/187a12d43717e6455e63127af751240f97e183cc",
+                "reference": "187a12d43717e6455e63127af751240f97e183cc",
+                "shasum": ""
+            },
+            "require": {
+                "laravel/framework": "^5.6|^6|^7|^8|^9",
+                "php": "^7.1.3|^8.0|^8.1"
+            },
+            "require-dev": {
+                "mockery/mockery": "^1.0",
+                "phpunit/phpunit": "^6.1|^7.0|^8.0|^9.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Botble\\Assets\\Providers\\AssetsServiceProvider"
+                    ],
+                    "aliases": {
+                        "Assets": "Botble\\Assets\\Facades\\AssetsFacade"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Botble\\Assets\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Sang Nguyen",
+                    "email": "sangnguyenplus@gmail.com"
+                }
+            ],
+            "description": "Laravel assets management",
+            "homepage": "https://botble.com",
+            "keywords": [
+                "botble",
+                "botble assets",
+                "botble cms",
+                "botble platform"
+            ],
+            "support": {
+                "issues": "https://github.com/botble/laravel-assets/issues",
+                "source": "https://github.com/botble/laravel-assets/tree/1.0.23"
+            },
+            "time": "2022-08-06T23:37:22+00:00"
+        },
         {
             "name": "brick/math",
             "version": "0.10.2",

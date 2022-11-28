@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\PoinCard;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\View;
 
@@ -16,7 +17,6 @@ class VoucherController extends Controller
     public function index()
     {
         //
-        
         return view("vouchers.index", ['data' => 'is index']);
     }
 
@@ -85,5 +85,12 @@ class VoucherController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    // GET method
+    public function poin_card(){
+
+        $poinCards = PoinCard::all();
+        return view('vouchers.poin_card', ['poinCards' => $poinCards]);
     }
 }
