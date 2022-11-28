@@ -16,7 +16,7 @@ use App\Http\Controllers\VoucherController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('layouts/layouts');
 });
 
 Route::resource('vouchers', VoucherController::class);
