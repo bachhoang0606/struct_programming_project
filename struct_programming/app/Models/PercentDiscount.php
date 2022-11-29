@@ -10,6 +10,12 @@ class PercentDiscount extends Model
     use HasFactory;
     protected $primaryKey = 'voucher_id';
 
+    protected $fillable = [
+        'voucher_id',
+        'percent',
+        'max_price',
+    ];
+
     public function voucher(){
         return $this->belongsTo(Voucher::class);
     }

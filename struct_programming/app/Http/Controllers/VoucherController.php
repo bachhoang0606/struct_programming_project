@@ -22,9 +22,9 @@ class VoucherController extends Controller
     {
         //
         $freeships = Freeship::all();
-        $priceDiscount = $freeships->merge(PriceDiscount::all());
-        $voucher_list = $priceDiscount->merge(PercentDiscount::all());
-        return view("vouchers.index", ['voucher_list' => $voucher_list]);
+        $price_discounts = PriceDiscount::all();
+        $percent_discounts = PercentDiscount::all();
+        return view("vouchers.index", ['freeships' => $freeships, 'price_discounts' => $price_discounts, 'percent_discounts' => $percent_discounts]);
     }
 
     /**
@@ -47,6 +47,8 @@ class VoucherController extends Controller
     public function store(Request $request)
     {
         //
+        
+        
     }
 
     /**
