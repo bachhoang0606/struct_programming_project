@@ -36,12 +36,12 @@ class DatabaseSeeder extends Seeder
             ['voucher_id' => '2' , 'price' => '12000'],
         ]);
 
-        DB::table('percentDiscounts')->insert([
+        DB::table('percent_discounts')->insert([
             ['voucher_id' => '3', 'percent' => '50', 'max_price' => '500000'],
             ['voucher_id' => '4', 'percent' => '50', 'max_price' => '500000'],
         ]);
 
-        DB::table('priceDiscounts')->insert([
+        DB::table('price_discounts')->insert([
             ['voucher_id' => '5' , 'price' => '12000'],
             ['voucher_id' => '6' , 'price' => '12000'],
         ]);
