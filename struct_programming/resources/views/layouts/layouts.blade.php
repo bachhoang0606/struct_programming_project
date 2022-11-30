@@ -13,79 +13,80 @@
         * {
             padding: 0;
             margin: 0;
-            box-sizing: border-box;
         }
-        .row{
-            margin:0;
+        .row {
+            margin: 0;
         }
         html {
             font-family: Arial, Helvetica, sans-serif;
         }
-
-        .header {
-            height: 80px;
-            background-color: rgb(248, 129, 18);
-            text-align: center;
+        .navbar {
+            height: 100px;
         }
-
-        #nav li {
+        .navbar ul {
+            list-style-type: none;
+            width: 100%;
+            top: 0;
+            background-color: rgb(23, 36, 48);
+            position: fixed;
+        }
+        .navbar li {
             display: inline-block;
         }
-
-        #nav li:hover {
-            color: white;
-            background-color: #333;
+        .navbar li:hover {
+            background-color: white;
         }
-
-        #nav li a {
+        .navbar li a:hover {
+            color: black;
+        }
+        .navbar li a {
             color: white;
-            font-size: 40px;
-            line-height: 80px;
+            font-size: 45px;
+            line-height: 100px;
             padding: 0 80px;
             text-decoration: none;
-            /* font-weight: bold; */
         }
-
         .content {
-            height: 800px;
+            height: 2000px;
         }
-
-        .section {
-            /* background-color: rgb(236, 71, 71); */
-            height: 800px;
-        }
-
-        button {
-            background-color: rgb(236, 71, 71);
-            text-align: center;
-        }
-
-        .aside {
-            background-color: rgb(255, 255, 255);
-            height: 800px;
+        .aside{
+            height: 1700px;
         }
 
         .footer {
             padding: 20px;
             height: 300px;
             background-color: rgb(248, 242, 242);
+      
         }
-        .button{
-            height: 200px;
-            width: 300px;
-            border: solid 4px orange;
-            margin:100px auto;
-            border-radius: 10px;
+        .footer a {
+            text-decoration: none;
+            color: black;
+            font-size: 20px;
         }
-        .button:hover{
-            background-color: #00bfa5;
+        .nav {
+            height: 2000px;
+            display: block;
+            background-color: rgb(23, 36, 48);
+           
         }
-        .ct{
-            color:black;
-            margin:80px auto;
-            text-align: center;
-            display: inline-block;
-         
+        .vertical-menu{
+            position: fixed;
+        }
+        .nav li {
+            list-style: none;
+            padding: 10px 10px;
+            cursor: pointer;
+            display: block;
+        }
+        .nav li a {
+            font-size: 35px;
+            text-decoration: none;
+            color: white;
+        }
+        .nav li a:hover {
+            font-size: 35px;
+            color: rgba(75, 105, 176, 1);
         }
     </style>
 
@@ -93,69 +94,84 @@
 
 <body>
 
-    <div class="container bg-info">
-        <div class="header">
-            <ul id="nav">
-                <li><a href="{{ route('create') }}"> Create Voucher </a></li>
-                <li><a href="{{ route('index') }}"> List voucher </a></li>
-                <li><a href="{{ route('poin_card') }}"> User Poin </a></li>
+    <div class="container-fluid">
+        <div class="row navbar">
+            <ul class="navbar-nav">
+                <div align="center">
+                    <li>
+                        <a href="route('create')">Link 1</a>
+                    </li>
+                    <li>
+                        <a href="route('index')">Link 2</a>
+                    </li>
+                    <li>
+                        <a href="route('poin_card')">Link 3</a>
+                    </li>
+
             </ul>
         </div>
 
         <div class="row content">
-            <div class="col-md-5 section">
+            <div class="col-md-1 nav">
                 
-                <div class="row ">
-                   <div class="button">
-                        <a class="ct" href="">Tao voucher moi</a>
-                   </div>
-                </div>
+                <ul class="vertical-menu">
 
-                <div class="row ">
-                   <div class="button">
-                        <a class="ct" href="">Tao voucher moi</a>
-                   </div>
-                </div>
-
-
+                    <li><a href="">Schedule</a></li>
+                    <hr />
+                    <li><a href="">Event</a></li>
+                    <hr />
+                    <li><a href="">Setting</a></li>
+                    <hr />
+                    <li><a href="">Privacy</a></li>
+                    <hr />
+                    <li><a href="">Event</a></li>
+                    <hr />
+                </ul>
             </div>
-            <div class="col-md-7 aside">
+
+            <div class="col-md-11 ">
                 @yield('content')
+                <div class="row aside"></div>
+                <div class="row footer">
+                    <div class="col-md-1">
+                    </div>
+                    <div class="col-md-3">
+                        <h3 class="footer_heading">Cham soc khach hang</h3>
+                        <ul class="fotter_list">
+                            <li><a href="">Trung tam tro giup</a></li>
+                            <li><a href="">Huong dan mua hang</a></li>
+                            <li><a href="">Chinh sach bao hanh</a></li>
+                            <li><a href="">Thanh toan</a></li>
+                            <li><a href="">Van chuyen</a></li>
+                            <li><a href="">Cham soc khach hang</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-md-1">
+                    </div>
 
+                    <div class="col-md-3">
+                        <h3 class="footer_heading">Ve shop</h3>
+                        <ul class="fotter_list">
+                            <li><a href="">Gioi thieu</a></li>
+                            <li><a href="">Dieu khoan</a></li>
+                            <li><a href="">Chinh sach bao mat</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-md-1">
+                    </div>
+
+                    <div class="col-md-3">
+                        <h3 class="footer_heading">Theo doi chung toi tren</h3>
+                        <ul class="fotter_list">
+                            <li><a href="">Facebook</a></li>
+                            <li><a href="">Instagram</a></li>
+                            <li><a href="">LinkedIn</a></li>
+                        </ul>
+                    </div>
+                </div>
             </div>
         </div>
 
-        <div class="row footer">
-
-            <div class="col-md-4">
-                <h3 class="footer_heading">Cham soc khach hang</h3>
-                <ul class="fotter_list">
-                    <li><a href="">Trung tam tro giup</a></li>
-                    <li><a href="">Huong dan mua hang</a></li>
-                    <li><a href="">Chinh sach bao hanh</a></li>
-                    <li><a href="">Thanh toan</a></li>
-                    <li><a href="">Van chuyen</a></li>
-                    <li><a href="">Cham soc khach hang</a></li>
-                </ul>
-            </div>
-
-            <div class="col-md-4">
-                
-            </div>
-            
-            <div class="col-md-4">
-                <h3 class="footer_heading">Theo doi chung toi tren</h3>
-                <ul class="fotter_list">
-                    <li><a href="">Facebook</a></li>
-                    <li><a href="">Instagram</a></li>
-                    <li><a href="">LinkedIn</a></li>
-                </ul>
-            </div>
-        </div>
-    </div>
-    <div class="container-wrap">
-        @yield('content')
-    </div>
 </body>
 
 </html>
