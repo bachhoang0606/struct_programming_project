@@ -15,7 +15,12 @@ class Voucher extends Model
         'minimun_price',
         'quantium',
         'products',
-        'outdate_at'
+        'effective_date',
+        'expiration_date',
+    ];
+
+    protected $attributes = [
+        'products' => '',
     ];
 
     public function freeship(){

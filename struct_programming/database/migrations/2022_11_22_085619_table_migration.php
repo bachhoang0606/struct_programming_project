@@ -21,7 +21,8 @@ return new class extends Migration
             $table->unsignedInteger('minimun_price');
             $table->integer('quantium');
             $table->string('products')->nullable(true);
-            $table->timestamp('outdate_at');
+            $table->timestamp('effective_date');
+            $table->timestamp('expiration_date');
             $table->timestamps();
         });
 

@@ -47,7 +47,7 @@
         }
 
         .content {
-            height: 800px;
+            height: auto;
         }
 
         .section {
@@ -62,7 +62,7 @@
 
         .aside {
             background-color: rgb(255, 255, 255);
-            height: 800px;
+            height: auto;
         }
 
         .footer {
@@ -121,7 +121,6 @@
             </div>
             <div class="col-md-7 aside">
                 @yield('content')
-
             </div>
         </div>
 
@@ -152,9 +151,6 @@
                 </ul>
             </div>
         </div>
-    </div>
-    <div class="container-wrap">
-        @yield('content')
     </div>
 </body>
 

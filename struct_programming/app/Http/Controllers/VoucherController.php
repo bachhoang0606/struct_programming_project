@@ -8,6 +8,7 @@ use App\Models\PoinCard;
 use App\Models\PriceDiscount;
 use App\Models\Voucher;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\View;
 
 
@@ -47,8 +48,35 @@ class VoucherController extends Controller
     public function store(Request $request)
     {
         //
-        
-        
+        dd($request->all());
+        $result = DB::transaction(function() use ($request){
+            $voucher_date = $request->only(['title', 'content', 'minimun_price', 'quantium', 'products', 'effective_date','expiration_date']);
+            $voucher = Voucher::create($voucher_date);
+
+            if($voucher->Vtype === 'freeships'){
+                Freeship::create([
+                    'voucher_id' => $voucher->id,
+                    'price' => $request->FP_price,
+                ]);
+            }elseif ($voucher->Vtype === 'priceDiscounts'){
+                PriceDiscount::create([
+                    'voucher_id' => $voucher->id,
+                    'price' => $request->price,
+                ]);
+            }else{
+                PercentDiscount::create([
+                    'voucher_id' => $voucher->id,
+                    'percent' => $request->percent,
+                    'max_price' => $request->max_price,
+                ]);
+            }
+        });
+
+        if($result){
+            return view("vouchers.create")->with('status', 'Create voucher successful');
+        }else{
+            return view("vouchers.create")->with('error', 'Some error occurred');
+        }
     }
 
     /**
