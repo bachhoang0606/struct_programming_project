@@ -15,31 +15,42 @@
             padding: 0;
             margin: 0;
         }
+
         .row {
             margin: 0;
         }
+
         html {
             font-family: Arial, Helvetica, sans-serif;
+        }
+        .page{
+            padding: 0;
         }
         .navbar {
             height: 100px;
         }
+
         .navbar ul {
             list-style-type: none;
             width: 100%;
             top: 0;
             background-color: rgb(23, 36, 48);
             position: fixed;
+        
         }
+
         .navbar li {
             display: inline-block;
         }
+
         .navbar li:hover {
             background-color: white;
         }
+
         .navbar li a:hover {
             color: black;
         }
+
         .navbar li a {
             color: white;
             font-size: 45px;
@@ -47,48 +58,57 @@
             padding: 0 80px;
             text-decoration: none;
         }
-        .content {
 
-            height: 2000px;
+        .content {
+            height: 1300px;
         }
-        .aside{
-            height: 1700px;
+
+        .aside {
+            height: 1000px;
         }
 
         .footer {
             padding: 20px;
             height: 300px;
             background-color: rgb(248, 242, 242);
-      
         }
+
         .footer a {
             text-decoration: none;
             color: black;
-            font-size: 20px;
+            font-size: 15px;
         }
+
         .nav {
-            height: 2000px;
+            height: 1300px;
             display: block;
-            background-color: rgb(23, 36, 48);
-           
+            background-color: rgb(23, 36, 48);           
         }
-        .vertical-menu{
-            position: fixed;
+        .posi{
+            position: sticky;           
+            top:100px;
+            
         }
-        .nav li {
+
+       .nav li {
             list-style: none;
             padding: 10px 10px;
             cursor: pointer;
             display: block;
         }
+
         .nav li a {
             font-size: 35px;
             text-decoration: none;
             color: white;
         }
+
         .nav li a:hover {
             font-size: 35px;
-            color: rgba(75, 105, 176, 1);
+            color: blue;
+        }
+        hr{
+            color:white;
         }
     </style>
 
@@ -96,44 +116,50 @@
 
 <body>
 
-    <div class="container-fluid">
+    <div class="container-fluid page">
         <div class="row navbar">
             <ul class="navbar-nav">
                 <div align="center">
                     <li>
-                        <a href="route('create')">Link 1</a>
+                        <a href="#">Home</a>
                     </li>
-                    <li>
-                        <a href="route('index')">Link 2</a>
-                    </li>
-                    <li>
-                        <a href="route('poin_card')">Link 3</a>
-                    </li>
-
+                </div>
             </ul>
         </div>
 
         <div class="row content">
-            <div class="col-md-1 nav">
-                
-
-                <ul class="vertical-menu">
-
-                    <li><a href="">Schedule</a></li>
-                    <hr />
-                    <li><a href="">Event</a></li>
-                    <hr />
-                    <li><a href="">Setting</a></li>
-                    <hr />
-                    <li><a href="">Privacy</a></li>
-                    <hr />
-                    <li><a href="">Event</a></li>
-                    <hr />
-                </ul>
+            <div class="col-md-3 nav">
+                <div class="posi">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a href="{{route('create')}}">Create voucher</a>
+                        </li>
+                        <hr />
+                        <li class="nav-item">
+                            <a href="{{route('index')}}">List voucher</a>
+                        </li>
+                        <hr />
+                        <li class="nav-item">
+                            <a href="{{route('poin_card')}}">User poin</a>
+                        </li>
+                        <hr />
+                        <li class="nav-item">
+                            <a href="{{route('product.index')}}">Product poin and discount</a>
+                        </li>
+                        <hr />
+                        <li class="nav-item">
+                            <a href="{{route('poin_card')}}">User poin</a>
+                        </li>
+                        <hr />
+                   </ul>  
+                </div>          
             </div>
-            <div class="col-md-7 aside no-padding">
-                @yield('content')
-                <div class="row aside"></div>
+
+            <div class="col-md-9 content">
+
+                <div class="row aside">
+                    @yield('content')
+                </div>
                 <div class="row footer">
                     <div class="col-md-1">
                     </div>
@@ -144,8 +170,7 @@
                             <li><a href="">Huong dan mua hang</a></li>
                             <li><a href="">Chinh sach bao hanh</a></li>
                             <li><a href="">Thanh toan</a></li>
-                            <li><a href="">Van chuyen</a></li>
-                            <li><a href="">Cham soc khach hang</a></li>
+                            
                         </ul>
                     </div>
                     <div class="col-md-1">
@@ -173,7 +198,7 @@
                 </div>
             </div>
         </div>
-
+    </div>
 </body>
 
 </html>
