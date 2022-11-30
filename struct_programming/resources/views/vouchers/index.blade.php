@@ -33,54 +33,68 @@
     @endforeach --}}
     
     <div>
+        <h2>Freeship voucher</h2>
         <table>
             <th>ID</th>
             <th>Type</th>
             <th>Price</th>
-            <th>Percent</th>
-            <th>MaxPrice</th>
-            <th>Ngay tao</th>
-            <th>Ngay sua</th>
+            <th>Created</th>
+            <th>Updated</th>
             <?php
-                foreach ($voucher_list as $voucher){
-                    if($voucher->price){
-                        $type = "freship";
-                        $price = $voucher->price;
-                        $precent = "none";
-                        $max_price = "none";
-                    }else{
-                        $type = "disscount";
-                        $price = "none";
-                        $precent = $voucher->percent;
-                        $max_price = $voucher->max_price;
-                    }
-                    if($voucher->created_at){
-                        $created = $voucher->created_at;
-                    }else
-                        $created = "null";
-                    if($voucher->created_at){
-                        $updated = $voucher->updated_at;
-                    }else
-                        $updated = "null";
+                foreach ($freeships as $freeship){
                     print '<tr>';
-                    print"<td>$voucher->voucher_id</td>";
-                    print"<td>$type</td>";
-                    print"<td>$price</td>";
-                    print"<td>$precent</td>";
-                    print"<td>$max_price</td>";
-                    print"<td>$created</td>";
-                    print"<td>$updated</td>";
+                    print"<td>$freeship->voucher_id</td>";
+                    print"<td>Freeship</td>";
+                    print"<td>$freeship->price</td>";
+                    print"<td>$freeship->created_at</td>";
+                    print"<td>$freeship->updated_at</td>";
                     print '</tr>';
                 }
             ?>
-            {{-- <tr>
-                <td>1</td>
-                <td>freeship</td>
-                <td>12000</td>
-                <td>23/09/2001</td>
-                <td>null</td>
-            </tr> --}}
         </table>
+
+        <h2>Discount voucher</h2>
+        <table>
+            <th>ID</th>
+            <th>Type</th>
+            <th>Percent</th>
+            <th>Max Price</th>
+            <th>Created</th>
+            <th>Updated</th>
+            <?php
+                foreach ($percent_discounts as $percent_discount){
+                    print '<tr>';
+                    print"<td>$percent_discount->voucher_id</td>";
+                    print"<td>Discount</td>";
+                    print"<td>$percent_discount->percent</td>";
+                    print"<td>$percent_discount->max_price</td>";
+                    print"<td>$percent_discount->created_at</td>";
+                    print"<td>$percent_discount->updated_at</td>";
+                    print '</tr>';
+                }
+            ?>
+        </table>
+
+        <h2>Price voucher</h2>
+        <table>
+            <th>ID</th>
+            <th>Type</th>
+            <th>Price</th>
+            <th>Created</th>
+            <th>Updated</th>
+            <?php
+                foreach ($price_discounts as $price_discount){
+                    print '<tr>';
+                    print"<td>$price_discount->voucher_id</td>";
+                    print"<td>Price discount</td>";
+                    print"<td>$price_discount->price</td>";
+                    print"<td>$price_discount->created_at</td>";
+                    print"<td>$price_discount->updated_at</td>";
+                    print '</tr>';
+                }
+            ?>
+        </table>
+        
     </div>
 
 @endsection

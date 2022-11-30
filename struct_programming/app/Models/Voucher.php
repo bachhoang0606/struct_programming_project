@@ -9,6 +9,20 @@ class Voucher extends Model
 {
     use HasFactory;
 
+    protected $fillable  =[
+        'title',
+        'content',
+        'minimun_price',
+        'quantium',
+        'products',
+        'effective_date',
+        'expiration_date',
+    ];
+
+    protected $attributes = [
+        'products' => '',
+    ];
+
     public function freeship(){
         return $this->hasOne(Freeship::class);
     }
