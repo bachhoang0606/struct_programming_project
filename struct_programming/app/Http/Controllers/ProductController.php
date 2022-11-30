@@ -22,6 +22,16 @@ class ProductController extends Controller
 
     // save new product
     public function store(Request $request){
+        $query =ProductAttribute::where('product_id', $request->product_id)
+        ->update([
+            'poin' => $request->poin,
+            'discount' => $request->discount,
+        ]);
 
+        if($query){
+            return view('products.create')->with('status', 'Update successful');
+        }else{
+            return view('products.create')->with('error', 'Some error occurred');
+        }
     }
 }
