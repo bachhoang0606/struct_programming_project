@@ -1,32 +1,44 @@
 @extends('layouts.layouts')
 
 @section('content')
-<form action="" method="GET">
+
+@if (session('status'))
+    <div class="alert alert-success">
+        {{ session('status') }}
+    </div>
+@endif
+@if (session('error'))
+    <div class="alert alert-danger">
+        {{ session('status') }}
+    </div>
+@endif
+<form action="{{ route('create') }}" method="POST">
+    @csrf
     <input type="hidden" name="sent" value="1">
 
     <div class="form-group">
         <label for="title" class="form-label">Set title</label><br>
-        <input type="text" name="title" class="form-control">
+        <input type="text" name="title" class="form-control" required>
     </div>
     <p></p>
     <div class="form-group">
         <label for="content" class="form-label">Write description: </label><br>
-        <textarea name="content" id="" cols="30" rows="5" placeholder="Describe voucher" class="form-control"></textarea>
+        <textarea name="content" id="" cols="30" rows="5" placeholder="Describe voucher" class="form-control" required></textarea>
     </div>
     <p></p>
     <div class="form-group">
         <label for="minimun_price" class="form-label">Minimum price</label><br>
-        <input type="number" name="minimun_price" min="0" class="form-control">
+        <input type="number" name="minimun_price" min="0" class="form-control" required>
     </div>
     <p></p>
     <div class="form-group">
         <label for="quantium" class="form-label">Amount of vouchers:</label><br>
-        <input type="number" name="quantium" min="1" class="form-control">
+        <input type="number" name="quantium" min="1" class="form-control" required>
     </div>
-    <p></p>
+    <p></p>    
     <div class="form-group">
         <label for="outdate_at" class="form-label">Expire at: </label>
-        <input type="date" name="outdate_at" class="form-control">
+        <input type="date" name="outdate_at" class="form-control" required>
     </div>
     <p></p>
     <h4>Choose types for voucher:</h4>
@@ -85,9 +97,11 @@
         if (checkbox.checked){
             label.style.display = "block";
             input.style.display = "block";
+            input.required = true;
         }else{
             label.style.display = "none";
             input.style.display = "none";
+            input.required = false;
             input.value=0;
         }
     }
@@ -103,6 +117,8 @@
             label[1].style.display = "block";
             input1.style.display = "block";
             input2.style.display = "block";
+            input1.required = true;
+            input2.required = true;
         }else{
             label[0].style.display = "none";
             label[1].style.display = "none";
@@ -110,6 +126,9 @@
             input1.value=0;
             input2.style.display = "none";
             input2.value=0;
+
+            input1.required = false;
+            input2.required = false;
         }
     }
 
@@ -121,10 +140,12 @@
         if (checkbox.checked){
             label.style.display = "block";
             input.style.display = "block";
+            input.required = true;
         }else{
             label.style.display = "none";
             input.style.display = "none";
             input.value=0;
+            input.required = false;
         }
     }
 
@@ -134,6 +155,7 @@
         
         label.style.display = "block";
         input.style.display = "block";
+        input.required = true;
     }
 
     function vGeneralOption(){
@@ -143,6 +165,7 @@
         label.style.display = "none";
         input.style.display = "none";
         input.value="";
+        input.required = false;
     }
     
 </script>

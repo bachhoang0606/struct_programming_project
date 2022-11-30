@@ -21,7 +21,8 @@ return new class extends Migration
             $table->unsignedInteger('minimun_price');
             $table->integer('quantium');
             $table->string('products')->nullable(true);
-            $table->timestamp('outdate_at');
+            $table->timestamp('effective_date');
+            $table->timestamp('expiration_date');
             $table->timestamps();
         });
 
@@ -33,7 +34,7 @@ return new class extends Migration
             $table->primary('voucher_id');
         });
 
-        Schema::create('percentDiscounts', function(Blueprint $table){
+        Schema::create('percent_discounts', function(Blueprint $table){
             $table->foreignId('voucher_id')->constrained();
             $table->unsignedInteger('percent');
             $table->integer('max_price');
@@ -42,7 +43,7 @@ return new class extends Migration
             $table->primary('voucher_id');
         });
 
-        Schema::create('priceDiscounts', function(Blueprint $table){
+        Schema::create('price_discounts', function(Blueprint $table){
             $table->foreignId('voucher_id')->constrained();
             $table->unsignedInteger('price');
             $table->timestamps();

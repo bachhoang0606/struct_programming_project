@@ -2,8 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Freeship;
+use App\Models\PercentDiscount;
 use App\Models\PoinCard;
+use App\Models\PriceDiscount;
+use App\Models\Voucher;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\View;
 
 
@@ -17,7 +22,10 @@ class VoucherController extends Controller
     public function index()
     {
         //
-        return view("vouchers.index", ['data' => 'is index']);
+        $freeships = Freeship::all();
+        $price_discounts = PriceDiscount::all();
+        $percent_discounts = PercentDiscount::all();
+        return view("vouchers.index", ['freeships' => $freeships, 'price_discounts' => $price_discounts, 'percent_discounts' => $percent_discounts]);
     }
 
     /**
@@ -28,7 +36,7 @@ class VoucherController extends Controller
     public function create()
     {
         //
-        return view("vouchers.create", ['data' => 'is create']);
+        return view("vouchers.create");
     }
 
     /**
@@ -40,6 +48,35 @@ class VoucherController extends Controller
     public function store(Request $request)
     {
         //
+        dd($request->all());
+        $result = DB::transaction(function() use ($request){
+            $voucher_date = $request->only(['title', 'content', 'minimun_price', 'quantium', 'products', 'effective_date','expiration_date']);
+            $voucher = Voucher::create($voucher_date);
+
+            if($voucher->Vtype === 'freeships'){
+                Freeship::create([
+                    'voucher_id' => $voucher->id,
+                    'price' => $request->FP_price,
+                ]);
+            }elseif ($voucher->Vtype === 'priceDiscounts'){
+                PriceDiscount::create([
+                    'voucher_id' => $voucher->id,
+                    'price' => $request->price,
+                ]);
+            }else{
+                PercentDiscount::create([
+                    'voucher_id' => $voucher->id,
+                    'percent' => $request->percent,
+                    'max_price' => $request->max_price,
+                ]);
+            }
+        });
+
+        if($result){
+            return view("vouchers.create")->with('status', 'Create voucher successful');
+        }else{
+            return view("vouchers.create")->with('error', 'Some error occurred');
+        }
     }
 
     /**

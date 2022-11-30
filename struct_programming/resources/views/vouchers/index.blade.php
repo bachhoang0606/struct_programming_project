@@ -1,5 +1,4 @@
 @extends('layouts.layouts')
-{{-- @vite(['resources/css/demo.css']) --}}
 @section('content')
 
     <div class="container-voucher">
@@ -16,5 +15,5 @@
         </div>
 
     </div>
-    
+  
 @endsection
