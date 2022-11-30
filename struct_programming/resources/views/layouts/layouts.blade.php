@@ -14,19 +14,15 @@
             padding: 0;
             margin: 0;
         }
-
         .row {
             margin: 0;
         }
-
         html {
             font-family: Arial, Helvetica, sans-serif;
         }
-
         .navbar {
             height: 100px;
         }
-
         .navbar ul {
             list-style-type: none;
             width: 100%;
@@ -34,19 +30,15 @@
             background-color: rgb(23, 36, 48);
             position: fixed;
         }
-
         .navbar li {
             display: inline-block;
         }
-
         .navbar li:hover {
             background-color: white;
         }
-
         .navbar li a:hover {
             color: black;
         }
-
         .navbar li a {
             color: white;
             font-size: 45px;
@@ -54,7 +46,6 @@
             padding: 0 80px;
             text-decoration: none;
         }
-
         .content {
             height: 2000px;
         }
@@ -67,13 +58,11 @@
             background-color: rgb(248, 242, 242);
       
         }
-
         .footer a {
             text-decoration: none;
             color: black;
             font-size: 20px;
         }
-
         .nav {
             height: 2000px;
             display: block;
@@ -83,21 +72,17 @@
         .vertical-menu{
             position: fixed;
         }
-
         .nav li {
             list-style: none;
             padding: 10px 10px;
             cursor: pointer;
             display: block;
-
         }
-
         .nav li a {
             font-size: 35px;
             text-decoration: none;
             color: white;
         }
-
         .nav li a:hover {
             font-size: 35px;
             color: rgba(75, 105, 176, 1);
