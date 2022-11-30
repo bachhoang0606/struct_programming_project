@@ -11,23 +11,19 @@
     <p></p>
     <div class="form-group">
         <label for="content" class="form-label">Write description: </label><br>
-        <textarea name="content" id="" cols="30" rows="5" class="form-control">Describe your voucher</textarea>
+        <textarea name="content" id="" cols="30" rows="5" placeholder="Describe voucher" class="form-control"></textarea>
     </div>
     <p></p>
     <div class="form-group">
         <label for="minimun_price" class="form-label">Minimum price</label><br>
-        <input type="number" name="minimun_price" class="form-control">
+        <input type="number" name="minimun_price" min="0" class="form-control">
     </div>
     <p></p>
     <div class="form-group">
         <label for="quantium" class="form-label">Amount of vouchers:</label><br>
-        <input type="number" name="quantium" class="form-control">
+        <input type="number" name="quantium" min="1" class="form-control">
     </div>
     <p></p>
-    <div class="form-group">
-        <label for="create_date" class="form-label">Create at: </label>
-        <input type="date" name="create_at" class="form-control">
-    </div>
     <div class="form-group">
         <label for="outdate_at" class="form-label">Expire at: </label>
         <input type="date" name="outdate_at" class="form-control">
@@ -40,19 +36,19 @@
     </div>
     <div class="form-group">
         <label for="FP_price" id="label_FP_price" style="display:none">Price: </label>
-        <input type="number" id="FP_price" name="FP_price" value="0" style="display:none" class="form-control">
+        <input type="number" id="FP_price" name="FP_price" value="0" style="display:none" min="0" class="form-control">
     </div>
     <div class="form-check">
-        <input class="form-check-input" type="radio" id="percent_discount" name="Vtype" value="percentDiscounts" onclick="perDisOption();freeShipOption();priceDisOption()">
+        <input class="form-check-input" type="radio" id="percent_discount" name="Vtype" value="percentDiscounts" min="0" onclick="perDisOption();freeShipOption();priceDisOption()">
         <label class="form-check-label" for="percentDiscounts">Percent discount</label>
     </div>
     <div class="form-group">
         <label for="max_price" name="label_perDis" style="display:none">Set max price: </label>
-        <input type="number" id="set_max" name="input_perDis_1" value="0" style="display:none" class="form-control">
+        <input type="number" id="set_max" name="input_perDis_1" value="0" min="0" style="display:none" class="form-control">
     </div>
     <div class="form-group">
         <label for="percent" name="label_perDis" style="display:none">Set percentage: </label>
-        <input type="number" id="set_percent" name="input_perDis_2" value="0" style="display:none" class="form-control">
+        <input type="number" id="set_percent" name="input_perDis_2" value="0" min="0" max="100" style="display:none" class="form-control">
     </div>
     <div class="form-check">
         <input class="form-check-input" type="radio" id="price_discount" name="Vtype" value="priceDiscounts" onclick="priceDisOption();freeShipOption();perDisOption()">
@@ -60,7 +56,7 @@
     </div>
     <div class="form-group">
         <label for="input_priceDis" id="label_priceDis" style="display:none">Price: </label>
-        <input type="number" id="input_priceDis" name="input_priceDis" value="0" style="display:none" class="form-control">
+        <input type="number" id="input_priceDis" name="input_priceDis" value="0" min="0" style="display:none" class="form-control">
     </div>
     <h4>Choose range of products:</h4>
     <div class="form-check">
