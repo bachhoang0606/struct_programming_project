@@ -33,7 +33,7 @@ return new class extends Migration
             $table->primary('voucher_id');
         });
 
-        Schema::create('percentDiscounts', function(Blueprint $table){
+        Schema::create('percent_discounts', function(Blueprint $table){
             $table->foreignId('voucher_id')->constrained();
             $table->unsignedInteger('percent');
             $table->integer('max_price');
@@ -42,7 +42,7 @@ return new class extends Migration
             $table->primary('voucher_id');
         });
 
-        Schema::create('priceDiscounts', function(Blueprint $table){
+        Schema::create('price_discounts', function(Blueprint $table){
             $table->foreignId('voucher_id')->constrained();
             $table->unsignedInteger('price');
             $table->timestamps();
