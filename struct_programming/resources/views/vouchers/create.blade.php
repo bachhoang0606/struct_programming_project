@@ -24,6 +24,7 @@
     <div class="form-group">
         <label for="content" class="form-label">Write description: </label><br>
         <textarea name="content" id="" cols="30" rows="5" class="form-control">Describe your voucher</textarea>
+
     </div>
     <p></p>
     <div class="form-group">
@@ -37,12 +38,13 @@
     </div>
     <p></p>
     <div class="form-group">
-        <label for="create_date" class="form-label">Effective at: </label>
-        <input type="date" name="effective_date" class="form-control">
+
+        <label for="create_date" class="form-label">Create at: </label>
+        <input type="date" name="create_at" class="form-control">
     </div>
     <div class="form-group">
-        <label for="outdate_at" class="form-label">Expiration at: </label>
-        <input type="date" name="expiration_date" class="form-control">
+        <label for="outdate_at" class="form-label">Expire at: </label>
+        <input type="date" name="outdate_at" class="form-control">
     </div>
     <p></p>
     <h4>Choose types for voucher:</h4>
