@@ -1,7 +1,19 @@
 @extends('layouts.layouts')
 
 @section('content')
-<form action="" method="GET">
+
+@if (session('status'))
+    <div class="alert alert-success">
+        {{ session('status') }}
+    </div>
+@endif
+@if (session('error'))
+    <div class="alert alert-danger">
+        {{ session('status') }}
+    </div>
+@endif
+<form action="{{ route('create') }}" method="POST">
+    @csrf
     <input type="hidden" name="sent" value="1">
 
     <div class="form-group">
@@ -12,6 +24,7 @@
     <div class="form-group">
         <label for="content" class="form-label">Write description: </label><br>
         <textarea name="content" id="" cols="30" rows="5" class="form-control">Describe your voucher</textarea>
+
     </div>
     <p></p>
     <div class="form-group">
@@ -25,6 +38,7 @@
     </div>
     <p></p>
     <div class="form-group">
+
         <label for="create_date" class="form-label">Create at: </label>
         <input type="date" name="create_at" class="form-control">
     </div>
@@ -40,7 +54,7 @@
     </div>
     <div class="form-group">
         <label for="FP_price" id="label_FP_price" style="display:none">Price: </label>
-        <input type="number" id="FP_price" name="FP_price" value="0" style="display:none" class="form-control">
+        <input type="number" id="FP_price" name="price" value="0" style="display:none" class="form-control">
     </div>
     <div class="form-check">
         <input class="form-check-input" type="radio" id="percent_discount" name="Vtype" value="percentDiscounts" onclick="perDisOption();freeShipOption();priceDisOption()">
@@ -60,7 +74,7 @@
     </div>
     <div class="form-group">
         <label for="input_priceDis" id="label_priceDis" style="display:none">Price: </label>
-        <input type="number" id="input_priceDis" name="input_priceDis" value="0" style="display:none" class="form-control">
+        <input type="number" id="input_priceDis" name="price" value="0" style="display:none" class="form-control">
     </div>
     <h4>Choose range of products:</h4>
     <div class="form-check">

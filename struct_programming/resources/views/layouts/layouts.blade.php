@@ -47,6 +47,7 @@
             text-decoration: none;
         }
         .content {
+
             height: 2000px;
         }
         .aside{
@@ -114,6 +115,7 @@
         <div class="row content">
             <div class="col-md-1 nav">
                 
+
                 <ul class="vertical-menu">
 
                     <li><a href="">Schedule</a></li>
