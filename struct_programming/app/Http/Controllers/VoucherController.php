@@ -48,20 +48,20 @@ class VoucherController extends Controller
     public function store(Request $request)
     {
         //
-        dd($request->all());
+        // dd($request->all());
         $result = DB::transaction(function() use ($request){
             $voucher_date = $request->only(['title', 'content', 'minimun_price', 'quantium', 'products', 'effective_date','expiration_date']);
             $voucher = Voucher::create($voucher_date);
 
-            if($voucher->Vtype === 'freeships'){
+            if($request->Vtype == 'freeships'){
                 Freeship::create([
                     'voucher_id' => $voucher->id,
-                    'price' => $request->FP_price,
+                    'price' => $request->fprice,
                 ]);
-            }elseif ($voucher->Vtype === 'priceDiscounts'){
+            }elseif ($request->Vtype == 'priceDiscounts'){
                 PriceDiscount::create([
                     'voucher_id' => $voucher->id,
-                    'price' => $request->price,
+                    'price' => $request->dprice,
                 ]);
             }else{
                 PercentDiscount::create([

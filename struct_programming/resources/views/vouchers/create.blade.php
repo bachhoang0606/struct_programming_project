@@ -39,12 +39,12 @@
     <p></p>
     <div class="form-group">
 
-        <label for="create_date" class="form-label">Create at: </label>
-        <input type="date" name="create_at" class="form-control">
+        <label for="create_date" class="form-label">Effective at: </label>
+        <input type="date" name="effective_date" class="form-control">
     </div>
     <div class="form-group">
-        <label for="outdate_at" class="form-label">Expire at: </label>
-        <input type="date" name="outdate_at" class="form-control">
+        <label for="outdate_at" class="form-label">Expiration at: </label>
+        <input type="date" name="expiration_date" class="form-control">
     </div>
     <p></p>
     <h4>Choose types for voucher:</h4>
@@ -54,7 +54,7 @@
     </div>
     <div class="form-group">
         <label for="FP_price" id="label_FP_price" style="display:none">Price: </label>
-        <input type="number" id="FP_price" name="price" value="0" style="display:none" class="form-control">
+        <input type="number" id="FP_price" name="fprice" value="0" style="display:none" class="form-control">
     </div>
     <div class="form-check">
         <input class="form-check-input" type="radio" id="percent_discount" name="Vtype" value="percentDiscounts" onclick="perDisOption();freeShipOption();priceDisOption()">
@@ -62,11 +62,11 @@
     </div>
     <div class="form-group">
         <label for="max_price" name="label_perDis" style="display:none">Set max price: </label>
-        <input type="number" id="set_max" name="input_perDis_1" value="0" style="display:none" class="form-control">
+        <input type="number" id="set_max" name="max_price" value="0" style="display:none" class="form-control">
     </div>
     <div class="form-group">
         <label for="percent" name="label_perDis" style="display:none">Set percentage: </label>
-        <input type="number" id="set_percent" name="input_perDis_2" value="0" style="display:none" class="form-control">
+        <input type="number" id="set_percent" name="percent" value="0" style="display:none" class="form-control">
     </div>
     <div class="form-check">
         <input class="form-check-input" type="radio" id="price_discount" name="Vtype" value="priceDiscounts" onclick="priceDisOption();freeShipOption();perDisOption()">
@@ -74,20 +74,20 @@
     </div>
     <div class="form-group">
         <label for="input_priceDis" id="label_priceDis" style="display:none">Price: </label>
-        <input type="number" id="input_priceDis" name="price" value="0" style="display:none" class="form-control">
+        <input type="number" id="input_priceDis" name="dprice" value="0" style="display:none" class="form-control">
     </div>
     <h4>Choose range of products:</h4>
     <div class="form-check">
-        <input class="form-check-input" type="radio" id="VGeneral" name="Vtype" value="VGeneral" onclick="vGeneralOption()">
+        <input class="form-check-input" type="radio" id="VGeneral" name="VTtype" value="VGeneral" onclick="vGeneralOption()">
         <label class="form-check-label" for="VGeneral">Available for all product</label>
     </div>
     <div class="form-check">
-        <input class="form-check-input" type="radio" id="VProduct" name="Vtype" value="VProduct" onclick="vProductOption()">
+        <input class="form-check-input" type="radio" id="VProduct" name="VTtype" value="VProduct" onclick="vProductOption()">
         <label class="form-check-label" for="VProduct">Available for an amount of products</label>
     </div>
     <div class="form-group">
         <label for="set_of_products" id="label_Vproduct" style="display:none">Please enter product's names: </label>
-        <input type="text" id="input_Vproduct" name="set_of_products" style="display:none" class="form-control">
+        <input type="text" id="input_Vproduct" name="products" style="display:none" class="form-control">
     </div>
     <p></p><input type="submit" value="Submit" class="btn btn-primary">
 </form>
