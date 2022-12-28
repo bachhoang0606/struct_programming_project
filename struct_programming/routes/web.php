@@ -21,6 +21,11 @@ Route::get('/', function () {
  
 });
 
+Route::get('/users/ui', function () {
+    return view('user_page.ui.index');
+ 
+});
+
 Route::resource('vouchers', VoucherController::class);
 
 Route::get('index', [VoucherController::class, 'index'])->name('index');

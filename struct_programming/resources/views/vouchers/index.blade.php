@@ -42,12 +42,13 @@
             <th>Updated</th>
             <?php
                 foreach ($freeships as $freeship){
+                    $voucher = $freeship->voucher;
                     print '<tr>';
                     print"<td>$freeship->voucher_id</td>";
                     print"<td>Freeship</td>";
                     print"<td>$freeship->price</td>";
-                    print"<td>$freeship->created_at</td>";
-                    print"<td>$freeship->updated_at</td>";
+                    print"<td>$voucher->effective_date</td>";
+                    print"<td>$voucher->expiration_date</td>";
                     print '</tr>';
                 }
             ?>
@@ -63,13 +64,14 @@
             <th>Updated</th>
             <?php
                 foreach ($percent_discounts as $percent_discount){
+                    $voucher = $percent_discount->voucher;
                     print '<tr>';
                     print"<td>$percent_discount->voucher_id</td>";
                     print"<td>Discount</td>";
                     print"<td>$percent_discount->percent</td>";
                     print"<td>$percent_discount->max_price</td>";
-                    print"<td>$percent_discount->created_at</td>";
-                    print"<td>$percent_discount->updated_at</td>";
+                    print"<td>$voucher->effective_date</td>";
+                    print"<td>$voucher->expiration_date</td>";
                     print '</tr>';
                 }
             ?>
@@ -84,12 +86,13 @@
             <th>Updated</th>
             <?php
                 foreach ($price_discounts as $price_discount){
+                    $voucher = $price_discount->voucher;
                     print '<tr>';
                     print"<td>$price_discount->voucher_id</td>";
                     print"<td>Price discount</td>";
                     print"<td>$price_discount->price</td>";
-                    print"<td>$price_discount->created_at</td>";
-                    print"<td>$price_discount->updated_at</td>";
+                    print"<td>$voucher->effective_date</td>";
+                    print"<td>$voucher->expiration_date</td>";
                     print '</tr>';
                 }
             ?>

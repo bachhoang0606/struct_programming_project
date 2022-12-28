@@ -23,12 +23,12 @@ class DatabaseSeeder extends Seeder
         // ]);
 
         DB::table('vouchers')->insert([
-            ['title' => 'voucher giam gia freeship', 'content' => Str::random(40), 'minimun_price' => '12000', 'quantium' => '100', 'outdate_at' => date('Y-m-d')],
-            ['title' => 'voucher giam gia freeship2', 'content' => Str::random(40), 'minimun_price' => '12000', 'quantium' => '100', 'outdate_at' => date('Y-m-d')],
-            ['title' => 'voucher giam gia percent discounts', 'content' => Str::random(40), 'minimun_price' => '12000', 'quantium' => '100', 'outdate_at' => date('Y-m-d')],
-            ['title' => 'voucher giam gia percent discounts2', 'content' => Str::random(40), 'minimun_price' => '12000', 'quantium' => '100', 'outdate_at' => date('Y-m-d')],
-            ['title' => 'voucher giam gia price discounts', 'content' => Str::random(40), 'minimun_price' => '12000', 'quantium' => '100', 'outdate_at' => date('Y-m-d')],
-            ['title' => 'voucher giam gia price discounts 2', 'content' => Str::random(40), 'minimun_price' => '12000', 'quantium' => '100', 'outdate_at' => date('Y-m-d')],
+            ['title' => 'voucher giam gia freeship', 'content' => Str::random(40), 'minimun_price' => '12000', 'quantium' => '100', 'effective_date' => date('Y-m-d'),  'expiration_date' => date('Y-m-d')],
+            ['title' => 'voucher giam gia freeship2', 'content' => Str::random(40), 'minimun_price' => '12000', 'quantium' => '100', 'effective_date' => date('Y-m-d'),  'expiration_date' => date('Y-m-d')],
+            ['title' => 'voucher giam gia percent discounts', 'content' => Str::random(40), 'minimun_price' => '12000', 'quantium' => '100', 'effective_date' => date('Y-m-d'),  'expiration_date' => date('Y-m-d')],
+            ['title' => 'voucher giam gia percent discounts2', 'content' => Str::random(40), 'minimun_price' => '12000', 'quantium' => '100', 'effective_date' => date('Y-m-d'),  'expiration_date' => date('Y-m-d')],
+            ['title' => 'voucher giam gia price discounts', 'content' => Str::random(40), 'minimun_price' => '12000', 'quantium' => '100', 'effective_date' => date('Y-m-d'),  'expiration_date' => date('Y-m-d')],
+            ['title' => 'voucher giam gia price discounts 2', 'content' => Str::random(40), 'minimun_price' => '12000', 'quantium' => '100', 'effective_date' => date('Y-m-d'),  'expiration_date' => date('Y-m-d')],
         ]);
 
         DB::table('freeships')->insert([

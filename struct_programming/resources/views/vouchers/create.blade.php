@@ -86,13 +86,11 @@
 
 <script>
     
-
     function perDisOption(){
         let checkbox = document.getElementById('percent_discount');
         let label = document.getElementsByName('label_perDis');
         let input1 = document.getElementById('set_max');
         let input2 = document.getElementById('set_percent');
-
         if (checkbox.checked){
             label[0].style.display = "block";
             label[1].style.display = "block";
@@ -109,14 +107,11 @@
             input1.value=0;
             input2.style.display = "none";
             input2.value=0;
-
             input1.required = false;
             input2.required = false;
-
             document.getElementById('input_price').disabled = false;
         }
     }
-
     function vProductOption(){
         let label = document.getElementById('label_Vproduct');
         let input = document.getElementById('input_Vproduct');
@@ -125,11 +120,9 @@
         input.style.display = "block";
         input.required = true;
     }
-
     function vGeneralOption(){
         let label = document.getElementById('label_Vproduct');
         let input = document.getElementById('input_Vproduct');
-
         label.style.display = "none";
         input.style.display = "none";
         input.value="";
