@@ -37,8 +37,12 @@
     </div>
     <p></p>    
     <div class="form-group">
-        <label for="outdate_at" class="form-label">Expire at: </label>
-        <input type="date" name="outdate_at" class="form-control" required>
+        <label for="effective_date" class="form-label">Effective date: </label>
+        <input type="date" name="effective_date" class="form-control" required>
+    </div>
+    <div class="form-group">
+        <label for="expiration_date" class="form-label">Expiration date: </label>
+        <input type="date" name="expiration_date" class="form-control" required>
     </div>
     <p></p>
     <div class="form-group">
@@ -66,7 +70,7 @@
         <input class="form-check-input" type="radio" id="price_discount" name="Vtype" value="priceDiscounts" onclick="perDisOption()">
         <label class="form-check-label" for="priceDiscounts">Price discount</label>
     </div>
-    <h4>Choose range of products:</h4>
+    {{-- <h4>Choose range of products:</h4>
     <div class="form-check">
         <input class="form-check-input" type="radio" id="VGeneral" name="Vrange" value="VGeneral" onclick="vGeneralOption()" required>
         <label class="form-check-label" for="VGeneral">Available for all product</label>
@@ -78,7 +82,7 @@
     <div class="form-group">
         <label for="set_of_products" id="label_Vproduct" style="display:none">Please enter product's names: </label>
         <input type="text" id="input_Vproduct" name="set_of_products" style="display:none" class="form-control">
-    </div>
+    </div> --}}
     <p></p><input type="submit" value="Submit" class="btn btn-primary" onclick="perDisOption()">
 </form>
 

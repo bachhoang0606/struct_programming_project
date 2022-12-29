@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 class ProductController extends Controller
 {
     //
-    //  list poin and discount
+    //  list coin and discount
     public function index(){
 
         $products = ProductAttribute::all();
@@ -24,7 +24,7 @@ class ProductController extends Controller
     public function store(Request $request){
         $query =ProductAttribute::where('product_id', $request->product_id)
         ->update([
-            'poin' => $request->poin,
+            'coin' => $request->coin,
             'discount' => $request->discount,
         ]);
 

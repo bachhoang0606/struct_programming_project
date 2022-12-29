@@ -31,7 +31,7 @@ Route::resource('vouchers', VoucherController::class);
 Route::get('index', [VoucherController::class, 'index'])->name('index');
 Route::get('vouchers', [VoucherController::class, 'create'])->name('create');
 Route::post('vouchers', [VoucherController::class, 'store'])->name('create');
-Route::get('/poin_card', [VoucherController::class, 'poin_card'])->name('poin_card');
+Route::get('/coin_card', [VoucherController::class, 'coin_card'])->name('coin_card');
 
 
 Route::get('product/index', [ProductController::class, 'index'])->name('product.index');

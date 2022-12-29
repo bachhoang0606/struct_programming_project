@@ -4,7 +4,7 @@
     <table>
         <th>ID</th>
         <th>Name</th>
-        <th>Poin</th>
+        <th>Coin</th>
         <th>Discount</th>
         <th>Created</th>
         <th>Updated</th>
@@ -13,7 +13,7 @@
                 print '<tr>';
                 print"<td>$products->product_id</td>";
                 print"<td>$products->name</td>";
-                print"<td>$products->poin</td>";
+                print"<td>$products->coin</td>";
                 print"<td>$products->discount</td>";
                 print"<td>$products->created_at</td>";
                 print"<td>$products->updated_at</td>";

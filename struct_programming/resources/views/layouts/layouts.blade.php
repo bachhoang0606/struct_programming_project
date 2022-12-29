@@ -140,15 +140,15 @@
                         </li>
                         <hr />
                         <li class="nav-item">
-                            <a href="{{route('poin_card')}}">User poin</a>
+                            <a href="{{route('coin_card')}}">User coin</a>
                         </li>
                         <hr />
                         <li class="nav-item">
-                            <a href="{{route('product.index')}}">Product poin and discount</a>
+                            <a href="{{route('product.index')}}">Product coin and discount</a>
                         </li>
                         <hr />
                         <li class="nav-item">
-                            <a href="{{route('poin_card')}}">User poin</a>
+                            <a href="{{route('coin_card')}}">User coin</a>
                         </li>
                         <hr />
                    </ul>  
