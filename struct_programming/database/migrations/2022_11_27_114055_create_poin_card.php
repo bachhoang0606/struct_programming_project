@@ -13,12 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('poin_cards', function (Blueprint $table) {
+        Schema::create('coin_cards', function (Blueprint $table) {
             $table->id('user_id');
             $table->string('name');
             $table->string('phone');
             $table->string('email')->unique();
-            $table->integer('poin');
+            $table->integer('coin');
             $table->timestamps();
         });
     }
@@ -30,6 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('poin_cards');
+        Schema::dropIfExists('coin_cards');
     }
 };

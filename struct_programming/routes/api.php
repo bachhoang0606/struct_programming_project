@@ -1,23 +1,18 @@
 <?php
 
-use Illuminate\Http\Request;
+use App\Http\Controllers\api\CalulatorApiController;
+use App\Http\Controllers\api\CoinCardController;
+use App\Http\Controllers\api\ProductAttributeApiController;
+use App\Http\Controllers\api\VoucherApiController;
 use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| API Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register API routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| is assigned the "api" middleware group. Enjoy building your API!
-|
-*/
+Route::get('/product-coin/{id}', [ProductAttributeApiController::class, 'show_coin']);
+Route::get('/products-sale-price', [ProductAttributeApiController::class, 'index']);
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
 
-Route::middleware('auth:something')->get('/user', function (Request $request) {
-    return $request->user();
-});
+Route::get('/user-coin/{id}', [CoinCardController::class, 'show']);
+Route::put('/refund', [CoinCardController::class, 'refund']);
+
+Route::get('/vouchers', [VoucherApiController::class, 'index']);
+
+Route::get('/discount-price', [CalulatorApiController::class, 'payment']);

@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Freeship;
 use App\Models\PercentDiscount;
-use App\Models\PoinCard;
+use App\Models\CoinCard;
 use App\Models\PriceDiscount;
 use App\Models\Voucher;
 use Illuminate\Http\Request;
@@ -48,20 +48,20 @@ class VoucherController extends Controller
     public function store(Request $request)
     {
         //
-        // dd($request->all());
+        dd($request->all());
         $result = DB::transaction(function() use ($request){
-            $voucher_date = $request->only(['title', 'content', 'minimun_price', 'quantium', 'products', 'effective_date','expiration_date']);
+            $voucher_date = $request->only(['title', 'content', 'minimun_price', 'quantium', 'expiration_date', 'effective_date']);
             $voucher = Voucher::create($voucher_date);
 
             if($request->Vtype == 'freeships'){
                 Freeship::create([
                     'voucher_id' => $voucher->id,
-                    'price' => $request->fprice,
+                    'price' => $request->price,
                 ]);
             }elseif ($request->Vtype == 'priceDiscounts'){
                 PriceDiscount::create([
                     'voucher_id' => $voucher->id,
-                    'price' => $request->dprice,
+                    'price' => $request->price,
                 ]);
             }else{
                 PercentDiscount::create([
@@ -125,9 +125,9 @@ class VoucherController extends Controller
     }
 
     // GET method
-    public function poin_card(){
+    public function coin_card(){
 
-        $poinCards = PoinCard::all();
-        return view('vouchers.poin_card', ['poinCards' => $poinCards]);
+        $coinCards = CoinCard::all();
+        return view('vouchers.coin_card', ['coinCards' => $coinCards]);
     }
 }

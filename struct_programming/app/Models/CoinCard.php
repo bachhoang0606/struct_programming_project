@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class PoinCard extends Model
+class CoinCard extends Model
 {
     use HasFactory;
 
@@ -13,6 +13,6 @@ class PoinCard extends Model
 
     protected $fillable = [
         'user_id',
-        'poin',
+        'coin',
     ];
 }

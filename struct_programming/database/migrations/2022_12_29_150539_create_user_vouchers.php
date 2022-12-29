@@ -13,12 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('product_attributes', function (Blueprint $table) {
-            $table->id('product_id');
-            $table->string('name');
-            $table->integer('coin');
-            $table->integer('discount');
+        Schema::create('user_vouchers', function (Blueprint $table) {
+            $table->integer('user_id');
+            $table->foreign('user_id')->references('user_id')->on('coin_cards');
+            $table->foreignId('voucher_id')->constrained();
             $table->timestamps();
+            $table->primary(['user_id', 'voucher_id']);
         });
     }
 
@@ -29,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('product_attributes');
+        Schema::dropIfExists('user_vouchers');
     }
 };
