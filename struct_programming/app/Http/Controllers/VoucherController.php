@@ -54,16 +54,19 @@ class VoucherController extends Controller
             $voucher = Voucher::create($voucher_date);
 
             if($request->Vtype == 'freeships'){
+                Voucher::where('id', $voucher->id)->update(['type' => 1]);
                 Freeship::create([
                     'voucher_id' => $voucher->id,
                     'price' => $request->price,
                 ]);
             }elseif ($request->Vtype == 'priceDiscounts'){
+                Voucher::where('id', $voucher->id)->update(['type' => 2]);
                 PriceDiscount::create([
                     'voucher_id' => $voucher->id,
                     'price' => $request->price,
                 ]);
             }else{
+                Voucher::where('id', $voucher->id)->update(['type' => 3]);
                 PercentDiscount::create([
                     'voucher_id' => $voucher->id,
                     'percent' => $request->percent,
