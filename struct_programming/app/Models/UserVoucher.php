@@ -8,6 +8,15 @@ use Illuminate\Database\Eloquent\Model;
 class UserVoucher extends Model
 {
     use HasFactory;
+
+    protected $primaryKey = [
+        'user_id',
+        'voucher_id',
+    ];
+
+    public $incrementing = false;
+
+
     protected $fillable  =[
         'user_id',
         'voucher_id',
