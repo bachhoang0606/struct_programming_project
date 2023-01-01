@@ -34,7 +34,6 @@ Route::post('vouchers', [VoucherController::class, 'store'])->name('create');
 Route::get('/coin_card', [VoucherController::class, 'coin_card'])->name('coin_card');
 Route::view('/chooseVoucher', 'vouchers/chooseVoucher');
 
-
 Route::get('product/index', [ProductController::class, 'index'])->name('product.index');
 Route::get('product/create', [ProductController::class, 'create'])->name('product.create');
 Route::post('product/create', [ProductController::class, 'store'])->name('product.create');

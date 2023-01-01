@@ -14,8 +14,7 @@
 @endif
 <div>
 <h2>Choose vouchers:</h2>
-<form action="" method="POST">
-    <input type="hidden" name="sent" value="1">
+<form action="" method="GET">
     <table>
         <thead>
             <th>Title</th>
@@ -28,18 +27,19 @@
         <tbody id="result">
         </tbody>
     </table>
-    <input type="submit" value="Submit">
+    <input type="submit" id="submit_button" value="Submit">
 </form>
 </div>
-
 
 @endsection
 
 <script>
-    fetch('http://127.0.0.1:8000/api/vouchers?fbclid=IwAR0KyYRwTAtAMKP84mDPKCSG1CdOlqyBQpkc6F7Kf-HrUm9SMHjadvyXfzM').then((res) => res.json()).then(
+    let numberOfVoucher;
+    fetch('/api/vouchers').then((res) => res.json()).then(
         response => {
             //console.log(response.data);
             let output = '';
+            numberOfVoucher = response.data.length;
             for (let i = 0; i < response.data.length; i++){
                 output += `
                 <tr>
@@ -49,7 +49,7 @@
                     <td>${response.data[i].quantium}</td>
                     <td>${response.data[i].expiration_date}</td>
                     <td>
-                        <input type="checkbox" name="listSelectedVouchers[]" value="${response.data[i].id}">
+                        <input type="radio" name="voucher_id" value="${response.data[i].id}" onclick="getVoucherId(${response.data[i].id})">
                     </td>
                 </tr>
                 `;
@@ -57,4 +57,53 @@
             document.getElementById("result").innerHTML = output;
         }
     ).catch(error => console.log(error));
+    
+    let voucher_id;
+
+    function getVoucherId(id){
+        voucher_id = id;
+    }
+
+    window.addEventListener("load", function(){
+        document.getElementById("submit_button").addEventListener("click", function(event){
+            event.preventDefault();
+
+            let userId = "1";
+            let apiUrl = '/api/create-user-voucher?user_id=' + userId + '&voucher_id=' + voucher_id;
+            fetch(apiUrl, {method: 'POST',})
+            .then(response => response.json())
+            .then(
+                response => {
+                    if (response.message == "user had this voucher"){
+                        alert(response.message);
+                    }else
+                        alert("Add voucher successful!");
+                }
+            )
+        });
+    });
+    
+
+    // $("form").on("submit", function(e){
+    // e.preventDefault(); //1
+
+    // let this_form = $(this);
+    // let url = this_form.attr("action");
+    // alert(url);
+
+    // //var $this = $(this); //alias form reference
+    
+
+    // // $.ajax({ //2
+    // //     url: $this.prop('action'),
+    // //     method: $this.prop('method'),
+    // //     dataType: 'json',  //3
+    // //     data: $this.serialize() //4
+    // // }).done( function (response) {
+    // //     if (response.hasOwnProperty('status')) {
+    // //         $('#target-div').html(response.status); //5
+    // //     }
+    // // });
+    // });
+
 </script>
