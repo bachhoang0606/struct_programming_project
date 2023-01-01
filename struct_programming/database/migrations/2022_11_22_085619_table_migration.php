@@ -20,8 +20,8 @@ return new class extends Migration
             $table->text('content');
             $table->unsignedInteger('minimun_price');
             $table->integer('quantium');
-            $table->timestamp('effective_date');
-            $table->timestamp('expiration_date');
+            $table->timestamp('effective_date')->nullable();
+            $table->timestamp('expiration_date')->nullable();
             $table->timestamps();
         });
 
