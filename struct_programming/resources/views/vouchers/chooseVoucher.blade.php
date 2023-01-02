@@ -34,41 +34,59 @@
 @endsection
 
 <script>
-    let numberOfVoucher;
-    fetch('/api/vouchers').then((res) => res.json()).then(
-        response => {
-            //console.log(response.data);
-            let output = '';
-            numberOfVoucher = response.data.length;
-            for (let i = 0; i < response.data.length; i++){
-                output += `
-                <tr>
-                    <td>${response.data[i].titlle}</td>
-                    <td>${response.data[i].content}</td>
-                    <td>${response.data[i].minimun_price}</td>
-                    <td>${response.data[i].quantium}</td>
-                    <td>${response.data[i].expiration_date}</td>
-                    <td>
-                        <input type="radio" name="voucher_id" value="${response.data[i].id}" onclick="getVoucherId(${response.data[i].id})">
-                    </td>
-                </tr>
-                `;
-            }
-            document.getElementById("result").innerHTML = output;
-        }
-    ).catch(error => console.log(error));
-    
+    let userId;
+    let user_vouchers = new Array();
     let voucher_id;
 
     function getVoucherId(id){
         voucher_id = id;
     }
 
+    function setUser(id){
+        userId = id;
+    }
+
+    setUser("2");
+
+    fetch(`/api/user-has-voucher/${userId}`).then((res) => res.json()).then(
+        response =>{
+            //console.log(response.data.voucher_list[0].id);
+            for (let i = 0; i < response.data.voucher_list.length; i++){
+                user_vouchers.push(response.data.voucher_list[i].id);
+            }
+            //console.log(user_vouchers);
+        }
+    ).catch(error => console.log(error));
+
+    
+    fetch('/api/vouchers').then((res) => res.json()).then(
+        response => {
+            //console.log(response.data);
+            let output = '';
+            for (let i = 0; i < response.data.length; i++){
+                if (!user_vouchers.includes(response.data[i].id)){
+                    output += `
+                    <tr>
+                        <td>${response.data[i].titlle}</td>
+                        <td>${response.data[i].content}</td>
+                        <td>${response.data[i].minimun_price}</td>
+                        <td>${response.data[i].quantium}</td>
+                        <td>${response.data[i].expiration_date}</td>
+                    <td>
+                        <input type="radio" name="voucher_id" value="${response.data[i].id}" onclick="getVoucherId(${response.data[i].id})">
+                    </td>
+                </tr>
+                `;
+                }
+            }
+            document.getElementById("result").innerHTML = output;
+        }
+    ).catch(error => console.log(error));
+
     window.addEventListener("load", function(){
         document.getElementById("submit_button").addEventListener("click", function(event){
             event.preventDefault();
 
-            let userId = "1";
             let apiUrl = '/api/create-user-voucher?user_id=' + userId + '&voucher_id=' + voucher_id;
             fetch(apiUrl, {method: 'POST',})
             .then(response => response.json())
@@ -82,28 +100,5 @@
             )
         });
     });
-    
-
-    // $("form").on("submit", function(e){
-    // e.preventDefault(); //1
-
-    // let this_form = $(this);
-    // let url = this_form.attr("action");
-    // alert(url);
-
-    // //var $this = $(this); //alias form reference
-    
-
-    // // $.ajax({ //2
-    // //     url: $this.prop('action'),
-    // //     method: $this.prop('method'),
-    // //     dataType: 'json',  //3
-    // //     data: $this.serialize() //4
-    // // }).done( function (response) {
-    // //     if (response.hasOwnProperty('status')) {
-    // //         $('#target-div').html(response.status); //5
-    // //     }
-    // // });
-    // });
 
 </script>
