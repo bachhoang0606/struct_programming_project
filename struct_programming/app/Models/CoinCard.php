@@ -15,4 +15,8 @@ class CoinCard extends Model
         'user_id',
         'coin',
     ];
+
+    public function vouchers(){
+        return $this->belongsToMany(Voucher::class, 'user_vouchers', 'user_id', 'voucher_id');
+    }
 }

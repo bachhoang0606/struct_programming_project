@@ -3,6 +3,9 @@
 namespace App\Http\Controllers\api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\UserVoucherResource;
+use App\Http\Resources\VoucherResource;
+use App\Models\CoinCard;
 use App\Models\UserVoucher;
 use App\Models\Voucher;
 use Illuminate\Http\Request;
@@ -46,4 +49,12 @@ class UserVoucherApiController extends Controller
             ]);
         }
     }
+
+    public function userHasVoucher(){
+        return UserVoucherResource::collection(CoinCard::all());
+    }
+
+    public function userHasVoucherWithId($id){
+        return new UserVoucherResource(CoinCard::find($id));
+    }   
 }
