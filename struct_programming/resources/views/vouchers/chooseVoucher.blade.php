@@ -27,6 +27,7 @@
         <tbody id="result">
         </tbody>
     </table>
+    <p></p>
     <input type="submit" id="submit_button" value="Submit">
 </form>
 </div>
@@ -46,7 +47,7 @@
         userId = id;
     }
 
-    setUser("2");
+    setUser("4");
 
     fetch(`/api/user-has-voucher/${userId}`).then((res) => res.json()).then(
         response =>{
@@ -64,7 +65,20 @@
             //console.log(response.data);
             let output = '';
             for (let i = 0; i < response.data.length; i++){
-                if (!user_vouchers.includes(response.data[i].id)){
+                if (user_vouchers.includes(response.data[i].id)){
+                    output += `
+                    <tr>
+                        <td>${response.data[i].titlle}</td>
+                        <td>${response.data[i].content}</td>
+                        <td>${response.data[i].minimun_price}</td>
+                        <td>${response.data[i].quantium}</td>
+                        <td>${response.data[i].expiration_date}</td>
+                    <td>
+                        <input type="radio" name="voucher_id" value="${response.data[i].id}" onclick="getVoucherId(${response.data[i].id})" disabled>
+                    </td>
+                    </tr>
+                `;
+                }else{
                     output += `
                     <tr>
                         <td>${response.data[i].titlle}</td>
@@ -75,7 +89,7 @@
                     <td>
                         <input type="radio" name="voucher_id" value="${response.data[i].id}" onclick="getVoucherId(${response.data[i].id})">
                     </td>
-                </tr>
+                    </tr>
                 `;
                 }
             }
