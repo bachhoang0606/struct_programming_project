@@ -3,8 +3,8 @@
 use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\VoucherController;
-
-
+use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
+use App\Http\Controllers\ChartController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -25,6 +25,13 @@ Route::get('/users/ui', function () {
     return view('user_page.ui.index');
  
 });
+
+
+Route::get('dashboard',function(){
+    return view('dashboard.dashboard');
+})->name('dashbroad');
+Route::get('chart', [ChartController::class, 'index'])->name('chart');
+
 
 Route::resource('vouchers', VoucherController::class);
 
