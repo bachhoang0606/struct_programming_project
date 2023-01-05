@@ -48,7 +48,6 @@ class VoucherController extends Controller
     public function store(Request $request)
     {
         //
-        dd($request->all());
         $result = DB::transaction(function() use ($request){
             $voucher_date = $request->only(['title', 'content', 'minimun_price', 'quantium', 'expiration_date', 'effective_date']);
             $voucher = Voucher::create($voucher_date);
