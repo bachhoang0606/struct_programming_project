@@ -11,6 +11,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\View;
 
+use App\Models\UserVoucher;
+use App\Http\Resources\UserVoucherResource;
+
 
 class VoucherController extends Controller
 {
@@ -26,6 +29,43 @@ class VoucherController extends Controller
         $price_discounts = PriceDiscount::all();
         $percent_discounts = PercentDiscount::all();
         return view("vouchers.index", ['freeships' => $freeships, 'price_discounts' => $price_discounts, 'percent_discounts' => $percent_discounts]);
+    }
+
+    public function displayAll($id)
+    {
+        $vouchers = Voucher::all();
+        $freeships = Freeship::all();
+        $price_discounts = PriceDiscount::all();
+        $percent_discounts = PercentDiscount::all();
+        $data = new UserVoucherResource(CoinCard::find($id));
+        return view("userPages.ui.voucher.all",['data' => $data, 'freeships' => $freeships, 'price_discounts' => $price_discounts, 'vouchers' => $vouchers, 'percent_discounts' => $percent_discounts]);  
+    }
+
+    public function displayFreeships($id)
+    {
+        //
+        $freeships = Freeship::all();
+        $vouchers = Voucher::all();
+        $data = new UserVoucherResource(CoinCard::find($id));
+        return view("userPages.ui.voucher.freeships", ['data' => $data, 'freeships' => $freeships], ['vouchers' => $vouchers]);
+    }
+
+    public function displayPercent($id)
+    {
+        //
+        $percent_discounts = PercentDiscount::all();
+        $vouchers = Voucher::all();
+        $data = new UserVoucherResource(CoinCard::find($id));
+        return view("userPages.ui.voucher.percent", ['data' => $data, 'percent_discounts' => $percent_discounts], ['vouchers' => $vouchers]);
+    }
+
+    public function displayPrice($id)
+    {
+        //
+        $price_discounts = PriceDiscount::all();
+        $vouchers = Voucher::all();
+        $data = new UserVoucherResource(CoinCard::find($id));
+        return view("userPages.ui.voucher.price", ['data' => $data, 'price_discounts' => $price_discounts], ['vouchers' => $vouchers]);
     }
 
     /**
