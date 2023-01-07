@@ -27,6 +27,11 @@ Route::get('users.ui', function () {
 
 Route::resource('vouchers', VoucherController::class);
 
+Route::get('/users/ui/voucherList/all/{id}', [VoucherController::class, 'displayAll'])->name('displayAll');
+Route::get('/users/ui/voucherList/freeships/{id}', [VoucherController::class, 'displayFreeships'])->name('displayFreeships');
+Route::get('/users/ui/voucherList/percent/{id}', [VoucherController::class, 'displayPercent'])->name('displayPercent');
+Route::get('/users/ui/voucherList/price/{id}', [VoucherController::class, 'displayPrice'])->name('displayPrice');
+
 Route::get('index', [VoucherController::class, 'index'])->name('index');
 Route::get('vouchers', [VoucherController::class, 'create'])->name('create');
 Route::post('vouchers', [VoucherController::class, 'store'])->name('create');

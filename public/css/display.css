@@ -1,0 +1,221 @@
+.wrapper{
+    margin: 10px;
+}
+
+.navbar-text{
+    cursor: pointer;
+    text-align: center;
+    width: 25%;
+    text-decoration: none;
+    border: 1px solid #ccc;
+    background-color: white;
+}
+
+.navbar-text:hover{
+    background-color: #fcdab0;
+}
+
+.navbar-voucher{
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid #ccc;
+}
+
+.voucher-list{
+    margin: 10px 0;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.voucher-wrapper{
+    width: calc((100% - 30px) / 3);
+    display: flex;
+    justify-content: space-between;
+    margin: 5px;
+    height: 100px;
+}
+
+.left{
+    width: 30%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    border-right: 1px solid #ccc;
+    background-color: #00bfa5;
+    color: white;
+    font-size: 18px;
+    font-weight: 600;
+    border: 1px solid #00bfa5;
+    border-top-left-radius: 2px;
+    border-bottom-left-radius: 2px;
+}
+
+.left-title{
+    width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    line-height: 25px;
+    -webkit-line-clamp: 2;
+    height: 50px;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+}
+
+.right{
+    width: 70%;
+    border: 1px solid #e8e8e8;
+    box-shadow: 0.125rem 0.125rem 0.3125rem rgba(0,0,0,.07);
+    border-top-right-radius: 2px;
+    border-bottom-right-radius: 2px;
+}
+
+.right-body{
+    width: 100%;
+    margin: 0 4px;
+}
+
+.right-footer{
+    text-align: right;
+    margin-right: 2px;
+    border: none;
+    background-color: white;
+    float: right;
+    font-size: 14px;
+}
+
+.right-footer:hover{
+    color: red;
+}
+
+.content{
+    width: 96%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    line-height: 24px;
+    -webkit-line-clamp: 2;
+    height: 52px;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    word-wrap: break-word;
+    margin-bottom: 4px;
+}
+
+.active-navbar{
+    border-bottom: 1px solid red;
+}
+
+.percent, .price{
+    background-color: #ee4d2d;
+    border: 1px solid #ee4d2d;
+}
+
+.price-text{
+    margin: 10px 0 0 4px;
+    border: 1px solid red;
+    display: inline-block;
+    padding: 0 2px;
+    color: red;
+    font-weight: 600;
+}
+
+.percent-price-max{
+    display: inline-block;
+    border: 1px solid red;
+    font-size: 12px;
+    padding: 0 4px;
+    color: red;
+    font-weight: 500;
+}
+
+.percent-text{
+    font-weight: 600;
+}
+
+.date{
+    font-size: 12px;
+    color: #ee4d2d;
+}
+
+.voucher-detail-wrapper{
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(245, 245, 245, 0.6);;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    display: none;
+}
+
+.show{
+    display: flex;
+}
+
+.voucher-detail{
+    width: 375px;
+    background-color: white;
+    animation: fade 600ms ease-in-out forwards;
+    box-shadow: 0 2px 4px rgb(0 0 0 / 24%);
+}
+
+.voucher-detail-header{
+    background-color: #f36700;
+    height: 60px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+}
+
+.voucher-detail-body{
+    margin: 10px 18px;
+}
+
+.voucher-detail-body-item > h6{
+    /* line-height: 14px; */
+    margin-bottom: 2px;
+    font-size: 18px;
+}
+
+.voucher-detail-body-item{
+    margin-bottom: 10px;
+}
+
+.voucher-detail-footer{
+    margin: 20px 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.voucher-detail-footer-btn{
+    width: 60%;
+    height: 34px;
+    background-color: #ee4d2d;
+    box-shadow: 0 2px 4px rgb(0 0 0 / 24%);
+    border: none;
+    border-radius: 2px;
+    color: white;
+    display: flex;
+    flex-direction: row;
+    padding: 0;
+    justify-content: center;
+    align-items: center;
+}
+
+@keyframes fade {
+    from {
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(10px);
+    }
+    to { 
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+}
