@@ -1,13 +1,12 @@
 @extends('layouts.layouts')
 @section('content')
-    <h2>Products</h2>
+<div class="container">
+    <h1 class="my-3">Product</h1>
     <table>
         <th>ID</th>
         <th>Name</th>
         <th>Coin</th>
         <th>Discount</th>
-        <th>Created</th>
-        <th>Updated</th>
         <?php
             foreach ($products as $products){
                 print '<tr>';
@@ -15,10 +14,10 @@
                 print"<td>$products->name</td>";
                 print"<td>$products->coin</td>";
                 print"<td>$products->discount</td>";
-                print"<td>$products->created_at</td>";
-                print"<td>$products->updated_at</td>";
                 print '</tr>';
             }
         ?>
     </table>
+    <br>
+</div>
 @endsection

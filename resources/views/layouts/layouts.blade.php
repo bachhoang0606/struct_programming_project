@@ -9,6 +9,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
     <link rel="stylesheet" href="/css/app.css">
     <link rel="stylesheet" href="/css/style.css">
+
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -16,9 +17,9 @@
     <!-- Bootstrap Core CSS RTL-->
     <link href="css/bootstrap-rtl.min.css" rel="stylesheet">
 
-    <title>Document</title>
-    <style>
+    <title>P02-Ads SP_02</title>
 
+    <style>
         * {
             margin: 0;
             padding: 0;
@@ -34,11 +35,13 @@
         }
 
         body {
+            display: flex;
             min-height: 100vh;
             overflow-x: hidden;
         }
 
         .navigation {
+            flex:2;
             height: 100%;
             background-color: var(--blue);
             /* border-left: 10px solid var(--blue); */
@@ -50,29 +53,21 @@
             padding: 0;
         }
 
-        .navigation {
-            position: sticky;
-            top:0;
-        }
-        .navigation ul{
+        .navigation ul {
             padding: 0;
-            
+
         }
 
         .navigation ul li {
-          
             list-style: none;
-
         }
 
         .navigation ul li:hover {
             background-color: var(--white);
-
         }
 
         .navigation ul li:nth-child(1) {
             margin-bottom: 100px;
-
         }
 
         .navigation ul li a {
@@ -115,6 +110,7 @@
         }
 
         .main {
+            flex: 7;
             padding: 90px;
         }
     </style>
@@ -125,8 +121,8 @@
 
     <div class="container-fluid page">
 
-        <div class="row content">
-            <div class="col-md-3 navigation">
+        <div class="row content h-100">
+            <div class="navigation">
 
                 <ul>
                     <li><a href="#">
@@ -135,7 +131,7 @@
                         </a>
                     </li>
 
-                    <li><a href="{{route('dashbroad')}}">
+                    <li><a href="{{route('dashboard')}}">
                             <span class="icon"><ion-icon name="bar-chart-outline"></ion-icon></ion-icon></span>
                             <span class="title">Dashboard</span>
                         </a>
@@ -169,12 +165,21 @@
 
                     </li>
 
+                    <li>
+                        <a href="{{route('users.layout')}}">
+                            <span class="icon"><ion-icon name="person-outline"></ion-icon></ion-icon></ion-icon></span>
+                            <span class="title">User page</span>
+                        </a>
+
+                    </li>
+
                 </ul>
 
             </div>
 
-            <div class="col-md-9 main">
+            <div class="main h-100">
                 @yield('content')
+
             </div>
         </div>
     </div>
