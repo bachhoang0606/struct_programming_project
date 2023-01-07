@@ -25,3 +25,4 @@ Route::get('/user-has-voucher', [UserVoucherApiController::class, 'userHasVouche
 Route::get('/user-has-voucher/{id}', [UserVoucherApiController::class, 'userHasVoucherWithId']);
 
 Route::get('/create-user-coin', [CoinCardController::class, 'createUserPoin']);
+Route::get('/create-product-coin', [ProductAttributeApiController::class, 'productCoin']);

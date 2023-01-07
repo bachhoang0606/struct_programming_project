@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\CoinCardResource;
 use App\Models\CoinCard;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
 
 class CoinCardController extends Controller
 {
@@ -33,47 +34,46 @@ class CoinCardController extends Controller
     }
 
     public function createUserPoin(){
-        $users = Http::timeout(6)->get("https://jsonplaceholder.typicode.com/users");
-        $arrayUsers = json_decode($users, true);
-        $countUser = count($arrayUsers);
-        $usersPoin = CoinCard::all();
-        $arrayUsersPoin = json_decode($usersPoin, true);
-        $countUsersPoin = count($arrayUsersPoin);
-        $arr = [];
-        $result = [];
-        if($countUser != $countUsersPoin ){
-            foreach($arrayUsers as $user){
-                foreach($arrayUsersPoin as $userPoin){
-                    if($user["id"] == $userPoin["user_id"]){
-                        $arr[] = $user["id"];
-                    }
-                }
-                // $arr[] = $user["id"];
-            }
-            if($countUser > $countUsersPoin){
-                
-                $arr[] = -1;
-                foreach($arrayUsers as $user){
-                    if(!array_key_exists($user["id"], $arr)){
-                        //add
-                        $coin = 0;
-                        $result[] = CoinCard::insert(['user_id' => $user["id"], 
-                                                    'name' =>$user["name"],
-                                                    'phone' => '0123456789',
-                                                    'email' =>$user["email"],
-                                                    'coin' => $coin]);
-                    }
-                }
-            }else if($countUser < $countUsersPoin){
-                $arr[] = -1;
-                foreach($arrayUsersPoin as $userPoin){
-                    if(!array_key_exists($userPoin["user_id"], $arr)){
-                        //remmote
-                        $result[] = CoinCard::where("user_id", $userPoin["user_id"])->first()->delete();
-                    }
-                }
+        $response = Http::timeout(10)->get("https://63b964c03329392049f25570.mockapi.io/api/v1/products");
+        $users = $response;
+        if(!is_array($response))
+            $users = json_decode($response, true);
+        $userCoins = CoinCard::all();
+        $userIds = [];
+        $userCoinIds = [];
+        $add = [];
+        $delete = [];
+
+        //coin and discount default
+        $coin = 0;
+
+        foreach($users as $element){
+            $userIds[] = $element["id"];
+        }
+
+        foreach($userCoins as $element){
+            $userCoinIds[] = $element["user_id"];
+        }
+
+        foreach($users as $user){
+            if(!in_array($user["id"], $userCoinIds)){ // add
+                $add[] = CoinCard::insert(['user_id' => $user["id"],
+                                                'name' => $user["name"],
+                                                'phone' => $user["phoneNumber"],
+                                                'email' => $user["email"],
+                                                'coin' => $coin,
+                                                'created_at' => NULL,
+                                                'updated_at' => NULL,]);
             }
         }
+
+        foreach($userCoins as $userCoin){
+            if(!in_array($userCoin["user_id"], $userIds)){ // delete
+                $delete[] = CoinCard::find($userCoin["user_id"])->delete();
+            }
+        }
+        $result = ["add" => $add, "delete" => $delete];
+
         return $result;
     }
 }
