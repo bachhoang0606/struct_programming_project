@@ -24,10 +24,6 @@ Route::get('users.ui', function () {
     return view('userPages.ui.index');
 })->name('users.layout');
 
-
-// Route::get('dashboard',function(){
-//     return view('dashboard.dashboard');
-// })->name('dashbroad');
 Route::get('dashboard.dashboard', [ChartController::class, 'index'])->name('dashboard');
 
 
@@ -47,3 +43,5 @@ Route::get('coin_card', [VoucherController::class, 'coin_card'])->name('coin_car
 Route::get('product.index', [ProductController::class, 'index'])->name('product.index');
 Route::get('product.create', [ProductController::class, 'create'])->name('product.create');
 Route::post('product.create', [ProductController::class, 'store'])->name('product.create');
+Route::get('product.edit/{product_id}',[ProductController::class, 'edit'])->name('product.edit');
+Route::put('product.update/{product_id}',[ProductController::class, 'update'])->name('product.update');

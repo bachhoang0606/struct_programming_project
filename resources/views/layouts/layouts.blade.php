@@ -111,7 +111,7 @@
 
         .main {
             flex: 7;
-            padding: 90px;
+            padding: 80px;
         }
     </style>
 

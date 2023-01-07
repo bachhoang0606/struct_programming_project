@@ -1,8 +1,13 @@
 @extends('layouts.layouts')
 
 @section('content')
-<h2>Create voucher</h2>
-@if (session('status'))
+<div class="container-fluid px-4">
+    <div class="card mt-4">
+        <div class="card-header">
+            <h4>Create Voucher</h4>
+        </div>
+        <div class="card-body">
+        @if (session('status'))
     <div class="alert alert-success">
         {{ session('status') }}
     </div>
@@ -86,6 +91,10 @@
     <p></p><input type="submit" value="Submit" class="btn btn-primary" onclick="perDisOption()">
 </form>
 <br>
+        </div>
+    </div>
+</div>
+
 @endsection
 
 <script>
