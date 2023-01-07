@@ -21,19 +21,28 @@ Route::get('/', function () {
  
 });
 
-Route::get('/users/ui', function () {
-    return view('user_page.ui.index');
- 
-});
+Route::get('users.ui', function () {
+    return view('userPages.ui.index');
+})->name('users.layout');
 
 Route::resource('vouchers', VoucherController::class);
+
+Route::get('/users/ui/voucherList/all/{id}', [VoucherController::class, 'displayAll'])->name('displayAll');
+Route::get('/users/ui/voucherList/freeships/{id}', [VoucherController::class, 'displayFreeships'])->name('displayFreeships');
+Route::get('/users/ui/voucherList/percent/{id}', [VoucherController::class, 'displayPercent'])->name('displayPercent');
+Route::get('/users/ui/voucherList/price/{id}', [VoucherController::class, 'displayPrice'])->name('displayPrice');
 
 Route::get('index', [VoucherController::class, 'index'])->name('index');
 Route::get('vouchers', [VoucherController::class, 'create'])->name('create');
 Route::post('vouchers', [VoucherController::class, 'store'])->name('create');
+<<<<<<< HEAD
 Route::get('/coin_card', [VoucherController::class, 'coin_card'])->name('coin_card');
 Route::view('/chooseVoucher', 'vouchers/chooseVoucher');
+=======
+Route::get('coin_card', [VoucherController::class, 'coin_card'])->name('coin_card');
 
-Route::get('product/index', [ProductController::class, 'index'])->name('product.index');
-Route::get('product/create', [ProductController::class, 'create'])->name('product.create');
-Route::post('product/create', [ProductController::class, 'store'])->name('product.create');
+>>>>>>> f40f1c667c62230c122d9c726645c64a5d15cc45
+
+Route::get('product.index', [ProductController::class, 'index'])->name('product.index');
+Route::get('product.create', [ProductController::class, 'create'])->name('product.create');
+Route::post('product.create', [ProductController::class, 'store'])->name('product.create');

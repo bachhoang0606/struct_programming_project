@@ -9,7 +9,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
     <link rel="stylesheet" href="/css/app.css">
     <link rel="stylesheet" href="/css/style.css">
-    <title>Document</title>
+    <title>P02-Ads SP_02</title>
     <style>
         * {
             padding: 0;
@@ -36,6 +36,7 @@
             top: 0;
             background-color: rgb(23, 36, 48);
             position: fixed;
+            z-index: 10000;
         
         }
 
@@ -119,7 +120,7 @@
     <div class="container-fluid page">
         <div class="row navbar">
             <ul class="navbar-nav">
-                <div align="center">
+                <div style="text-align: center">
                     <li>
                         <a href="#">Home</a>
                     </li>
@@ -144,11 +145,15 @@
                         </li>
                         <hr />
                         <li class="nav-item">
-                            <a href="{{route('product.index')}}">Product coin and discount</a>
+                            <a href="{{route('product.index')}}">Product</a>
                         </li>
                         <hr />
                         <li class="nav-item">
                             <a href="{{route('coin_card')}}">User coin</a>
+                        </li>
+                        <hr />
+                        <li class="nav-item">
+                            <a href="{{route('users.layout')}}">User page</a>
                         </li>
                         <hr />
                    </ul>  
@@ -157,7 +162,7 @@
 
             <div class="col-md-9 content">
 
-                <div class="row aside">
+                <div class="container">
                     @yield('content')
                 </div>
                 <div class="row footer">

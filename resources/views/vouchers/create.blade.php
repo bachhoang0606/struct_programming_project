@@ -85,7 +85,7 @@
     </div> --}}
     <p></p><input type="submit" value="Submit" class="btn btn-primary" onclick="perDisOption()">
 </form>
-
+<br>
 @endsection
 
 <script>
