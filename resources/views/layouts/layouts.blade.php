@@ -149,7 +149,7 @@
                         </li>
                         <hr />
                         <li class="nav-item">
-                            <a href="{{route('coin_card')}}">User coin</a>
+                            <a href="{{route('users.layout')}}">User page</a>
                         </li>
                         <hr />
                         <li class="nav-item">
