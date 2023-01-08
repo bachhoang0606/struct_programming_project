@@ -35,13 +35,10 @@ Route::get('/users/ui/voucherList/price/{id}', [VoucherController::class, 'displ
 Route::get('index', [VoucherController::class, 'index'])->name('index');
 Route::get('vouchers', [VoucherController::class, 'create'])->name('create');
 Route::post('vouchers', [VoucherController::class, 'store'])->name('create');
-<<<<<<< HEAD
-Route::get('/coin_card', [VoucherController::class, 'coin_card'])->name('coin_card');
-Route::view('/chooseVoucher', 'vouchers/chooseVoucher');
-=======
 Route::get('coin_card', [VoucherController::class, 'coin_card'])->name('coin_card');
 
->>>>>>> f40f1c667c62230c122d9c726645c64a5d15cc45
+Route::view('/edit-voucher', 'vouchers.edit');
+
 
 Route::get('product.index', [ProductController::class, 'index'])->name('product.index');
 Route::get('product.create', [ProductController::class, 'create'])->name('product.create');

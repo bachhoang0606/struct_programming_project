@@ -108,8 +108,11 @@
                 response => {
                     if (response.message == "user had this voucher"){
                         alert(response.message);
-                    }else
+                    }else{
+                        window.location.reload();
                         alert("Add voucher successful!");
+                    }
+                        
                 }
             )
         });
