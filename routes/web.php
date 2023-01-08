@@ -39,6 +39,8 @@ Route::get('coin_card', [VoucherController::class, 'coin_card'])->name('coin_car
 
 Route::view('/edit-voucher', 'vouchers.edit');
 
+Route::view('/del-voucher', 'vouchers.delete');
+
 
 Route::get('product.index', [ProductController::class, 'index'])->name('product.index');
 Route::get('product.create', [ProductController::class, 'create'])->name('product.create');
