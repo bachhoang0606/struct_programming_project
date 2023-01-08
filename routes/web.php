@@ -24,7 +24,7 @@ Route::get('users.ui', function () {
     return view('userPages.ui.index');
 })->name('users.layout');
 
-Route::get('dashboard.dashboard', [ChartController::class, 'index'])->name('dashboard');
+
 
 
 Route::resource('vouchers', VoucherController::class);

@@ -29,9 +29,6 @@
         :root {
             --blue: #287bff;
             --white: #fff;
-            --grey: #f5f5f5;
-            --black1: #222;
-            --black2: #999;
         }
 
         body {
@@ -41,24 +38,28 @@
         }
 
         .navigation {
-            flex:2;
+            position: relative;
             height: 100%;
             background-color: var(--blue);
             /* border-left: 10px solid var(--blue); */
             transition: 0.5s;
             overflow: hidden;
-
             top: 0;
             left: 0;
             padding: 0;
         }
 
+        .posi{
+            position: fixed;
+            top:0;
+        }
         .navigation ul {
-            padding: 0;
-
+            top: 0;
+            
         }
 
         .navigation ul li {
+            padding-right: 10px;
             list-style: none;
         }
 
@@ -83,14 +84,12 @@
         }
 
         .navigation ul li a .icon {
-
             display: block;
             min-width: 80px;
             height: 80px;
             line-height: 60px;
             text-align: center;
             padding-top: 20px;
-
         }
 
         .navigation ul li a .icon ion-icon {
@@ -98,7 +97,6 @@
         }
 
         .navigation ul li a .title {
-
             display: block;
             padding: 0 10px;
             height: 80px;
@@ -110,10 +108,12 @@
         }
 
         .main {
-            flex: 7;
-            padding: 80px;
+            padding: 30px;
+            
         }
     </style>
+    
+
 
 </head>
 
@@ -121,63 +121,57 @@
 
     <div class="container-fluid page">
 
-        <div class="row content h-100">
-            <div class="navigation">
+        <div class="row content h-100 ">
+            <div class="navigation col-md-2">
+                <div class="posi">
+                    <ul>
+                        <li><a href="#">
+                                <span class="icon"><ion-icon name="home-outline"></ion-icon></span>
+                                <span class="title">Home</span>
+                            </a>
+                        </li>
 
-                <ul>
-                    <li><a href="#">
-                            <span class="icon"><ion-icon name="home-outline"></ion-icon></span>
-                            <span class="title">Home</span>
-                        </a>
-                    </li>
+                        <li><a href="{{route('index')}}">
+                                <span class="icon"><ion-icon name="bar-chart-outline"></ion-icon></ion-icon></span>
+                                <span class="title">Dashboard</span>
+                            </a>
+                        </li>
 
-                    <li><a href="{{route('dashboard')}}">
-                            <span class="icon"><ion-icon name="bar-chart-outline"></ion-icon></ion-icon></span>
-                            <span class="title">Dashboard</span>
-                        </a>
-                    </li>
+                        <li>
+                            <a href="{{route('create')}}">
+                                <span class="icon"><ion-icon name="create-outline"></ion-icon></span>
+                                <span class="title">Create Voucher</span>
+                            </a>
+                        </li>
 
-                    <li>
-                        <a href="{{route('create')}}">
-                            <span class="icon"><ion-icon name="create-outline"></ion-icon></span>
-                            <span class="title">Create Voucher</span>
-                        </a>
-                    </li>
+                        <li>
+                            <a href="{{route('coin_card')}}">
+                                <span class="icon"><ion-icon name="people-circle-outline"></ion-icon></span>
+                                <span class="title">User coin</span>
+                            </a>
+                        </li>
 
-                    <li>
-                        <a href="{{route('index')}}">
-                            <span class="icon"><ion-icon name="list-outline"></ion-icon></span>
-                            <span class="title">List Voucher</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="{{route('coin_card')}}">
-                            <span class="icon"><ion-icon name="people-circle-outline"></ion-icon></span>
-                            <span class="title">User coin</span>
-                        </a>
-                    </li>
+                        <li>
+                            <a href="{{route('product.index')}}">
+                                <span class="icon"><ion-icon name="calculator-outline"></ion-icon></ion-icon></span>
+                                <span class="title">Product</span>
+                            </a>
 
-                    <li>
-                        <a href="{{route('product.index')}}">
-                            <span class="icon"><ion-icon name="calculator-outline"></ion-icon></ion-icon></span>
-                            <span class="title">Product coin and discount</span>
-                        </a>
+                        </li>
 
-                    </li>
+                        <li>
+                            <a href="{{route('users.layout')}}">
+                                <span class="icon"><ion-icon name="person-outline"></ion-icon></ion-icon></ion-icon></span>
+                                <span class="title">User page</span>
+                            </a>
 
-                    <li>
-                        <a href="{{route('users.layout')}}">
-                            <span class="icon"><ion-icon name="person-outline"></ion-icon></ion-icon></ion-icon></span>
-                            <span class="title">User page</span>
-                        </a>
+                        </li>
 
-                    </li>
-
-                </ul>
-
+                    </ul>
+                </div>
             </div>
 
-            <div class="main h-100">
+            <div class="main h-100 col-md-10">
                 @yield('content')
 
             </div>
