@@ -27,6 +27,7 @@ class CalulatorApiController extends Controller
         // kiem tra gia tri don hang toi thieu
         $voucher = Voucher::find($request->voucher_id);
         $total = $request->shipping_fee + $request->product_price;
+        // dd($voucher);
         if($voucher->minimun_price > $total){
             return response()->json([
                 'error' => 'Gia tri toi thieu khong thoa man'
@@ -71,20 +72,20 @@ class CalulatorApiController extends Controller
 
         // cap nhat lai xu cua nguoi dung
         $user = CoinCard::where('user_id', $request->user_id)->first();
-        $user_coin = $user->Coin - $request->coin;
+        $user_coin = $user->coin - $request->coin;
         if( $user_coin < 0 ){
             return response()->json([
                 'error' => 'Nguoi dung khong du diem'
             ]);
         }
-        $user = CoinCard::where('user_id', $request->user_id)->update(['Coin' => $user_coin]);
+        $user = CoinCard::where('user_id', $request->user_id)->update(['coin' => $user_coin]);
 
         // xoa voucher ra khoi bang voucher nguoi dung
         $user_voucher = UserVoucher::where('user_id', $request->user_id)->where('voucher_id', $request->voucher_id)->delete();
 
         return response()->json([
             'data' => [
-                'discount_price' => $discount_price,
+                'produc_discount' => $discount_price,
             ]
         ]);
     }
