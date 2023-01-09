@@ -30,7 +30,7 @@ class autoLoadCoin
     public function createUserPoin(){
         // $response = Http::timeout(4)->get("https://63b964c03329392049f25570.mockapi.io/api/v1/products");
         $response = Http::timeout(4)->get("https://api-admin-dype.onrender.com/user");
-        if($response["statusCode"] != 404){
+        if(!isset($response["statusCode"])){
             $users = $response;
             if(!is_array($response))
                 $users = json_decode($response, true);
@@ -58,6 +58,12 @@ class autoLoadCoin
                                                     'coin' => $coin,
                                                     'created_at' => NULL,
                                                     'updated_at' => NULL,]);
+                }else{
+                    $coinCard = CoinCard::find($user["id"]);
+                    $coinCard->name = $user["name"];
+                    $coinCard->phone = $user["phoneNumber"];
+                    $coinCard->email = $user["email"];
+                    $coinCard->save();
                 }
             }
     
@@ -94,6 +100,12 @@ class autoLoadCoin
                                                     'discount' => $discount,
                                                     'created_at' => $product["created_at"] ? Carbon::parse($product["created_at"])->toDateTimeString() : NULL,
                                                     'updated_at' => $product["updated_at"] ? Carbon::parse($product["updated_at"])->toDateTimeString() : NULL,]);
+                }else{
+                    $productCoin = ProductAttribute::find($product["id"]);
+                    $productCoin->name = $product["name"];
+                    $productCoin->created_at = $product["created_at"] ? Carbon::parse($product["created_at"])->toDateTimeString() : NULL;
+                    $productCoin->updated_at = $product["updated_at"] ? Carbon::parse($product["updated_at"])->toDateTimeString() : NULL;
+                    $productCoin->save();
                 }
             }
     
