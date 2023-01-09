@@ -3,8 +3,7 @@
 use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\VoucherController;
-
-
+use App\Http\Controllers\ChartController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -25,6 +24,9 @@ Route::get('users.ui', function () {
     return view('userPages.ui.index');
 })->name('users.layout');
 
+
+
+
 Route::resource('vouchers', VoucherController::class);
 
 Route::get('/users/ui/voucherList/all/{id}', [VoucherController::class, 'displayAll'])->name('displayAll');
@@ -41,3 +43,5 @@ Route::get('coin_card', [VoucherController::class, 'coin_card'])->name('coin_car
 Route::get('product.index', [ProductController::class, 'index'])->name('product.index');
 Route::get('product.create', [ProductController::class, 'create'])->name('product.create');
 Route::post('product.create', [ProductController::class, 'store'])->name('product.create');
+Route::get('product.edit/{product_id}',[ProductController::class, 'edit'])->name('product.edit');
+Route::put('product.update/{product_id}',[ProductController::class, 'update'])->name('product.update');
