@@ -25,5 +25,3 @@ Route::post('/create-user-voucher', [UserVoucherApiController::class, 'store']);
 
 Route::get('/user-has-voucher', [UserVoucherApiController::class, 'userHasVoucher']);
 Route::get('/user-has-voucher/{id}', [UserVoucherApiController::class, 'userHasVoucherWithId']);
-
-Route::get('/create-user-coin', [CoinCardController::class, 'createUserPoin']);
