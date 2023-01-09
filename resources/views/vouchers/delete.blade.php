@@ -29,7 +29,6 @@
     </table>
     <p></p>
     <input type="submit" id="del-button" value="Delete">
-    <input type="submit" id="edit-button" value="Edit">
 </form>
 </div>
 @endsection
@@ -71,13 +70,10 @@
             .then(response => response.json())
             .then(
                 response => {
-                    window.location.reload();
-                    alert('delete success!');
+                    console.log(response);
                 }
-            ).catch((error) => {
-                console.error('Error:', error);
-                alert('cannot delete!');
-            });
+            );
+            window.location.reload();
         });
     });
 

@@ -12,7 +12,7 @@
         {{ session('status') }}
     </div>
 @endif
-<form action="/api/vouchers/update/4" method="POST" id="edit-form">
+<form action="" method="POST" id="edit-form">
     @csrf
     <input type="hidden" name="_method" value="PUT">
     <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
@@ -125,6 +125,7 @@
             document.getElementById('input_price').disabled = false;
         }
     }
+
     function vProductOption(){
         let label = document.getElementById('label_Vproduct');
         let input = document.getElementById('input_Vproduct');
@@ -133,6 +134,7 @@
         input.style.display = "block";
         input.required = true;
     }
+
     function vGeneralOption(){
         let label = document.getElementById('label_Vproduct');
         let input = document.getElementById('input_Vproduct');
@@ -141,5 +143,9 @@
         input.value="";
         input.required = false;
     }
+
+    window.addEventListener("load", function(){
+        document.getElementById("edit-form").action = `/api/vouchers/update/${voucher_id}`;
+    })
     
 </script>
