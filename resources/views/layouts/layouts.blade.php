@@ -79,6 +79,9 @@
             color: var(--white);
         }
 
+        ul {
+            padding: 0;
+        }
         .navigation ul li:hover a {
             color: var(--blue);
         }
@@ -103,7 +106,7 @@
             line-height: 80px;
             text-align: start;
             white-space: nowrap;
-            font-size: 25px;
+            font-size: 15px;
             font-weight: 400;
         }
 
