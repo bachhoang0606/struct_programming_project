@@ -34,4 +34,21 @@ class ProductController extends Controller
             return view('products.create')->with('error', 'Some error occurred');
         }
     }
+    public function edit($product_id)
+    {
+        $products = ProductAttribute::find($product_id);
+        return view('products.edit',compact('products'));
+
+    }
+    public function update(Request $request,$product_id)
+    {
+        $data = $request;
+        $products = ProductAttribute::find($product_id);
+        $products->coin = $data['coin'];
+        $products->discount = $data['discount'];
+        $products->update();
+        return redirect('product.index')->with('message','Product Updated Successfully');
+
+    }
+
 }
