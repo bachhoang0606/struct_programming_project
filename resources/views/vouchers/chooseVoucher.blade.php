@@ -1,6 +1,6 @@
-@extends('layouts.layouts')
+@extends('userPages.ui.index')
 
-@section('content')
+@section('display')
 
 @if (session('status'))
     <div class="alert alert-success">
