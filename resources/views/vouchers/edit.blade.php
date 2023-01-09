@@ -1,13 +1,8 @@
 @extends('layouts.layouts')
 
 @section('content')
-<div class="container-fluid px-4">
-    <div class="card mt-4">
-        <div class="card-header">
-            <h4>Create Voucher</h4>
-        </div>
-        <div class="card-body">
-        @if (session('status'))
+
+@if (session('status'))
     <div class="alert alert-success">
         {{ session('status') }}
     </div>
@@ -17,9 +12,11 @@
         {{ session('status') }}
     </div>
 @endif
-<form action="{{ route('create') }}" method="POST">
+<form action="" method="POST" id="edit-form">
     @csrf
-    <input type="hidden" name="sent" value="1">
+    <input type="hidden" name="_method" value="PUT">
+    <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
+    <!-- <input type="hidden" name="sent" value="1"> -->
 
     <div class="form-group">
         <label for="title" class="form-label">Set title</label><br>
@@ -43,11 +40,11 @@
     <p></p>    
     <div class="form-group">
         <label for="effective_date" class="form-label">Effective date: </label>
-        <input type="date" name="effective_date" class="form-control" required>
+        <input type="date" name="effective_date" class="form-control" >
     </div>
     <div class="form-group">
         <label for="expiration_date" class="form-label">Expiration date: </label>
-        <input type="date" name="expiration_date" class="form-control" required>
+        <input type="date" name="expiration_date" class="form-control">
     </div>
     <p></p>
     <div class="form-group">
@@ -88,16 +85,19 @@
         <label for="set_of_products" id="label_Vproduct" style="display:none">Please enter product's names: </label>
         <input type="text" id="input_Vproduct" name="set_of_products" style="display:none" class="form-control">
     </div> --}}
-    <p></p><input type="submit" value="Submit" class="btn btn-primary">
+    <p></p><input type="submit" id="submit_button" value="Update" class="btn btn-primary">
 </form>
 <br>
-        </div>
-    </div>
-</div>
-
 @endsection
 
 <script>
+    let voucher_id;
+
+    function getVoucherId(id){
+        voucher_id = id;
+    }
+
+    getVoucherId(4);
     
     function perDisOption(){
         let checkbox = document.getElementById('percent_discount');
@@ -125,6 +125,7 @@
             document.getElementById('input_price').disabled = false;
         }
     }
+
     function vProductOption(){
         let label = document.getElementById('label_Vproduct');
         let input = document.getElementById('input_Vproduct');
@@ -133,6 +134,7 @@
         input.style.display = "block";
         input.required = true;
     }
+
     function vGeneralOption(){
         let label = document.getElementById('label_Vproduct');
         let input = document.getElementById('input_Vproduct');
@@ -141,8 +143,9 @@
         input.value="";
         input.required = false;
     }
+
+    window.addEventListener("load", function(){
+        document.getElementById("edit-form").action = `/api/vouchers/update/${voucher_id}`;
+    })
     
 </script>
-
-    
-
