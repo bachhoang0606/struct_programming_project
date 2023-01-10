@@ -25,18 +25,15 @@
             padding: 0;
             box-sizing: border-box;
         }
-
         :root {
             --blue: #287bff;
             --white: #fff;
         }
-
         body {
             display: flex;
             min-height: 100vh;
             overflow-x: hidden;
         }
-
         .navigation {
             position: relative;
             height: 100%;
@@ -48,29 +45,25 @@
             left: 0;
             padding: 0;
         }
-
         .posi{
+            width:inherit;
             position: fixed;
             top:0;
         }
         .navigation ul {
-            top: 0;
             
+            padding: 0;
         }
-
         .navigation ul li {
             padding-right: 10px;
             list-style: none;
         }
-
         .navigation ul li:hover {
             background-color: var(--white);
         }
-
         .navigation ul li:nth-child(1) {
             margin-bottom: 100px;
         }
-
         .navigation ul li a {
             display: block;
             /* width: 100%; */
@@ -78,11 +71,9 @@
             text-decoration: none;
             color: var(--white);
         }
-
         .navigation ul li:hover a {
             color: var(--blue);
         }
-
         .navigation ul li a .icon {
             display: block;
             min-width: 80px;
@@ -91,11 +82,9 @@
             text-align: center;
             padding-top: 20px;
         }
-
         .navigation ul li a .icon ion-icon {
             font-size: 2em;
         }
-
         .navigation ul li a .title {
             display: block;
             padding: 0 10px;
@@ -103,10 +92,9 @@
             line-height: 80px;
             text-align: start;
             white-space: nowrap;
-            font-size: 25px;
+            font-size: 19px;
             font-weight: 400;
         }
-
         .main {
             padding: 30px;
             
@@ -156,7 +144,6 @@
                                 <span class="icon"><ion-icon name="calculator-outline"></ion-icon></ion-icon></span>
                                 <span class="title">Product</span>
                             </a>
-
                         </li>
 
                         <li>
