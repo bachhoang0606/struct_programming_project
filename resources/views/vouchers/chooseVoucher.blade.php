@@ -31,9 +31,6 @@
     <input type="submit" id="submit_button" value="Submit">
 </form>
 </div>
-
-@endsection
-
 <script>
     let userId;
     let user_vouchers = new Array();
@@ -47,7 +44,7 @@
         userId = id;
     }
 
-    setUser("4");
+    setUser({{$id}});
 
     fetch(`/api/user-has-voucher/${userId}`).then((res) => res.json()).then(
         response =>{
@@ -119,3 +116,5 @@
     });
 
 </script>
+@endsection
+
