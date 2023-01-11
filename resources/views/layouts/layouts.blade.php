@@ -146,7 +146,7 @@
                         </li>
 
                         <li>
-                            <a href="{{route('users.layout', 3)}}">
+                            <a href="{{route('users.layout', 1)}}">
                                 <span class="icon"><ion-icon name="person-outline"></ion-icon></ion-icon></ion-icon></span>
                                 <span class="title">User page</span>
                             </a>
