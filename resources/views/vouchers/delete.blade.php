@@ -28,8 +28,8 @@
         </tbody>
     </table>
     <p></p>
-    <input type="submit" id="del-button" value="Delete">
-    <a id="edit-tag" href="">Edit this voucher</a>
+    <input type="submit" id="del-button" value="Delete" class="btn btn-danger">
+    <a id="edit-tag" href="" class="btn btn-info">Edit this voucher</a>
 </form>
 </div>
 @endsection
