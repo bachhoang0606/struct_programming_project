@@ -17,7 +17,6 @@ class CoinCardController extends Controller
 
     public function refund(Request $request){
         $user = CoinCard::where('user_id', $request->user_id)->first();
-
         if($user){
             $user_coin = $user->coin + $request->coin;
             CoinCard::where('user_id', $request->user_id)->update(['coin'=> $user_coin]);
@@ -25,10 +24,8 @@ class CoinCardController extends Controller
             return new CoinCardResource($user);
         }else {
             return response()->json([
-                'error' => "user not avaiable",
+                'error' => "user not exit",
             ]);
-        }
-
-        
+        } 
     }
 }

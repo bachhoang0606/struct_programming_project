@@ -12,7 +12,7 @@ Route::get('/products-sale-price', [ProductAttributeApiController::class, 'index
 
 
 Route::get('/user-coin/{id}', [CoinCardController::class, 'show']);
-Route::put('/refund', [CoinCardController::class, 'refund']);
+Route::get('/refund', [CoinCardController::class, 'refund']);
 
 Route::get('/vouchers', [VoucherApiController::class, 'index']);
 Route::put('vouchers/update/{id}', [VoucherApiController::class, 'update']);

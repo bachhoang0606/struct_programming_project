@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\CoinCardResource;
 use App\Http\Resources\VoucherResource;
+use App\Models\CoinCard;
 use App\Models\Freeship;
 use App\Models\PercentDiscount;
 use App\Models\PriceDiscount;
@@ -93,6 +95,5 @@ class VoucherApiController extends Controller
         $price_discounts = PriceDiscount::all();
         $percent_discounts = PercentDiscount::all();
         return view("vouchers.index", ['freeships' => $freeships, 'price_discounts' => $price_discounts, 'percent_discounts' => $percent_discounts]);
-    }
-
+    }   
 }
