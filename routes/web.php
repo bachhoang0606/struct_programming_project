@@ -20,8 +20,8 @@ Route::get('/', function () {
  
 });
 
-Route::get('users.ui', function () {
-    return view('userPages.ui.index');
+Route::get('users/ui/{id}', function ($id) {
+    return view('userPages.ui.index', ['id' => $id]);
 })->name('users.layout');
 
 
@@ -43,6 +43,9 @@ Route::view('/edit-voucher', 'vouchers.edit');
 
 Route::view('/del-voucher', 'vouchers.delete');
 
+Route::get('choose-voucher/{id}', function ($id) {
+    return view('vouchers.chooseVoucher', ['id' => $id]);
+})->name('choose-voucher');
 
 Route::get('product.index', [ProductController::class, 'index'])->name('product.index');
 Route::get('product.create', [ProductController::class, 'create'])->name('product.create');
