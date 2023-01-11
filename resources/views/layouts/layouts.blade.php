@@ -152,9 +152,14 @@
                             </a>
 
                         </li>
+                        <hr />
+                        <li class="nav-item">
+                            <a href="{{route('delete-voucher')}}">Edit voucher</a>
+                        </li>
+                        <hr />
+                   </ul>  
+                </div>          
 
-                    </ul>
-                </div>
             </div>
 
             <div class="main h-100 col-md-10">

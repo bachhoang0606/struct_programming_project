@@ -39,9 +39,9 @@ Route::get('vouchers', [VoucherController::class, 'create'])->name('create');
 Route::post('vouchers', [VoucherController::class, 'store'])->name('create');
 Route::get('coin_card', [VoucherController::class, 'coin_card'])->name('coin_card');
 
-Route::view('/edit-voucher', 'vouchers.edit');
+Route::get('/edit-voucher/{id}',[VoucherController::class, 'edit']);
 
-Route::view('/del-voucher', 'vouchers.delete');
+Route::view('/del-voucher', 'vouchers.delete')->name('delete-voucher');
 
 Route::get('choose-voucher/{id}', function ($id) {
     return view('vouchers.chooseVoucher', ['id' => $id]);

@@ -140,7 +140,9 @@ class VoucherController extends Controller
      */
     public function edit($id)
     {
-        //
+        //make change here
+        //echo $id;
+        return view('vouchers.edit', ['id' => $id]);
     }
 
     // GET method
