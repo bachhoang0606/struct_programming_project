@@ -24,7 +24,7 @@ Route::get('/users/ui/voucherList/price/{id}', [VoucherController::class, 'displ
 Route::get('/', [VoucherController::class, 'index'])->name('index');
 Route::get('vouchers', [VoucherController::class, 'create'])->name('create');
 Route::post('vouchers', [VoucherController::class, 'store'])->name('create');
-Route::get('coin_card', [VoucherController::class, 'coin_card'])->name('coin_card');
+Route::get('coin_card', [VoucherController::class, 'coin_card'])->name('coin_card')->middleware('loadcoin');
 
 Route::get('/edit-voucher/{id}',[VoucherController::class, 'edit']);
 
@@ -34,7 +34,7 @@ Route::get('choose-voucher/{id}', function ($id) {
     return view('vouchers.chooseVoucher', ['id' => $id]);
 })->name('choose-voucher');
 
-Route::get('product.index', [ProductController::class, 'index'])->name('product.index');
+Route::get('product.index', [ProductController::class, 'index'])->name('product.index')->middleware('loadcoin');
 Route::get('product.create', [ProductController::class, 'create'])->name('product.create');
 Route::post('product.create', [ProductController::class, 'store'])->name('product.create');
 Route::get('product.edit/{product_id}',[ProductController::class, 'edit'])->name('product.edit');

@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('coin_cards', function (Blueprint $table) {
             $table->id('user_id');
             $table->string('name');
-            $table->string('phone');
+            $table->string('phone')->nullable();
             $table->string('email')->unique();
             $table->integer('coin');
             $table->timestamps();

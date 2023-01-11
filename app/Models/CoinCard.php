@@ -14,6 +14,13 @@ class CoinCard extends Model
     protected $fillable = [
         'user_id',
         'coin',
+        'name',
+        'phone',
+        'email'
+    ];
+
+    protected $attributes = [
+        'phone' => '00000000',
     ];
 
     public function vouchers(){

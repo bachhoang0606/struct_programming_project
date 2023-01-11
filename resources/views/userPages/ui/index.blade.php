@@ -30,8 +30,7 @@
                 <div class="list-group list-group-flush">
                         <a class="list-group-item list-group-item-action list-group-item-light p-3" href="{{route('displayAll', ['id' => $id])}}">VoucherList</a>
                         <a class="list-group-item list-group-item-action list-group-item-light p-3" href="{{route('choose-voucher', ['id' => $id])}}">Get voucher</a>
-                        <a class="list-group-item list-group-item-action list-group-item-light p-3" href="{{route('index')}}">Admin page</a>
-                    
+                        {{-- <a class="list-group-item list-group-item-action list-group-item-light p-3" href="{{route('index')}}">Admin page</a> --}}                    
                 </div>
             </div>
             <!-- Page content wrapper-->

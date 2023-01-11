@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Models\UserVoucher;
 use Closure;
 use Illuminate\Http\Request;
 use App\Models\CoinCard;
@@ -29,7 +30,7 @@ class autoLoadCoin
 
     public function createUserPoin(){
         // $response = Http::timeout(4)->get("https://63b964c03329392049f25570.mockapi.io/api/v1/products");
-        $response = Http::timeout(4)->get("https://api-admin-dype.onrender.com/user");
+        $response = Http::timeout(4)->get("https://api-admin-dype.onrender.com/api/user");
         if(!isset($response["statusCode"])){
             $users = $response;
             if(!is_array($response))
@@ -51,13 +52,14 @@ class autoLoadCoin
     
             foreach($users as $user){
                 if(!in_array($user["id"], $userCoinIds)){ // add
-                    CoinCard::insert(['user_id' => $user["id"],
-                                                    'name' => $user["name"],
-                                                    'phone' => $user["phoneNumber"],
-                                                    'email' => $user["email"],
-                                                    'coin' => $coin,
-                                                    'created_at' => NULL,
-                                                    'updated_at' => NULL,]);
+                    CoinCard::insert(
+                        [
+                            'user_id' => $user["id"],
+                            'name' => $user["name"],
+                            'phone' => $user["phoneNumber"],
+                            'email' => $user["email"],
+                            'coin' => $coin,
+                        ]);
                 }else{
                     $coinCard = CoinCard::find($user["id"]);
                     $coinCard->name = $user["name"];
@@ -69,6 +71,7 @@ class autoLoadCoin
     
             foreach($userCoins as $userCoin){
                 if(!in_array($userCoin["user_id"], $userIds)){ // delete
+                    UserVoucher::where("user_id", $userCoin["user_id"])->delete();
                     CoinCard::find($userCoin["user_id"])->delete();
                 }
             }
@@ -94,12 +97,16 @@ class autoLoadCoin
     
             foreach($products as $product){
                 if(!in_array($product["id"], $productAttrIds)){ // add
-                    ProductAttribute::insert(['product_id' => $product["id"],
-                                                    'name' => $product["name"],
-                                                    'coin' => $coin,
-                                                    'discount' => $discount,
-                                                    'created_at' => $product["created_at"] ? Carbon::parse($product["created_at"])->toDateTimeString() : NULL,
-                                                    'updated_at' => $product["updated_at"] ? Carbon::parse($product["updated_at"])->toDateTimeString() : NULL,]);
+                    ProductAttribute::insert(
+                        [
+                            'product_id' => $product["id"],
+                            'name' => $product["name"],
+                            'coin' => $coin,
+                            'discount' => $discount,
+                            'created_at' => $product["created_at"] ? Carbon::parse($product["created_at"])->toDateTimeString() : NULL,
+                            'updated_at' => $product["updated_at"] ? Carbon::parse($product["updated_at"])->toDateTimeString() : NULL,
+                        ]
+                    );
                 }else{
                     $productCoin = ProductAttribute::find($product["id"]);
                     $productCoin->name = $product["name"];

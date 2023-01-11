@@ -161,16 +161,18 @@
                                 <span class="title">Product</span>
                             </a>
                         </li>
-
-
-
-                        <li>
+                        {{-- <li>
+                            <a href="{{route('delete-voucher')}}">
+                                <span class="icon"><ion-icon name="construct-outline"></ion-icon></ion-icon></ion-icon></ion-icon></span>
+                                <span class="title">Edit voucher</span>
+                            </a>
+                        </li> --}}
+                        {{-- <li>
                             <a href="{{route('displayAll', 1)}}">
                                 <span class="icon"><ion-icon name="person-outline"></ion-icon></ion-icon></ion-icon></span>
                                 <span class="title">User page</span>
                             </a>
-
-                        </li>
+                        </li> --}}
 
                         <hr />
                     </ul>
