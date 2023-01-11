@@ -91,7 +91,7 @@
             line-height: 80px;
             text-align: start;
             white-space: nowrap;
-            font-size: 19px;
+            font-size: 15px;
             font-weight: 400;
         }
         .main {
