@@ -20,31 +20,31 @@
 
     <div class="form-group">
         <label for="title" class="form-label">Set title</label><br>
-        <input type="text" name="title" class="form-control" required>
+        <input type="text" name="title" id="input-title" class="form-control" required>
     </div>
     <p></p>
     <div class="form-group">
         <label for="content" class="form-label">Write description: </label><br>
-        <textarea name="content" id="" cols="30" rows="5" placeholder="Describe voucher" class="form-control" required></textarea>
+        <textarea name="content" id="input-content" cols="30" rows="5" placeholder="Describe voucher" class="form-control" required></textarea>
     </div>
     <p></p>
     <div class="form-group">
         <label for="minimun_price" class="form-label">Minimum price</label><br>
-        <input type="number" name="minimun_price" value="0" min="0" class="form-control" required>
+        <input type="number" name="minimun_price" id="input-min-price" value="0" min="0" class="form-control" required>
     </div>
     <p></p>
     <div class="form-group">
         <label for="quantium" class="form-label">Amount of vouchers:</label><br>
-        <input type="number" name="quantium" value="1" min="1" class="form-control" required>
+        <input type="number" name="quantium" id="input-quantium" value="1" min="1" class="form-control" required>
     </div>
     <p></p>    
     <div class="form-group">
         <label for="effective_date" class="form-label">Effective date: </label>
-        <input type="date" name="effective_date" class="form-control" >
+        <input type="date" name="effective_date" id="input-eff-date" class="form-control" >
     </div>
     <div class="form-group">
         <label for="expiration_date" class="form-label">Expiration date: </label>
-        <input type="date" name="expiration_date" class="form-control">
+        <input type="date" name="expiration_date" id="input-exp-date" class="form-control">
     </div>
     <p></p>
     <div class="form-group">
@@ -152,6 +152,30 @@
         getVoucherId(str_arr[str_arr.length -1]);
         console.log('voucher_id: ' + voucher_id);
         document.getElementById("edit-form").action = `/api/vouchers/update/${voucher_id}`;
+
+        fetch('/api/vouchers').then((res) => res.json()).then(
+            response => {
+                let i;
+                for (i = 0; i < response.data.length; i++){
+                    if (response.data[i].id == voucher_id){
+                        break;
+                    } 
+                }
+                document.getElementById("input-title").value = response.data[i].titlle;
+                document.getElementById("input-content").value = response.data[i].content;
+                document.getElementById("input-min-price").value = response.data[i].minimun_price;
+                document.getElementById("input-quantium").value = response.data[i].quantium;
+                document.getElementById("input-eff-date").value = response.data[i].effective_date;
+                document.getElementById("input-exp-date").value = response.data[i].expiration_date;
+                let type = response.data[i].type;
+                if (type == 1)
+                    document.getElementById("free_ship").checked = true;
+                else if (type == 2)
+                    document.getElementById("percent_discount").checked = true;
+                else
+                    document.getElementById("price_discount").checked = true;
+            }
+        )
     })
     
 </script>
