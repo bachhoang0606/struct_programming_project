@@ -156,6 +156,10 @@
                             <a href="{{route('users.layout')}}">User page</a>
                         </li>
                         <hr />
+                        <li class="nav-item">
+                            <a href="{{route('delete-voucher')}}">Edit voucher</a>
+                        </li>
+                        <hr />
                    </ul>  
                 </div>          
             </div>

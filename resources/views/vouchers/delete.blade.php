@@ -29,6 +29,7 @@
     </table>
     <p></p>
     <input type="submit" id="del-button" value="Delete">
+    <a id="edit-tag" href="">Edit this voucher</a>
 </form>
 </div>
 @endsection
@@ -37,6 +38,8 @@
 
     function getVoucherId(id){
         voucher_id = id;
+        console.log(voucher_id);
+        document.getElementById("edit-tag").href = '/edit-voucher/' + voucher_id;
     }
 
     fetch('/api/vouchers').then((res) => res.json()).then(
@@ -65,16 +68,35 @@
         document.getElementById("del-button").addEventListener("click", function(event){
             event.preventDefault();
 
-            let apiUrl = '/api/vouchers/delete/' + voucher_id;
-            fetch(apiUrl, {method: 'DELETE',})
-            .then(response => response.json())
-            .then(
-                response => {
-                    console.log(response);
+            if (voucher_id == '' || voucher_id == undefined){
+                alert('Need to choose voucher first!');
+            }else{
+                let apiUrl = '/api/vouchers/delete/' + voucher_id;
+                fetch(apiUrl, {method: 'DELETE',})
+                .then(response => response.json())
+                .then(
+                    response => {
+                        console.log(response);
+                    }
+                );
+                window.location.reload();
                 }
-            );
-            window.location.reload();
+        });
+
+        document.getElementById("edit-tag").addEventListener("click", function(event){
+            if (voucher_id == '' || voucher_id == undefined){
+                event.preventDefault();
+                alert('Need to choose voucher first!');
+            }
         });
     });
+
+    // window.addEventListener("load", function(){
+    //     document.getElementById("edit-button").addEventListener("click", function(event){
+    //         event.preventDefault();
+
+            
+    //     });
+    // });
 
 </script>

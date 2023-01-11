@@ -97,7 +97,7 @@
         voucher_id = id;
     }
 
-    getVoucherId(4);
+    //getVoucherId(4);
     
     function perDisOption(){
         let checkbox = document.getElementById('percent_discount');
@@ -145,6 +145,12 @@
     }
 
     window.addEventListener("load", function(){
+        let currentUrl = window.location.href
+        //console.log(currentUrl);
+        let str_arr = currentUrl.split("/");
+        //console.log(str_arr[str_arr.length -1]);
+        getVoucherId(str_arr[str_arr.length -1]);
+        console.log('voucher_id: ' + voucher_id);
         document.getElementById("edit-form").action = `/api/vouchers/update/${voucher_id}`;
     })
     
