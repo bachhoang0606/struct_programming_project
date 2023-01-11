@@ -52,7 +52,6 @@
             height: inherit;
         }
         .navigation ul {
-            
             padding: 0;
         }
         .navigation ul li {
@@ -63,7 +62,8 @@
             background-color: var(--white);
         }
         /* .navigation ul li:nth-child(1) {
-            margin-bottom: 100px;
+
+            margin-bottom: 80px;
         } */
         .navigation ul li a {
             display: block;
