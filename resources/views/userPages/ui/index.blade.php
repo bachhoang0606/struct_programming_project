@@ -13,16 +13,25 @@
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
         <link href="/css/display.css" rel="stylesheet" />
+
+        <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+        <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+        <link href="css/bootstrap.min.css" rel="stylesheet">
+
+        <!-- Bootstrap Core CSS RTL-->
+        <link href="css/bootstrap-rtl.min.css" rel="stylesheet">
+
     </head>
     <body>
         <div class="d-flex" id="wrapper">
             <!-- Sidebar-->
             <div class="border-end bg-white" id="sidebar-wrapper">
-                <div class="sidebar-heading border-bottom bg-light">Start Bootstrap</div>
+                <div class="sidebar-heading border-bottom bg-light">User page</div>
                 <div class="list-group list-group-flush">
-                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">Dashboard</a>
-                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="{{route('displayAll', 1)}}">VoucherList</a>
-                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="{{route('index')}}">Admin page</a>
+                        <a class="list-group-item list-group-item-action list-group-item-light p-3" href="{{route('displayAll', ['id' => $id])}}">VoucherList</a>
+                        <a class="list-group-item list-group-item-action list-group-item-light p-3" href="{{route('choose-voucher', ['id' => $id])}}">Get voucher</a>
+                        <a class="list-group-item list-group-item-action list-group-item-light p-3" href="{{route('index')}}">Admin page</a>
+                    
                 </div>
             </div>
             <!-- Page content wrapper-->

@@ -3,8 +3,7 @@
 use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\VoucherController;
-
-
+use App\Http\Controllers\ChartController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -21,9 +20,12 @@ Route::get('/', function () {
  
 });
 
-Route::get('users.ui', function () {
-    return view('userPages.ui.index');
+Route::get('users/ui/{id}', function ($id) {
+    return view('userPages.ui.index', ['id' => $id]);
 })->name('users.layout');
+
+
+
 
 Route::resource('vouchers', VoucherController::class);
 
@@ -41,7 +43,12 @@ Route::get('/edit-voucher/{id}',[VoucherController::class, 'edit']);
 
 Route::view('/del-voucher', 'vouchers.delete')->name('delete-voucher');
 
+Route::get('choose-voucher/{id}', function ($id) {
+    return view('vouchers.chooseVoucher', ['id' => $id]);
+})->name('choose-voucher');
 
 Route::get('product.index', [ProductController::class, 'index'])->name('product.index');
 Route::get('product.create', [ProductController::class, 'create'])->name('product.create');
 Route::post('product.create', [ProductController::class, 'store'])->name('product.create');
+Route::get('product.edit/{product_id}',[ProductController::class, 'edit'])->name('product.edit');
+Route::put('product.update/{product_id}',[ProductController::class, 'update'])->name('product.update');

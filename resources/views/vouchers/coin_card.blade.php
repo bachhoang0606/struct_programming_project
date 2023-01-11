@@ -1,5 +1,6 @@
 @extends('layouts.layouts')
 @section('content')
+<h2>User coin</h2>
     <div class="container-fluid my-3">
         @foreach ($coinCards as $coinCard)
             <div class="card mb-3">

@@ -38,7 +38,7 @@ class VoucherController extends Controller
         $price_discounts = PriceDiscount::all();
         $percent_discounts = PercentDiscount::all();
         $data = new UserVoucherResource(CoinCard::find($id));
-        return view("userPages.ui.voucher.all",['data' => $data, 'freeships' => $freeships, 'price_discounts' => $price_discounts, 'vouchers' => $vouchers, 'percent_discounts' => $percent_discounts]);  
+        return view("userPages.ui.voucher.all",['data' => $data, 'freeships' => $freeships, 'price_discounts' => $price_discounts, 'vouchers' => $vouchers, 'percent_discounts' => $percent_discounts, 'id' => $id]);  
     }
 
     public function displayFreeships($id)
@@ -47,7 +47,7 @@ class VoucherController extends Controller
         $freeships = Freeship::all();
         $vouchers = Voucher::all();
         $data = new UserVoucherResource(CoinCard::find($id));
-        return view("userPages.ui.voucher.freeships", ['data' => $data, 'freeships' => $freeships], ['vouchers' => $vouchers]);
+        return view("userPages.ui.voucher.freeships", ['data' => $data, 'freeships' => $freeships], ['vouchers' => $vouchers, 'id' => $id]);
     }
 
     public function displayPercent($id)
@@ -56,7 +56,7 @@ class VoucherController extends Controller
         $percent_discounts = PercentDiscount::all();
         $vouchers = Voucher::all();
         $data = new UserVoucherResource(CoinCard::find($id));
-        return view("userPages.ui.voucher.percent", ['data' => $data, 'percent_discounts' => $percent_discounts], ['vouchers' => $vouchers]);
+        return view("userPages.ui.voucher.percent", ['data' => $data, 'percent_discounts' => $percent_discounts], ['vouchers' => $vouchers, 'id' => $id]);
     }
 
     public function displayPrice($id)
@@ -65,7 +65,7 @@ class VoucherController extends Controller
         $price_discounts = PriceDiscount::all();
         $vouchers = Voucher::all();
         $data = new UserVoucherResource(CoinCard::find($id));
-        return view("userPages.ui.voucher.price", ['data' => $data, 'price_discounts' => $price_discounts], ['vouchers' => $vouchers]);
+        return view("userPages.ui.voucher.price", ['data' => $data, 'price_discounts' => $price_discounts], ['vouchers' => $vouchers, 'id' => $id]);
     }
 
     /**
