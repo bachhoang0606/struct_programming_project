@@ -48,9 +48,10 @@
             width:inherit;
             position: fixed;
             top:0;
+            background-color: var(--blue);
+            height: inherit;
         }
         .navigation ul {
-            
             padding: 0;
         }
         .navigation ul li {
@@ -60,9 +61,9 @@
         .navigation ul li:hover {
             background-color: var(--white);
         }
-        .navigation ul li:nth-child(1) {
-            margin-bottom: 100px;
-        }
+        /* .navigation ul li:nth-child(1) {
+            margin-bottom: 80px;
+        } */
         .navigation ul li a {
             display: block;
             /* width: 100%; */
@@ -79,19 +80,19 @@
             height: 80px;
             line-height: 60px;
             text-align: center;
-            padding-top: 20px;
+            padding-top: 18px;
         }
         .navigation ul li a .icon ion-icon {
             font-size: 2em;
         }
         .navigation ul li a .title {
             display: block;
-            padding: 0 10px;
+            /* padding: 0 10px; */
             height: 80px;
             line-height: 80px;
             text-align: start;
             white-space: nowrap;
-            font-size: 19px;
+            font-size: 16px;
             font-weight: 400;
         }
         .main {
