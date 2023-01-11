@@ -62,6 +62,7 @@
             background-color: var(--white);
         }
         /* .navigation ul li:nth-child(1) {
+
             margin-bottom: 80px;
         } */
         .navigation ul li a {
@@ -80,7 +81,7 @@
             height: 80px;
             line-height: 60px;
             text-align: center;
-            padding-top: 18px;
+            padding-top:18px;
         }
         .navigation ul li a .icon ion-icon {
             font-size: 2em;
@@ -118,7 +119,6 @@
                                 <span class="title">Home</span>
                             </a>
                         </li>
-
                         <li><a href="{{route('index')}}">
                                 <span class="icon"><ion-icon name="bar-chart-outline"></ion-icon></ion-icon></span>
                                 <span class="title">Dashboard</span>
@@ -147,15 +147,17 @@
                         </li>
 
                         <li>
-                            <a href="{{route('users.layout', 3)}}">
+                            <a href="{{route('users.layout', 1)}}">
                                 <span class="icon"><ion-icon name="person-outline"></ion-icon></ion-icon></ion-icon></span>
                                 <span class="title">User page</span>
                             </a>
 
                         </li>
-                        <hr />
-                        <li class="nav-item">
-                            <a href="{{route('delete-voucher')}}">Edit voucher</a>
+                        <li>
+                            <a href="{{route('delete-voucher')}}">
+                                <span class="icon"><ion-icon name="person-outline"></ion-icon></ion-icon></ion-icon></span>
+                                <span class="title">Delete voucher</span>
+                            </a>
                         </li>
                         <hr />
                    </ul>  
