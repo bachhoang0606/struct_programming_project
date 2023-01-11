@@ -128,6 +128,13 @@
                         </li>
 
                         <li>
+                            <a href="{{route('delete-voucher')}}">
+                                <span class="icon"><ion-icon name="trash-outline"></ion-icon></ion-icon></ion-icon></span>
+                                <span class="title">Delete voucher</span>
+                            </a>
+                        </li>
+
+                        <li>
                             <a href="{{route('coin_card')}}">
                                 <span class="icon"><ion-icon name="people-circle-outline"></ion-icon></span>
                                 <span class="title">User coin</span>
@@ -142,11 +149,13 @@
                         </li>
 
                         <li>
+
                             <a href="{{route('delete-voucher')}}">
                                 <span class="icon"><ion-icon name="construct-outline"></ion-icon></ion-icon></ion-icon></ion-icon></span>
                                 <span class="title">Edit voucher</span>
                             </a>
                         </li> 
+
 
                         <li>
                             <a href="{{route('users.layout', 1)}}">
