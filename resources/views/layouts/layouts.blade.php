@@ -136,10 +136,17 @@
 
                         <li>
                             <a href="{{route('product.index')}}">
-                                <span class="icon"><ion-icon name="calculator-outline"></ion-icon></ion-icon></span>
+                                <span class="icon"><ion-icon name="shirt-outline"></ion-icon></ion-icon></ion-icon></span>
                                 <span class="title">Product</span>
                             </a>
                         </li>
+
+                        <li>
+                            <a href="{{route('delete-voucher')}}">
+                                <span class="icon"><ion-icon name="construct-outline"></ion-icon></ion-icon></ion-icon></ion-icon></span>
+                                <span class="title">Edit voucher</span>
+                            </a>
+                        </li> 
 
                         <li>
                             <a href="{{route('users.layout', 1)}}">
@@ -148,12 +155,7 @@
                             </a>
 
                         </li>
-                        <li>
-                            <a href="{{route('delete-voucher')}}">
-                                <span class="icon"><ion-icon name="person-outline"></ion-icon></ion-icon></ion-icon></span>
-                                <span class="title">Delete voucher</span>
-                            </a>
-                        </li>
+                        
                         <hr />
                    </ul>  
                 </div>          
