@@ -93,7 +93,7 @@
             line-height: 80px;
             text-align: start;
             white-space: nowrap;
-            font-size: 18px;
+            font-size: 16px;
             font-weight: 400;
         }
         .main {
