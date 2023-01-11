@@ -14,6 +14,7 @@ use App\Http\Controllers\ChartController;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
 Route::resource('vouchers', VoucherController::class);
 
 Route::get('/users/ui/voucherList/all/{id}', [VoucherController::class, 'displayAll'])->name('displayAll');
