@@ -114,11 +114,6 @@
             <div class="navigation col-md-2">
                 <div class="posi">
                     <ul>
-                        <li><a href="#">
-                                <span class="icon"><ion-icon name="home-outline"></ion-icon></span>
-                                <span class="title">Home</span>
-                            </a>
-                        </li>
                         <li><a href="{{route('index')}}">
                                 <span class="icon"><ion-icon name="bar-chart-outline"></ion-icon></ion-icon></span>
                                 <span class="title">Dashboard</span>

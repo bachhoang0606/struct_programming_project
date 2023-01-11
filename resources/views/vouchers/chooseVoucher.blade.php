@@ -15,7 +15,7 @@
 <div>
 <h2>Choose vouchers:</h2>
 <form action="" method="GET">
-    <table>
+    <table class="table">
         <thead>
             <th>Title</th>
             <th>Content</th>
@@ -28,7 +28,7 @@
         </tbody>
     </table>
     <p></p>
-    <input type="submit" id="submit_button" value="Submit">
+    <input type="submit" id="submit_button" value="Submit" class="btn btn-success">
 </form>
 </div>
 <script>

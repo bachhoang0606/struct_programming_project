@@ -38,6 +38,7 @@ class VoucherController extends Controller
         $price_discounts = PriceDiscount::all();
         $percent_discounts = PercentDiscount::all();
         $data = new UserVoucherResource(CoinCard::find($id));
+        
         return view("userPages.ui.voucher.all",['data' => $data, 'freeships' => $freeships, 'price_discounts' => $price_discounts, 'vouchers' => $vouchers, 'percent_discounts' => $percent_discounts, 'id' => $id]);  
     }
 
