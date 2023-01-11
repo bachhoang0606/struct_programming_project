@@ -28,9 +28,13 @@
             <div class="border-end bg-white" id="sidebar-wrapper">
                 <div class="sidebar-heading border-bottom bg-light">User page</div>
                 <div class="list-group list-group-flush">
-                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="{{route('displayAll', 1)}}">VoucherList</a>
-                    {{-- <a class="list-group-item list-group-item-action list-group-item-light p-3" href="{{route('choose-voucher', 1)}}">Get voucher</a> --}}
-                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="{{route('index')}}">Admin page</a>
+                    @php
+                        $id
+                    @endphp
+                        <a class="list-group-item list-group-item-action list-group-item-light p-3" href="{{route('displayAll', ['id' => $id])}}">VoucherList</a>
+                        <a class="list-group-item list-group-item-action list-group-item-light p-3" href="{{route('choose-voucher', ['id' => $id])}}">Get voucher</a>
+                        <a class="list-group-item list-group-item-action list-group-item-light p-3" href="{{route('index')}}">Admin page</a>
+                    
                 </div>
             </div>
             <!-- Page content wrapper-->

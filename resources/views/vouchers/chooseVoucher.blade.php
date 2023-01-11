@@ -44,7 +44,7 @@
         userId = id;
     }
 
-    setUser("4");
+    setUser({{$id}});
 
     fetch(`/api/user-has-voucher/${userId}`).then((res) => res.json()).then(
         response =>{
