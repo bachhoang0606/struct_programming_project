@@ -14,19 +14,6 @@ use App\Http\Controllers\ChartController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-Route::get('/', function () {
-    return view('vouchers.create');
- 
-});
-
-Route::get('users/ui/{id}', function ($id) {
-    return view('userPages.ui.index', ['id' => $id]);
-})->name('users.layout');
-
-
-
-
 Route::resource('vouchers', VoucherController::class);
 
 Route::get('/users/ui/voucherList/all/{id}', [VoucherController::class, 'displayAll'])->name('displayAll');
@@ -34,7 +21,7 @@ Route::get('/users/ui/voucherList/freeships/{id}', [VoucherController::class, 'd
 Route::get('/users/ui/voucherList/percent/{id}', [VoucherController::class, 'displayPercent'])->name('displayPercent');
 Route::get('/users/ui/voucherList/price/{id}', [VoucherController::class, 'displayPrice'])->name('displayPrice');
 
-Route::get('index', [VoucherController::class, 'index'])->name('index');
+Route::get('/', [VoucherController::class, 'index'])->name('index');
 Route::get('vouchers', [VoucherController::class, 'create'])->name('create');
 Route::post('vouchers', [VoucherController::class, 'store'])->name('create');
 Route::get('coin_card', [VoucherController::class, 'coin_card'])->name('coin_card');
