@@ -149,7 +149,7 @@
                         </li>
 
                         <li>
-                            <a href="{{route('coin_card')}}">
+                            <a href="{{route('coin_cards.index')}}">
                                 <span class="icon"><ion-icon name="people-circle-outline"></ion-icon></span>
                                 <span class="title">User coin</span>
                             </a>

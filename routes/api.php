@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\api\CalulatorApiController;
-use App\Http\Controllers\api\CoinCardController;
+use App\Http\Controllers\api\CoinCardApiController;
 use App\Http\Controllers\api\ProductAttributeApiController;
 use App\Http\Controllers\api\UserVoucherApiController;
 use App\Http\Controllers\api\VoucherApiController;
@@ -11,8 +11,8 @@ Route::get('/product-coin/{id}', [ProductAttributeApiController::class, 'show_co
 Route::get('/products-sale-price', [ProductAttributeApiController::class, 'index']);
 
 
-Route::get('/user-coin/{id}', [CoinCardController::class, 'show']);
-Route::get('/refund', [CoinCardController::class, 'refund']);
+Route::get('/user-coin/{id}', [CoinCardApiController::class, 'show']);
+Route::get('/refund', [CoinCardApiController::class, 'refund']);
 
 Route::get('/vouchers', [VoucherApiController::class, 'index']);
 Route::put('vouchers/update/{id}', [VoucherApiController::class, 'update']);
