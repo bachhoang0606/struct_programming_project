@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\web\CoinCardController;
 use App\Http\Controllers\web\ProductController;
+use App\Http\Controllers\web\UserVoucherController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\web\VoucherController;
 /*
@@ -34,18 +36,18 @@ Route::group( ['prefix' => 'admins/'] , function () {
     Route::post('vouchers', [VoucherController::class, 'store'])->name('create');
 
     // coin card controller routes
-    Route::get('coin_card', [VoucherController::class, 'coin_card'])->name('coin_card');//->middleware('loadcoin');
+    Route::get('coin_cards', [CoinCardController::class, 'index'])->name('coin_cards.index');//->middleware('loadcoin');
 });
 
 
 Route::group( ['prefix' => 'users/'] , function () {
 
-    // vouchers controller routes
-    Route::get('voucherList.all/{id}', [VoucherController::class, 'displayAll'])->name('displayAll');
-    Route::get('voucherList.freeships/{id}', [VoucherController::class, 'displayFreeships'])->name('displayFreeships');
-    Route::get('voucherList.percent/{id}', [VoucherController::class, 'displayPercent'])->name('displayPercent');
-    Route::get('voucherList.price/{id}', [VoucherController::class, 'displayPrice'])->name('displayPrice');
+    // users vouchers controller routes
+    Route::get('voucherList.all/{id}', [UserVoucherController::class, 'displayAll'])->name('displayAll');
+    Route::get('voucherList.freeships/{id}', [UserVoucherController::class, 'displayFreeships'])->name('displayFreeships');
+    Route::get('voucherList.percent/{id}', [UserVoucherController::class, 'displayPercent'])->name('displayPercent');
+    Route::get('voucherList.price/{id}', [UserVoucherController::class, 'displayPrice'])->name('displayPrice');
     Route::get('choose-voucher/{id}', function ($id) {
-        return view('vouchers.users.chooseVoucher', ['id' => $id]);
+        return view('user_vouchers.users.chooseVoucher', ['id' => $id]);
     })->name('choose-voucher');
 });

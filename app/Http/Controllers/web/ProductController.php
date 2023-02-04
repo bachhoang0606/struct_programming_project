@@ -8,47 +8,88 @@ use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
-    //
-    //  list coin and discount
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Contracts\View\Factory
+     */
     public function index(){
 
         $products = ProductAttribute::all();
-        return view('products.admins.index', ['products' => $products]);
+        return view(
+            'products.admins.index', 
+            [
+                'products' => $products
+            ]
+        );
     }
 
-    // display form create
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Contracts\View\Factory
+     */
     public function create(){
-        return view('products.create');
+        return view( 'products.create' );
     }
 
-    // save new product
-    public function store(Request $request){
-        $query =ProductAttribute::where('product_id', $request->product_id)
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store( Request $request ){
+        $query = ProductAttribute::where( 'product_id', $request->product_id )
         ->update([
             'coin' => $request->coin,
             'discount' => $request->discount,
         ]);
 
-        if($query){
-            return view('products.create')->with('status', 'Update successful');
+        if( $query ){
+            return view( 'products.create' )
+            ->with( 'status', 'Update successful' );
         }else{
-            return view('products.create')->with('error', 'Some error occurred');
+            return view( 'products.create' )
+            ->with( 'error', 'Some error occurred' );
         }
     }
-    public function edit($product_id)
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $product_id
+     * @return \Illuminate\Contracts\View\Factory
+     */
+    public function edit( $product_id )
     {
-        $products = ProductAttribute::find($product_id);
-        return view('products.admins.edit',compact('products'));
+        $products = ProductAttribute::find( $product_id );
+        return view(
+            'products.admins.edit',
+            compact( 'products' )
+        );
 
     }
-    public function update(Request $request,$product_id)
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $product_id
+     * @return \Illuminate\Http\Response
+     */
+    public function update( Request $request, $product_id )
     {
         $data = $request;
-        $products = ProductAttribute::find($product_id);
+        $products = ProductAttribute::find( $product_id );
+
         $products->coin = $data['coin'];
         $products->discount = $data['discount'];
+
         $products->update();
-        return redirect('product.index')->with('message','Product Updated Successfully');
+
+        return redirect( 'product.index' )
+        ->with( 'message','Product Updated Successfully' );
 
     }
 
