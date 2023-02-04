@@ -1,4 +1,4 @@
-@extends('userPages.ui.index')
+@extends('layouts.users.layouts')
 
 @section('display')
 

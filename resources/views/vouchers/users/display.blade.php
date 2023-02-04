@@ -1,7 +1,6 @@
-@extends('userPages.ui.index')
+@extends('layouts.users.layouts')
 
 @section('display')
-
     <div class="wrapper">
         <div class="navbar-voucher">
             <a class="navbar-text all" href="{{route('displayAll', ['id' => $id] )}}" onclick="addActive()">All</a>

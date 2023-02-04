@@ -3,9 +3,7 @@
 namespace App\Http\Controllers\api;
 
 use App\Http\Controllers\Controller;
-use App\Http\Resources\CoinCardResource;
 use App\Http\Resources\VoucherResource;
-use App\Models\CoinCard;
 use App\Models\Freeship;
 use App\Models\PercentDiscount;
 use App\Models\PriceDiscount;
@@ -13,7 +11,6 @@ use App\Models\UserVoucher;
 use App\Models\Voucher;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use SebastianBergmann\CodeCoverage\Util\Percentage;
 
 class VoucherApiController extends Controller
 {
@@ -62,9 +59,9 @@ class VoucherApiController extends Controller
             $freeships = Freeship::all();
             $price_discounts = PriceDiscount::all();
             $percent_discounts = PercentDiscount::all();
-            return view("vouchers.index", ['freeships' => $freeships, 'price_discounts' => $price_discounts, 'percent_discounts' => $percent_discounts]);
+            return view("vouchers.admins.index", ['freeships' => $freeships, 'price_discounts' => $price_discounts, 'percent_discounts' => $percent_discounts]);
         }else{
-            return view("vouchers.create")->with('error', 'Some error occurred');
+            return view("vouchers.admins.create")->with('error', 'Some error occurred');
         }
     }
 

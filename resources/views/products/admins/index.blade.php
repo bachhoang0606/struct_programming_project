@@ -1,4 +1,4 @@
-@extends('layouts.layouts')
+@extends('layouts.admins.layouts')
 @section('content')
 <div class="container">
     <h1 class="my-3">Product</h1>

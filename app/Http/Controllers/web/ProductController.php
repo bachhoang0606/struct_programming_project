@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\web;
 
+use App\Http\Controllers\Controller;
 use App\Models\ProductAttribute;
 use Illuminate\Http\Request;
 
@@ -12,7 +13,7 @@ class ProductController extends Controller
     public function index(){
 
         $products = ProductAttribute::all();
-        return view('products.index', ['products' => $products]);
+        return view('products.admins.index', ['products' => $products]);
     }
 
     // display form create
@@ -37,7 +38,7 @@ class ProductController extends Controller
     public function edit($product_id)
     {
         $products = ProductAttribute::find($product_id);
-        return view('products.edit',compact('products'));
+        return view('products.admins.edit',compact('products'));
 
     }
     public function update(Request $request,$product_id)
