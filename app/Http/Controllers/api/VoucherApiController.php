@@ -95,5 +95,6 @@ class VoucherApiController extends Controller
         $price_discounts = PriceDiscount::all();
         $percent_discounts = PercentDiscount::all();
         return view("vouchers.index", ['freeships' => $freeships, 'price_discounts' => $price_discounts, 'percent_discounts' => $percent_discounts]);
+        //return '{"msg":"successful"}';
     }   
 }

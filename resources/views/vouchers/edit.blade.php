@@ -91,6 +91,7 @@
 @endsection
 
 <script>
+    //need to get back to prev page
     let voucher_id;
 
     function getVoucherId(id){
@@ -165,8 +166,9 @@
                 document.getElementById("input-content").value = response.data[i].content;
                 document.getElementById("input-min-price").value = response.data[i].minimun_price;
                 document.getElementById("input-quantium").value = response.data[i].quantium;
-                document.getElementById("input-eff-date").value = response.data[i].effective_date;
-                document.getElementById("input-exp-date").value = response.data[i].expiration_date;
+                document.getElementById("input-eff-date").value = response.data[i]["effective date"].split(" ")[0];
+                //console.log(response.data[i]["effective date"].split(" ")[0]);
+                document.getElementById("input-exp-date").value = response.data[i]["expiration_date"].split(" ")[0];
                 let type = response.data[i].type;
                 if (type == 1)
                     document.getElementById("free_ship").checked = true;

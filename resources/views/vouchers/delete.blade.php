@@ -72,13 +72,21 @@
                 alert('Need to choose voucher first!');
             }else{
                 let apiUrl = '/api/vouchers/delete/' + voucher_id;
-                fetch(apiUrl, {method: 'DELETE',})
-                .then(response => response.json())
+                fetch(apiUrl, {method: 'DELETE'})
+                .then(response => {
+                    if (response.ok)
+                        return response.json();
+                    
+                    //throw new Error('Cannot delete this voucher!');
+                })
+                // .then(response => response.json())
                 .then(
                     response => {
                         console.log(response);
                     }
-                );
+                ).catch(error => {
+                    alert('Cannot delete this voucher');
+                });
                 window.location.reload();
                 }
         });
