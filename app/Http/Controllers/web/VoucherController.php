@@ -52,6 +52,18 @@ class VoucherController extends Controller
      */
     public function store(Request $request)
     {
+        $validated = $request->validate(
+            [ 
+                'title' => 'required', 
+                'content' => 'required', 
+                'minimun_price' => 'required|numeric|min:0', 
+                'quantium' => 'required|numeric|min:0', 
+                'effective_date' => 'required', 
+                'expiration_date' => 'required|after_or_equal:effective_date', 
+            ]
+        );
+
+        // must all action is successful
         $result = DB::transaction( function () use ( $request ) {
 
             $voucher_date = $request->only(
@@ -105,13 +117,8 @@ class VoucherController extends Controller
             }
         });
 
-        if ($result) {
-            return view( "vouchers.index" )
-            ->with( 'status', 'Create voucher successful' );
-        } else {
-            return view( "vouchers.admins.create" )
-            ->with( 'error', 'Some error occurred' );
-        }
+        return redirect( route( "index" ) )
+        ->with( 'message', 'Create voucher successful' );
     }
 
     /**

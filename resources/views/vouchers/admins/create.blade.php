@@ -1,6 +1,15 @@
 @extends('layouts.admins.layouts')
 
 @section('content')
+@if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
 <div class="container-fluid px-4">
     <div class="card mt-4">
         <div class="card-header">
@@ -23,56 +32,56 @@
 
     <div class="form-group">
         <label for="title" class="form-label">Set title</label><br>
-        <input type="text" name="title" class="form-control" required>
+        <input type="text" name="title" class="form-control" value="{{old('title')}}" required>
     </div>
     <p></p>
     <div class="form-group">
         <label for="content" class="form-label">Write description: </label><br>
-        <textarea name="content" id="" cols="30" rows="5" placeholder="Describe voucher" class="form-control" required></textarea>
+        <textarea name="content" id="" cols="30" rows="5" placeholder="Describe voucher" class="form-control" required>{{old('content')}}</textarea>
     </div>
     <p></p>
     <div class="form-group">
         <label for="minimun_price" class="form-label">Minimum price</label><br>
-        <input type="number" name="minimun_price" value="0" min="0" class="form-control" required>
+        <input type="number" name="minimun_price" value="0" min="0" class="form-control" value="{{old('minimun_price')}}" required>
     </div>
     <p></p>
     <div class="form-group">
         <label for="quantium" class="form-label">Amount of vouchers:</label><br>
-        <input type="number" name="quantium" value="1" min="1" class="form-control" required>
+        <input type="number" name="quantium" value="1" min="1" class="form-control" value="{{old('quantium')}}"  required>
     </div>
     <p></p>    
     <div class="form-group">
         <label for="effective_date" class="form-label">Effective date: </label>
-        <input type="date" name="effective_date" class="form-control" required>
+        <input type="date" name="effective_date" class="form-control" value="{{old('effective_date')}}" required>
     </div>
     <div class="form-group">
         <label for="expiration_date" class="form-label">Expiration date: </label>
-        <input type="date" name="expiration_date" class="form-control" required>
+        <input type="date" name="expiration_date" class="form-control"  value="{{old('expiration_date')}}"  required>
     </div>
     <p></p>
     <div class="form-group">
         <label for="price" id="label_price">Price: </label>
-        <input type="number" id="input_price" name="price" value="0" min="0" class="form-control" required>
+        <input type="number" id="input_price" name="price" value="0" min="0" class="form-control" value="{{old('price')}}"  required>
     </div>
     <h4>Choose types for voucher:</h4>
     <div class="form-check">
-        <input class="form-check-input" type="radio" id="free_ship" name="Vtype" value="freeships" onclick="perDisOption()" required>
+        <input class="form-check-input" type="radio" id="free_ship" name="Vtype" value="freeships" onclick="perDisOption()" {{ (old('Vtype') == "freeships" ? 'checked':'')  }} required>
         <label class="form-check-label" for="freeships">Free ship</label>
     </div>
     <div class="form-check">
-        <input class="form-check-input" type="radio" id="percent_discount" name="Vtype" value="percentDiscounts" min="0" onclick="perDisOption()">
+        <input class="form-check-input" type="radio" id="percent_discount" name="Vtype" value="percentDiscounts" min="0" onclick="perDisOption()" {{ (old('Vtype') == "percentDiscounts" ? 'checked':'')  }}>
         <label class="form-check-label" for="percentDiscounts">Percent discount</label>
     </div>
     <div class="form-group">
         <label for="max_price" name="label_perDis" style="display:none">Set max price: </label>
-        <input type="number" id="set_max" name="max_price" value="0" min="0" style="display:none" class="form-control">
+        <input type="number" id="set_max" name="max_price" value="0" min="0" style="display:none" class="form-control" value="{{old('max_price')}}">
     </div>
     <div class="form-group">
         <label for="percent" name="label_perDis" style="display:none">Set percentage: </label>
-        <input type="number" id="set_percent" name="percent" value="0" min="0" max="100" style="display:none" class="form-control">
+        <input type="number" id="set_percent" name="percent" value="0" min="0" max="100" style="display:none" class="form-control" value="{{old('percent')}}">
     </div>
     <div class="form-check">
-        <input class="form-check-input" type="radio" id="price_discount" name="Vtype" value="priceDiscounts" onclick="perDisOption()">
+        <input class="form-check-input" type="radio" id="price_discount" name="Vtype" value="priceDiscounts" onclick="perDisOption()" {{ (old('Vtype') == "priceDiscounts" ? 'checked':'')  }}>
         <label class="form-check-label" for="priceDiscounts">Price discount</label>
     </div>
     {{-- <h4>Choose range of products:</h4>

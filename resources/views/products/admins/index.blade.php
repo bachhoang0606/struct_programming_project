@@ -1,5 +1,10 @@
 @extends('layouts.admins.layouts')
 @section('content')
+@if (session('message'))
+<div class="alert alert-success">
+    {{ session('message') }}
+</div>
+@endif
 <div class="container">
     <h1 class="my-3">Product</h1>
     <table>
@@ -16,7 +21,7 @@
                 <td><?= $products->name; ?></td>
                 <td><?= $products->coin; ?></td>
                 <td><?= $products->discount; ?></td>
-                <td><a href="{{url('product.edit/'.$products->product_id)}}" class="btn btn-success">Edit</a></td>
+                <td><a href="{{url('admins/product.edit/'.$products->product_id)}}" class="btn btn-success">Edit</a></td>
             </tr>
         <?php endforeach; ?>
 

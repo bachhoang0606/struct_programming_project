@@ -9,6 +9,7 @@ use App\Models\PercentDiscount;
 use App\Models\PriceDiscount;
 use App\Models\UserVoucher;
 use App\Models\Voucher;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -22,7 +23,7 @@ class VoucherApiController extends Controller
     public function index()
     {
         $vouchers = Voucher::all();
-        return VoucherResource::collection( $vouchers );
+        return VoucherResource::collection($vouchers);
     }
 
     /**
@@ -30,105 +31,103 @@ class VoucherApiController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View 
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function update( Request $request, $id )
+    public function update(Request $request, $id)
     {
+        $validator = Validator::make( $request->all(), [
+            'title' => 'required',
+            'content' => 'required',
+            'minimun_price' => 'required|numeric|min:0',
+            'quantium' => 'required|numeric|min:0',
+            'effective_date' => 'required',
+            'expiration_date' => 'required|after_or_equal:effective_date',
+        ]);
 
-        $result = DB::transaction( function () use ( $request, $id ) {
+        if ($validator->fails()) {
+            return response()->json( $validator->errors(), 404 );
+        }
+
+        $result = DB::transaction(function () use ($request, $id) {
             $voucher_date = $request->only(
                 [
-                    'title', 
-                    'content', 
-                    'minimun_price', 
-                    'quantium', 
-                    'expiration_date', 
+                    'title',
+                    'content',
+                    'minimun_price',
+                    'quantium',
+                    'expiration_date',
                     'effective_date'
                 ]
             );
-            Voucher::where( 'id', $id )
-            ->update( $voucher_date );
+            Voucher::where('id', $id)
+                ->update($voucher_date);
 
-            if ( $request->Vtype == 'freeships' ) {
+            if ($request->Vtype == 'freeships') {
                 // update freeship voucher
-                Voucher::where( 'id', $id )
-                ->update(
-                    [
-                        'type' => 1
-                    ]
-                );
+                Voucher::where('id', $id)
+                    ->update(
+                        [
+                            'type' => 1
+                        ]
+                    );
 
-                Freeship::where( 'voucher_id', $id )
-                ->update(
-                    [
-                        'price' => $request->price,
-                    ]
-                );
+                Freeship::where('voucher_id', $id)
+                    ->update(
+                        [
+                            'price' => $request->price,
+                        ]
+                    );
 
-            } elseif ( $request->Vtype == 'priceDiscounts' ) {
+            } elseif ($request->Vtype == 'priceDiscounts') {
                 // update price discounts voucher
-                Voucher::where( 'id', $id )
-                ->update(
-                    [
-                        'type' => 2
-                    ]
-                );
+                Voucher::where('id', $id)
+                    ->update(
+                        [
+                            'type' => 2
+                        ]
+                    );
 
-                PriceDiscount::where( 'voucher_id', $id )
-                ->update(
-                    [
-                        'price' => $request->price
-                    ]
-                );
+                PriceDiscount::where('voucher_id', $id)
+                    ->update(
+                        [
+                            'price' => $request->price
+                        ]
+                    );
             } else {
                 // update percent discounts voucher
-                Voucher::where( 'id', $id )
-                ->update(
-                    [
-                        'type' => 3
-                    ]
-                );
-                PercentDiscount::where( 'voucher_id', $id )
-                ->update(
-                    [
-                        'percent' => $request->percent,
-                        'max_price' => $request->max_price
-                    ]
-                );
+                Voucher::where('id', $id)
+                    ->update(
+                        [
+                            'type' => 3
+                        ]
+                    );
+                PercentDiscount::where('voucher_id', $id)
+                    ->update(
+                        [
+                            'percent' => $request->percent,
+                            'max_price' => $request->max_price
+                        ]
+                    );
             }
         });
 
-        if ( $result ) {
-            // update success
-            $freeships = Freeship::all();
-            $price_discounts = PriceDiscount::all();
-            $percent_discounts = PercentDiscount::all();
-
-            return view(
-                "vouchers.admins.index", 
-                [
-                    'freeships' => $freeships, 
-                    'price_discounts' => $price_discounts, 
-                    'percent_discounts' => $percent_discounts
-                ]
-            );
-        } else {
-            // update false
-            return view( "vouchers.admins.create" )
-            ->with( 'error', 'Some error occurred' );
-        }
+        return response()->json(
+            [
+                'message' => "Voucher update successful.",
+            ]
+        );
     }
 
     /**
      * api remove the specified voucher from storage.
      *
      * @param  int  $id
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View 
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function destroy( $id )
+    public function destroy($id)
     {
-        $voucher = Voucher::find( $id );
-        if ( $voucher->type == 1 ) {
+        $voucher = Voucher::find($id);
+        if ($voucher->type == 1) {
 
             // delete voucher freeship
             Freeship::where('voucher_id', $id)->delete();
@@ -143,20 +142,17 @@ class VoucherApiController extends Controller
         }
 
         // delete voucher with id
-        UserVoucher::where( 'voucher_id', $id )
-        ->delete();
+        UserVoucher::where('voucher_id', $id)
+            ->delete();
         $voucher->delete();
 
         $freeships = Freeship::all();
         $price_discounts = PriceDiscount::all();
         $percent_discounts = PercentDiscount::all();
 
-        return view(
-            "vouchers.index", 
+        return response()->json(
             [
-                'freeships' => $freeships, 
-                'price_discounts' => $price_discounts, 
-                'percent_discounts' => $percent_discounts
+                'message' => "Successfully deleted voucher.",
             ]
         );
     }

@@ -1,5 +1,10 @@
 @extends('layouts.admins.layouts')
 @section('content')
+@if (session('message'))
+<div class="alert alert-success">
+    {{ session('message') }}
+</div>
+@endif
 <?php
 // foreach ($voucher_list as $voucher){
 //     print '<div class="container-voucher">

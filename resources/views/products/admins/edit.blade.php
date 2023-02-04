@@ -1,12 +1,21 @@
 @extends('layouts.admins.layouts')
 @section('content')
+@if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
 <div class="container-fluid px-4">
     <div class="card mt-4">
         <div class="card-header">
             <h4>Edit coin and discount</h4>
         </div>
         <div class="card-body">
-            <form action="{{url('product.update/'.$products->product_id)}}" method="POST" enctype="multipart/form-data">
+            <form action="{{url('/admins/product.update/'.$products->product_id)}}" method="POST" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
                <div class="mb-3">
@@ -21,12 +30,12 @@
 
                <div class="mb-3">
                     <label>Coin</label>
-                    <input type="text" name="coin"  value="{{$products->coin}}"class="form-control">
+                    <input type="text" name="coin"  value="{{ old('coin', $products->coin) }}"class="form-control">
                </div> 
 
                <div class="mb-3">
                     <label>Discount</label>
-                    <input type="text" name="discount"  value="{{$products->discount}}"class="form-control">
+                    <input type="text" name="discount"  value="{{ old('discount', $products->discount) }}"class="form-control">
                </div> 
 
                <div class="mb-6">

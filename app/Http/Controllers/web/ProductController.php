@@ -80,6 +80,12 @@ class ProductController extends Controller
      */
     public function update( Request $request, $product_id )
     {
+        $validated = $request->validate(
+            [ 
+                'coin' => 'required|numeric|min:0', 
+                'discount' => 'required|numeric|min:0|max:100', 
+            ]
+        );
         $data = $request;
         $products = ProductAttribute::find( $product_id );
 
@@ -88,8 +94,8 @@ class ProductController extends Controller
 
         $products->update();
 
-        return redirect( 'product.index' )
-        ->with( 'message','Product Updated Successfully' );
+        return redirect( route('product.index') )
+        ->with( 'message','Product updated successfully' );
 
     }
 
