@@ -1,4 +1,4 @@
-@extends('layouts.layouts')
+@extends('layouts.admins.layouts')
 @section('content')
 <h2>User coin</h2>
     <div class="container-fluid my-3">

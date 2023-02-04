@@ -1,4 +1,4 @@
-@extends('userPages.ui.voucher.display')
+@extends('vouchers.users.display')
 
 @section('voucherlist')
     <div class="voucher-list">

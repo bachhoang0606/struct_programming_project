@@ -1,4 +1,4 @@
-@extends('userPages.ui.voucher.display')
+@extends('vouchers.users.display')
 
 @section('voucherlist')
     <div class="voucher-list">
@@ -12,8 +12,6 @@
                 // print "$element->id";
                 $voucherList[] = $element->id;
             }
-
-            
             foreach ($vouchers as $voucher) {
                 if(in_array($voucher->id, $voucherList)){
                 # freeship...
