@@ -14,7 +14,7 @@ class ProductAttributeApiController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \App\Http\Resources\ProductAttributeResource
      */
-    public function show_coin( $id ){
+    public function showCoin( $id ){
         $product_coin = ProductAttribute::where( 'product_id', $id )
         ->first();
         return new ProductAttributeResource( $product_coin );

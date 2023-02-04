@@ -5,7 +5,6 @@ namespace App\Http\Controllers\web;
 use App\Http\Controllers\Controller;
 use App\Models\Freeship;
 use App\Models\PercentDiscount;
-use App\Models\CoinCard;
 use App\Models\PriceDiscount;
 use App\Models\Voucher;
 use Illuminate\Http\Request;
@@ -24,6 +23,7 @@ class VoucherController extends Controller
         $freeships = Freeship::all();
         $price_discounts = PriceDiscount::all();
         $percent_discounts = PercentDiscount::all();
+
         return view(
             "dashboards.admins.index", 
             [
@@ -50,9 +50,10 @@ class VoucherController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store( Request $request )
     {
-        $validated = $request->validate(
+        // validate form data
+        $request->validate(
             [ 
                 'title' => 'required', 
                 'content' => 'required', 
@@ -64,7 +65,7 @@ class VoucherController extends Controller
         );
 
         // must all action is successful
-        $result = DB::transaction( function () use ( $request ) {
+        DB::transaction( function () use ( $request ) {
 
             $voucher_date = $request->only(
                 [
@@ -120,17 +121,6 @@ class VoucherController extends Controller
         return redirect( route( "index" ) )
         ->with( 'message', 'Create voucher successful' );
     }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    // public function show($id)
-    // {
-    //     //
-    // }
 
     /**
      * Show the form for editing the specified resource.

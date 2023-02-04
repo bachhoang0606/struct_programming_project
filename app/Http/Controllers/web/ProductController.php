@@ -41,10 +41,12 @@ class ProductController extends Controller
      */
     public function store( Request $request ){
         $query = ProductAttribute::where( 'product_id', $request->product_id )
-        ->update([
-            'coin' => $request->coin,
-            'discount' => $request->discount,
-        ]);
+        ->update(
+            [ 
+                'coin' => $request->coin, 
+                'discount' => $request->discount, 
+            ]
+        );
 
         if( $query ){
             return view( 'products.create' )
@@ -96,7 +98,6 @@ class ProductController extends Controller
 
         return redirect( route('product.index') )
         ->with( 'message','Product updated successfully' );
-
     }
 
 }

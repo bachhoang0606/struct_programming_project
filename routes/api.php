@@ -8,7 +8,7 @@ use App\Http\Controllers\api\VoucherApiController;
 use Illuminate\Support\Facades\Route;
 
 // product api controller
-Route::get('/product-coin/{id}', [ProductAttributeApiController::class, 'show_coin']);
+Route::get('/product-coin/{id}', [ProductAttributeApiController::class, 'showCoin']);
 Route::get('/products-sale-price', [ProductAttributeApiController::class, 'index']);
 
 // coin card api controller

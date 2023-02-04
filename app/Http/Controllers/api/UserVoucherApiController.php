@@ -76,6 +76,6 @@ class UserVoucherApiController extends Controller
      */
     public function userHasVoucherWithId( $id ){  
 
-        return new UserVoucherResource(CoinCard::find($id));
+        return new UserVoucherResource( CoinCard::find( $id ) );
     }   
 }

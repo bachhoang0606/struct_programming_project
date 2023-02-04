@@ -14,11 +14,11 @@ class CoinCardController extends Controller
      */
     public function index ()
     {
-        $coinCards = CoinCard::all();
+        $coin_cards = CoinCard::all();
         return view(
             'coin_cards.admins.index', 
             [
-                'coinCards' => $coinCards
+                'coin_cards' => $coin_cards
             ]
         );
     }

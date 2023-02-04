@@ -23,7 +23,7 @@ class VoucherApiController extends Controller
     public function index()
     {
         $vouchers = Voucher::all();
-        return VoucherResource::collection($vouchers);
+        return VoucherResource::collection( $vouchers );
     }
 
     /**
@@ -33,7 +33,7 @@ class VoucherApiController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\JsonResponse
      */
-    public function update(Request $request, $id)
+    public function update( Request $request, $id )
     {
         $validator = Validator::make( $request->all(), [
             'title' => 'required',
@@ -44,11 +44,11 @@ class VoucherApiController extends Controller
             'expiration_date' => 'required|after_or_equal:effective_date',
         ]);
 
-        if ($validator->fails()) {
+        if ( $validator->fails() ) {
             return response()->json( $validator->errors(), 404 );
         }
 
-        $result = DB::transaction(function () use ($request, $id) {
+        $result = DB::transaction(function () use ( $request, $id ) {
             $voucher_date = $request->only(
                 [
                     'title',
@@ -124,32 +124,28 @@ class VoucherApiController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\JsonResponse
      */
-    public function destroy($id)
+    public function destroy( $id )
     {
-        $voucher = Voucher::find($id);
+        $voucher = Voucher::find( $id );
         if ($voucher->type == 1) {
 
             // delete voucher freeship
-            Freeship::where('voucher_id', $id)->delete();
+            Freeship::where( 'voucher_id', $id )->delete();
         } elseif ($voucher->type == 2) {
 
             // delete voucher price discounts
-            PriceDiscount::where('voucher_id', $id)->delete();
+            PriceDiscount::where( 'voucher_id', $id )->delete();
         } else {
 
             // delete voucher percent discounts
-            PercentDiscount::where('voucher_id', $id)->delete();
+            PercentDiscount::where( 'voucher_id', $id )->delete();
         }
 
         // delete voucher with id
-        UserVoucher::where('voucher_id', $id)
+        UserVoucher::where( 'voucher_id', $id )
             ->delete();
         $voucher->delete();
-
-        $freeships = Freeship::all();
-        $price_discounts = PriceDiscount::all();
-        $percent_discounts = PercentDiscount::all();
-
+        
         return response()->json(
             [
                 'message' => "Successfully deleted voucher.",
