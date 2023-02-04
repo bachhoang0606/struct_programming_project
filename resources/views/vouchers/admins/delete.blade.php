@@ -39,7 +39,7 @@
     function getVoucherId(id){
         voucher_id = id;
         console.log(voucher_id);
-        document.getElementById("edit-tag").href = '/edit-voucher/' + voucher_id;
+        document.getElementById("edit-tag").href = '/admins/edit-voucher/' + voucher_id;
     }
 
     fetch('/api/vouchers').then((res) => res.json()).then(
@@ -74,8 +74,10 @@
                 let apiUrl = '/api/vouchers/delete/' + voucher_id;
                 fetch(apiUrl, {method: 'DELETE'})
                 .then(response => {
-                    if (response.ok)
-                        return response.json();
+                    if (!response.ok){
+                        alert('Cannot delete this voucher');
+                    }
+                        //return response.json();
                     
                     //throw new Error('Cannot delete this voucher!');
                 })
@@ -85,7 +87,8 @@
                         console.log(response);
                     }
                 ).catch(error => {
-                    alert('Cannot delete this voucher');
+                    //alert('Cannot delete this voucher');
+                    console.log(error);
                 });
                 window.location.reload();
                 }

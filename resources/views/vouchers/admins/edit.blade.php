@@ -153,6 +153,9 @@
         getVoucherId(str_arr[str_arr.length -1]);
         console.log('voucher_id: ' + voucher_id);
         document.getElementById("edit-form").action = `/api/vouchers/update/${voucher_id}`;
+        // document.getElementById("edit-form").addEventListener("click", function(event){
+        //     event.preventDefault();
+        // });
 
         fetch('/api/vouchers').then((res) => res.json()).then(
             response => {
