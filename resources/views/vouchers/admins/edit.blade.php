@@ -5,7 +5,7 @@
 <form action="" method="POST" id="edit-form">
     @csrf
     <input type="hidden" name="_method" value="PUT">
-    <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
+    <input type="hidden" name="_token" value=" <?php echo csrf_token(); ?>">
     <!-- <input type="hidden" name="sent" value="1"> -->
 
     <div class="form-group">
@@ -138,17 +138,26 @@
     
     window.addEventListener("load", function(){
         let currentUrl = window.location.href
-        //console.log(currentUrl);
         let str_arr = currentUrl.split("/");
-        //console.log(str_arr[str_arr.length -1]);
         getVoucherId(str_arr[str_arr.length -1]);
         console.log('voucher_id: ' + voucher_id);
-        document.getElementById("edit-form").action = `/api/vouchers/update/${voucher_id}`;
-        // document.getElementById("submit_button").addEventListener("click", function(event){
-        //     event.preventDefault();
-        //     document.getElementById("edit-form").submit();
-        //     //window.location.replace("http://localhost:8000/admins/del-voucher");
-        // });
+        //document.getElementById("edit-form").action = `/api/vouchers/update/${voucher_id}`; 
+        document.getElementById("submit_button").addEventListener("click", function(event){
+            event.preventDefault();
+            //document.getElementById("edit-form").submit();
+            let apiUrl = `/api/vouchers/update/${voucher_id}`;
+            let payload = new FormData(document.getElementById("edit-form"));
+            //console.log([...payload]);
+            fetch(apiUrl, {body: payload, method: 'POST',}).then((res)=>res.json()).then(msg=>{
+                if (msg.message == 'Voucher update successful.'){
+                    console.log('update thanh cong!');
+                    window.location.replace("http://localhost:8000/admins/del-voucher");
+                }else
+                    console.log('khong update thanh cong!');
+            });
+        });
+
+        
 
         fetch('/api/vouchers').then((res) => res.json()).then(
             response => {

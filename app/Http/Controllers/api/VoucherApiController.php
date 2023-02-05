@@ -35,6 +35,8 @@ class VoucherApiController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $request->effective_date .= ' 00:00:00';
+        $request->expiration_date .= ' 00:00:00';
         $validator = Validator::make( $request->all(), [
             'title' => 'required',
             'content' => 'required',
