@@ -33,6 +33,8 @@
 </form>
 </div>
 @endsection
+
+
 <script>
     let voucher_id;
 
@@ -66,21 +68,12 @@
 
     window.addEventListener("load", function(){
         document.getElementById("del-button").addEventListener("click", function(event){
-            event.preventDefault();
-
             if (voucher_id == '' || voucher_id == undefined){
+                event.preventDefault();
                 alert('Need to choose voucher first!');
             }else{
                 let apiUrl = '/api/vouchers/delete/' + voucher_id;
                 fetch(apiUrl, {method: 'DELETE'})
-                .then(response => {
-                    if (!response.ok){
-                        alert('Cannot delete this voucher');
-                    }
-                        //return response.json();
-                    
-                    //throw new Error('Cannot delete this voucher!');
-                })
                 // .then(response => response.json())
                 .then(
                     response => {
@@ -91,7 +84,7 @@
                     console.log(error);
                 });
                 window.location.reload();
-                }
+            }
         });
 
         document.getElementById("edit-tag").addEventListener("click", function(event){

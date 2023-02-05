@@ -2,16 +2,6 @@
 
 @section('content')
 
-@if (session('status'))
-    <div class="alert alert-success">
-        {{ session('status') }}
-    </div>
-@endif
-@if (session('error'))
-    <div class="alert alert-danger">
-        {{ session('status') }}
-    </div>
-@endif
 <form action="" method="POST" id="edit-form">
     @csrf
     <input type="hidden" name="_method" value="PUT">
@@ -85,7 +75,7 @@
         <label for="set_of_products" id="label_Vproduct" style="display:none">Please enter product's names: </label>
         <input type="text" id="input_Vproduct" name="set_of_products" style="display:none" class="form-control">
     </div> --}}
-    <p></p><input type="submit" id="submit_button" value="Update" class="btn btn-primary">
+    <p></p><input type="submit" id="submit_button" name="submit_btn" value="Update" class="btn btn-primary">
 </form>
 <br>
 @endsection
@@ -145,6 +135,7 @@
         input.required = false;
     }
 
+    
     window.addEventListener("load", function(){
         let currentUrl = window.location.href
         //console.log(currentUrl);
@@ -153,8 +144,10 @@
         getVoucherId(str_arr[str_arr.length -1]);
         console.log('voucher_id: ' + voucher_id);
         document.getElementById("edit-form").action = `/api/vouchers/update/${voucher_id}`;
-        // document.getElementById("edit-form").addEventListener("click", function(event){
+        // document.getElementById("submit_button").addEventListener("click", function(event){
         //     event.preventDefault();
+        //     document.getElementById("edit-form").submit();
+        //     //window.location.replace("http://localhost:8000/admins/del-voucher");
         // });
 
         fetch('/api/vouchers').then((res) => res.json()).then(
@@ -181,6 +174,6 @@
                     document.getElementById("price_discount").checked = true;
             }
         )
-    })
+    });
     
 </script>
