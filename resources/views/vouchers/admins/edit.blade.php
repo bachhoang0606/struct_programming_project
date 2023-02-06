@@ -30,11 +30,11 @@
     <p></p>    
     <div class="form-group">
         <label for="effective_date" class="form-label">Effective date: </label>
-        <input type="date" name="effective_date" id="input-eff-date" class="form-control" >
+        <input type="date" name="effective_date" id="input-eff-date" class="form-control" required>
     </div>
     <div class="form-group">
         <label for="expiration_date" class="form-label">Expiration date: </label>
-        <input type="date" name="expiration_date" id="input-exp-date" class="form-control">
+        <input type="date" name="expiration_date" id="input-exp-date" class="form-control" required>
     </div>
     <p></p>
     <div class="form-group">
@@ -81,7 +81,6 @@
 @endsection
 
 <script>
-    //need to get back to prev page
     let voucher_id;
 
     function getVoucherId(id){
@@ -135,29 +134,50 @@
         input.required = false;
     }
 
+    function validateDate(){
+        let eff_date = Date.parse(document.getElementById("input-eff-date").value);
+        let exp_date = Date.parse(document.getElementById("input-exp-date").value);
+        let today = new Date;
+
+        if (exp_date <= today){
+            alert("error: expiration date lesser than current date");
+            return false;
+        }
+
+        if (exp_date <= eff_date){
+            alert("error: expiration date lesser than effective date");
+            return false;
+        }
+
+        return true;
+    }
+
     
     window.addEventListener("load", function(){
         let currentUrl = window.location.href
         let str_arr = currentUrl.split("/");
         getVoucherId(str_arr[str_arr.length -1]);
         console.log('voucher_id: ' + voucher_id);
-        //document.getElementById("edit-form").action = `/api/vouchers/update/${voucher_id}`; 
-        document.getElementById("submit_button").addEventListener("click", function(event){
+        //document.getElementById("edit-form").action = `/api/vouchers/update/${voucher_id}`;
+        document.getElementById("edit-form").addEventListener("submit", function(event){
+        //document.getElementById("submit_button").addEventListener("click", function(event){
             event.preventDefault();
-            //document.getElementById("edit-form").submit();
-            let apiUrl = `/api/vouchers/update/${voucher_id}`;
-            let payload = new FormData(document.getElementById("edit-form"));
-            //console.log([...payload]);
-            fetch(apiUrl, {body: payload, method: 'POST',}).then((res)=>res.json()).then(msg=>{
-                if (msg.message == 'Voucher update successful.'){
-                    alert('update thanh cong!');
-                    window.location.replace("http://localhost:8000/admins/del-voucher");
-                }else
-                    alert('khong update thanh cong!');
-            });
+            
+            if (validateDate()){
+                let apiUrl = `/api/vouchers/update/${voucher_id}`;
+                let payload = new FormData(document.getElementById("edit-form"));
+                //console.log([...payload]);
+                fetch(apiUrl, {body: payload, method: 'POST',}).then((res)=>res.json()).then(msg=>{
+                    if (msg.message == 'Voucher update successful.'){
+                        alert('update thanh cong!');
+                        window.location.replace("http://localhost:8000/admins/del-voucher");
+                    }else
+                        alert('khong update thanh cong!');
+                });
+            } 
         });
 
-        
+        //document.getElementById("input-exp-date").min = new Date;
 
         fetch('/api/vouchers').then((res) => res.json()).then(
             response => {
@@ -182,7 +202,7 @@
                 else
                     document.getElementById("price_discount").checked = true;
             }
-        )
+        );
     });
     
 </script>
