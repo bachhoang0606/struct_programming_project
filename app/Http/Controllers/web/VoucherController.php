@@ -24,12 +24,14 @@ class VoucherController extends Controller
         $freeships = Freeship::all();
         $price_discounts = PriceDiscount::all();
         $percent_discounts = PercentDiscount::all();
+        $coin_cards = CoinCard::all();
         return view(
             "dashboards.admins.index", 
             [
                 'freeships' => $freeships, 
                 'price_discounts' => $price_discounts, 
-                'percent_discounts' => $percent_discounts
+                'percent_discounts' => $percent_discounts,
+                'coin_cards' => $coin_cards,
             ]
         );
     }
