@@ -36,6 +36,15 @@
         //console.log(let);
     }
 
+    function checkExpDate(date){
+        let expDate = Date.parse(date);
+        let today = new Date;
+        if (expDate > today)
+            return true;
+    
+        return false;
+    }
+
     setUser({{$id}});
 
     fetch(`/api/user-has-voucher/${userId}`).then((res) => res.json()).then(
@@ -54,7 +63,7 @@
             //console.log(response.data);
             let output = '';
             for (let i = 0; i < response.data.length; i++){
-                if (!user_vouchers.includes(response.data[i].id)){
+                if (!user_vouchers.includes(response.data[i].id) && (checkExpDate(response.data[i]["expiration_date"].split(" ")[0]))){
                     if (response.data[i].type == "1"){ //freeship
                         output += `<div class="voucher-wrapper">
                             <div class="left">

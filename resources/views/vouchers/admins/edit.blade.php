@@ -150,10 +150,10 @@
             //console.log([...payload]);
             fetch(apiUrl, {body: payload, method: 'POST',}).then((res)=>res.json()).then(msg=>{
                 if (msg.message == 'Voucher update successful.'){
-                    console.log('update thanh cong!');
+                    alert('update thanh cong!');
                     window.location.replace("http://localhost:8000/admins/del-voucher");
                 }else
-                    console.log('khong update thanh cong!');
+                    alert('khong update thanh cong!');
             });
         });
 
