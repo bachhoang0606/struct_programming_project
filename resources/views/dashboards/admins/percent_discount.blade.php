@@ -1,6 +1,6 @@
 @extends('layouts.admins.layouts')
 @section('content')
-<h2>Discount voucher</h2>
+<h2>Percent Discount Voucher</h2>
         <table>
             <th>ID</th>
             <th>Type</th>
