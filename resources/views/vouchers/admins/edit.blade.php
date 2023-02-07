@@ -154,8 +154,8 @@
 
     
     window.addEventListener("load", function(){
-        let currentUrl = window.location.href
-        let str_arr = currentUrl.split("/");
+        let current_url = window.location.href
+        let str_arr = current_url.split("/");
         getVoucherId(str_arr[str_arr.length -1]);
         console.log('voucher_id: ' + voucher_id);
         //document.getElementById("edit-form").action = `/api/vouchers/update/${voucher_id}`;

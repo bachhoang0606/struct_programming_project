@@ -11,7 +11,7 @@
 <!-- </form> -->
 </div>
 <script>
-    let userId;
+    let user_id;
     let user_vouchers = new Array();
     let voucher_id;
 
@@ -22,7 +22,7 @@
     }
 
     function setUser(id){
-        userId = id;
+        user_id = id;
     }
 
     function displayIndex(index){
@@ -37,9 +37,9 @@
     }
 
     function checkExpDate(date){
-        let expDate = Date.parse(date);
+        let exp_date = Date.parse(date);
         let today = new Date;
-        if (expDate > today)
+        if (exp_date > today)
             return true;
     
         return false;
@@ -47,7 +47,7 @@
 
     setUser({{$id}});
 
-    fetch(`/api/user-has-voucher/${userId}`).then((res) => res.json()).then(
+    fetch(`/api/user-has-voucher/${user_id}`).then((res) => res.json()).then(
         response =>{
             //console.log(response.data.voucher_list[0].id);
             for (let i = 0; i < response.data.voucher_list.length; i++){
@@ -271,7 +271,7 @@
         document.getElementById("submit_button").addEventListener("click", function(event){
             event.preventDefault();
 
-            let apiUrl = '/api/create-user-voucher?user_id=' + userId + '&voucher_id=' + voucher_id;
+            let apiUrl = '/api/create-user-voucher?user_id=' + user_id + '&voucher_id=' + voucher_id;
             fetch(apiUrl, {method: 'POST',})
             .then(response => response.json())
             .then(
