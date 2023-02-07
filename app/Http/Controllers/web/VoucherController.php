@@ -33,7 +33,36 @@ class VoucherController extends Controller
             ]
         );
     }
-
+    public function freeship()
+    {
+        $freeships = Freeship::all();
+        return view(
+            "dashboards.admins.freeship", 
+            [
+                'freeships' => $freeships, 
+            ]
+        );
+    }
+    public function price_discount()
+    {
+        $price_discounts = PriceDiscount::all();
+        return view(
+            "dashboards.admins.price_discount", 
+            [
+                'price_discounts' => $price_discounts, 
+            ]
+        );
+    }
+    public function percent_discount()
+    {
+        $percent_discounts = PercentDiscount::all();
+        return view(
+            "dashboards.admins.percent_discount", 
+            [
+                'percent_discounts' => $percent_discounts, 
+            ]
+        );
+    }
     /**
      * Show the form for creating a new resource.
      *
