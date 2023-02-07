@@ -83,11 +83,13 @@
 @endsection
 
 <script>
+    // hien thi thong tin chi tiet
     function displayIndex(index){
         var let = document.getElementById(index);
         let.classList.add("show");
         console.log(let);
     }
+    // an thong tin chi tiet
     function hideIndex(index){
         var let = document.getElementById(index);
         let.classList.remove("show");
