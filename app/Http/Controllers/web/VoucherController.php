@@ -33,6 +33,13 @@ class VoucherController extends Controller
             ]
         );
     }
+
+
+    /**
+     * Display a listing of the resource
+     * 
+     * @return \Illuminate\Contracts\View\Factory
+     */
     public function freeship()
     {
         $freeships = Freeship::all();
@@ -43,6 +50,12 @@ class VoucherController extends Controller
             ]
         );
     }
+
+    /**
+     * Display a listing of the resource
+     * 
+     * @return \Illuminate\Contracts\View\Factory
+     */
     public function price_discount()
     {
         $price_discounts = PriceDiscount::all();
@@ -53,6 +66,13 @@ class VoucherController extends Controller
             ]
         );
     }
+    
+
+    /**
+     * Display a listing of the resource
+     * 
+     * @return \Illuminate\Contracts\View\Factory
+     */
     public function percent_discount()
     {
         $percent_discounts = PercentDiscount::all();
