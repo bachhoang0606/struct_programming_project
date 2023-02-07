@@ -1,11 +1,11 @@
 <?php
 
 use App\Http\Controllers\web\CoinCardController;
+use App\Http\Controllers\web\DashboardController;
 use App\Http\Controllers\web\ProductController;
 use App\Http\Controllers\web\UserVoucherController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\web\VoucherController;
-use App\Http\Controllers\web\ChartController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -18,7 +18,7 @@ use App\Http\Controllers\web\ChartController;
 */
 
 
-Route::get('/', [VoucherController::class, 'index'])->name('index');
+Route::get('/', [DashboardController::class, 'index'])->name('index');
 Route::get('/freeship', [VoucherController::class, 'freeship'])->name('freeship');
 Route::get('/price_discount', [VoucherController::class, 'price_discount'])->name('price_discount');
 Route::get('/percent_discount', [VoucherController::class, 'percent_discount'])->name('percent_discount');
