@@ -82,6 +82,7 @@
 @endsection
 
 <script>
+    //comment
     function displayIndex(index){
         var let = document.getElementById(index);
         let.classList.add("show");
