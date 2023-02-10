@@ -35,8 +35,8 @@ class UserVoucherApiController extends Controller
                 ]
             );
         }
-        $row = $this->repository->checkUserHasVoucher($user_id, $voucher_id);
 
+        $row = $this->repository->checkUserHasVoucher($user_id, $voucher_id);
         if ($row) {
             return response()->json(
                 [
@@ -48,13 +48,11 @@ class UserVoucherApiController extends Controller
         $user_voucher = $this->repository->store($request);
 
         if ($user_voucher) {
-
             return response()->json($this->repository->index());
         } else {
-
             return response()->json(
                 [
-                    'message' => "error",
+                    'message' => "Voucher này đã hết",
                 ]
             );
         }

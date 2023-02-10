@@ -31,8 +31,14 @@ class UserVoucherRepository implements UserVoucherRepositoryInterface
 
     public function store($attributes)
     {
+        $voucher = Voucher::find($attributes->voucher_id);
+        if ( $voucher->quantium <= 0 ){
+            return null;
+        }
 
         $user_voucher = UserVoucher::create($attributes->all());
+        Voucher::where('id', $attributes->voucher_id)->update(['quantium' => --$voucher->quantium]);
+
         return $user_voucher;
     }
     public function update($id, $update_array)

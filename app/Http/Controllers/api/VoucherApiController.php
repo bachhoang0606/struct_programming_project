@@ -35,14 +35,23 @@ class VoucherApiController extends Controller
      */
     public function update(Request $request, $id)
     {
+        // voucher need update
+        $voucher = $this->repository->show($id);
+
+        // The number of updated vouchers needs to be greater than 
+        // the number of vouchers currently used.
+
+        $messages = [
+            'quantium.gt' => 'Số lượng voucher cập nhật cần lớn hơn số lượng voucher hiện đã được sử dụng.',
+        ];
         $validator = Validator::make($request->all(), [
             'title' => 'required',
             'content' => 'required',
             'minimun_price' => 'required|numeric|min:0',
-            'quantium' => 'required|numeric|min:0',
+            'quantium' => 'required|numeric|gt:'.($voucher->total - $voucher->quantium).'min:0',
             'effective_date' => 'required',
             'expiration_date' => 'required|after_or_equal:effective_date',
-        ]);
+        ], $messages);
 
         if ($validator->fails()) {
             return response()->json($validator->errors(), 404);
@@ -58,14 +67,14 @@ class VoucherApiController extends Controller
     }
 
     /**
-     * api remove the specified voucher from storage.
+     * api remove the mitiple specified voucher from storage.
      *
-     * @param  int  $id
+     * @param  Request  $request
      * @return \Illuminate\Http\JsonResponse
      */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
-        $this->repository->destroy($id);
+        $this->repository->destroy($request->ids);
         return response()->json(
             [
                 'message' => "Successfully deleted voucher.",

@@ -25,18 +25,21 @@ class VoucherRepository implements VoucherRepositoryInterface
 
     public function store($attributes)
     {
+        $params = $attributes->only(
+            [
+                'title',
+                'content',
+                'minimun_price',
+                'quantium',
+                'expiration_date',
+                'effective_date',
+            ]
+        );
+
+        $params['total'] = $params['quantium'];
 
         $voucher = Voucher::create(
-            $attributes->only(
-                [
-                    'title',
-                    'content',
-                    'minimun_price',
-                    'quantium',
-                    'expiration_date',
-                    'effective_date',
-                ]
-            )
+            $params
         );
 
         $type = $attributes->Vtype;
@@ -86,45 +89,62 @@ class VoucherRepository implements VoucherRepositoryInterface
         return $voucher;
     }
 
-    public function destroy($id)
+    public function destroy($ids)
     {
-        $voucher = Voucher::find($id);
-        if ($voucher->type == 1) {
+        // destroy mutiple voucher
+        foreach ($ids as $id) {
+            $voucher = Voucher::find($id);
+            if($voucher == null){
+                continue;
+            }
+            if ($voucher->type == 1) {
 
-            // delete voucher freeship
-            Freeship::where('voucher_id', $id)->delete();
-        } elseif ($voucher->type == 2) {
+                // delete voucher freeship
+                Freeship::where('voucher_id', $id)->delete();
+            } elseif ($voucher->type == 2) {
 
-            // delete voucher price discounts
-            PriceDiscount::where('voucher_id', $id)->delete();
-        } else {
+                // delete voucher price discounts
+                PriceDiscount::where('voucher_id', $id)->delete();
+            } else {
 
-            // delete voucher percent discounts
-            PercentDiscount::where('voucher_id', $id)->delete();
+                // delete voucher percent discounts
+                PercentDiscount::where('voucher_id', $id)->delete();
+            }
+
+            // delete voucher with id
+            UserVoucher::where('voucher_id', $id)
+                ->delete();
+            $voucher->delete();
         }
 
-        // delete voucher with id
-        UserVoucher::where('voucher_id', $id)
-            ->delete();
-        $voucher->delete();
     }
 
-    public function update($id, $update_array)
+    public function update($id, $attributes)
     {
-        $attributes = $update_array->only(
+        $params = $attributes->only(
             [
                 'title',
                 'content',
                 'minimun_price',
                 'quantium',
                 'expiration_date',
-                'effective_date'
+                'effective_date',
             ]
         );
 
-        Voucher::where('id', $id)->update($attributes);
+        $voucher = Voucher::find($id);
 
-        $type = $update_array->Vtype;
+        $params['total'] = $params['quantium'];
+        $params['quantium'] = $voucher->quantium;
+        if($params['quantium'] < $voucher->total){
+            // Tính số lượng voucher còn lại sau khi cập nhật tổng lượng voucher mới
+            $params['total'] = $params['quantium'];
+            $params['quantium'] = $params['total'] - ($voucher->total - $voucher->quantium);
+        }
+        
+        Voucher::where('id', $id)->update($params);
+
+        $type = $attributes->Vtype;
 
         if ($type == 'freeships') {
             // update freeship voucher
@@ -138,7 +158,7 @@ class VoucherRepository implements VoucherRepositoryInterface
             Freeship::where('voucher_id', $id)
                 ->update(
                     [
-                        'price' => $update_array->price,
+                        'price' => $attributes->price,
                     ]
                 );
 
@@ -154,7 +174,7 @@ class VoucherRepository implements VoucherRepositoryInterface
             PriceDiscount::where('voucher_id', $id)
                 ->update(
                     [
-                        'price' => $update_array->price
+                        'price' => $attributes->price
                     ]
                 );
         } else {
@@ -168,8 +188,8 @@ class VoucherRepository implements VoucherRepositoryInterface
             PercentDiscount::where('voucher_id', $id)
                 ->update(
                     [
-                        'percent' => $update_array->percent,
-                        'max_price' => $update_array->max_price
+                        'percent' => $attributes->percent,
+                        'max_price' => $attributes->max_price
                     ]
                 );
         }
