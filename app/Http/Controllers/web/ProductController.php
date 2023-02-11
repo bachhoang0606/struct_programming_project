@@ -2,12 +2,17 @@
 
 namespace App\Http\Controllers\web;
 
+use App\Contracts\Repositories\ProductRepositoryInterface;
 use App\Http\Controllers\Controller;
 use App\Models\ProductAttribute;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
+    protected $repository;
+    public function __construct( ProductRepositoryInterface $repository ){
+        $this->repository = $repository;
+    }
     /**
      * Display a listing of the resource.
      *
@@ -15,7 +20,7 @@ class ProductController extends Controller
      */
     public function index(){
 
-        $products = ProductAttribute::all();
+        $products = $this->repository->index();
         return view(
             'products.admins.index', 
             [
@@ -40,11 +45,14 @@ class ProductController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store( Request $request ){
-        $query = ProductAttribute::where( 'product_id', $request->product_id )
-        ->update([
+
+        $update_array = [
             'coin' => $request->coin,
             'discount' => $request->discount,
-        ]);
+        ];
+
+        $id = $request->product_id;
+        $query = $this->repository->update( $id, $update_array );
 
         if( $query ){
             return view( 'products.create' )
@@ -63,7 +71,7 @@ class ProductController extends Controller
      */
     public function edit( $product_id )
     {
-        $products = ProductAttribute::find( $product_id );
+        $products = $this->repository->show( $product_id );
         return view(
             'products.admins.edit',
             compact( 'products' )
@@ -80,23 +88,22 @@ class ProductController extends Controller
      */
     public function update( Request $request, $product_id )
     {
-        $validated = $request->validate(
+        $request->validate(
             [ 
                 'coin' => 'required|numeric|min:0', 
                 'discount' => 'required|numeric|min:0|max:100', 
             ]
         );
-        $data = $request;
-        $products = ProductAttribute::find( $product_id );
 
-        $products->coin = $data['coin'];
-        $products->discount = $data['discount'];
+        $update_array = [
+            'coin' => $request->coin,
+            'discount' => $request->discount,
+        ];
 
-        $products->update();
+        $this->repository->update( $product_id, $update_array );
 
         return redirect( route('product.index') )
         ->with( 'message','Product updated successfully' );
-
     }
 
 }
