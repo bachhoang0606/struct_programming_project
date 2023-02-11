@@ -3,11 +3,11 @@
 @section('display')
 
 <div>
-<h4>Choose vouchers: <a id="chosen-voucher"></a></h4>
+<!-- <h4>Choose vouchers: <a id="chosen-voucher"></a></h4> -->
 <!-- <form action="" method="GET"> -->
     <div id="result"></div>
     <p></p>
-    <button id="submit_button" class="btn btn-success">Submit</button>
+    <!-- <button id="submit_button" class="btn btn-success">Submit</button> -->
 <!-- </form> -->
 </div>
 <script>
@@ -15,10 +15,24 @@
     let user_vouchers = new Array();
     let voucher_id;
 
-    function getVoucherId(id){
+    function getVoucher(id){
         voucher_id = id;
         //console.log(voucher_id);
-        document.getElementById("chosen-voucher").innerHTML = voucher_id;
+        //document.getElementById("chosen-voucher").innerHTML = voucher_id;
+        let apiUrl = '/api/create-user-voucher?user_id=' + user_id + '&voucher_id=' + voucher_id;
+            fetch(apiUrl, {method: 'POST',})
+            .then(response => response.json())
+            .then(
+                response => {
+                    if (response.message == "user had this voucher"){
+                        alert(response.message);
+                    }else{
+                        window.location.reload();
+                        alert("Add voucher successful!");
+                    }
+                        
+                }
+            )
     }
 
     function setUser(id){
@@ -161,7 +175,7 @@
                                         </div>
                                     </div>
                                     <div class="voucher-detail-footer">
-                                        <button class="voucher-detail-footer-btn btn-primary" onclick="getVoucherId(${response.data[i].id})">Chọn voucher này</button>
+                                        <button class="voucher-detail-footer-btn btn-primary" onclick="getVoucher(${response.data[i].id})">Chọn voucher này</button>
                                         <button class="voucher-detail-footer-btn" onclick="hideIndex(${response.data[i].id})">Đồng ý</button>
                                     </div>
                                 </div>
@@ -279,20 +293,20 @@
         document.getElementById("submit_button").addEventListener("click", function(event){
             event.preventDefault();
 
-            let apiUrl = '/api/create-user-voucher?user_id=' + user_id + '&voucher_id=' + voucher_id;
-            fetch(apiUrl, {method: 'POST',})
-            .then(response => response.json())
-            .then(
-                response => {
-                    if (response.message == "user had this voucher"){
-                        alert(response.message);
-                    }else{
-                        window.location.reload();
-                        alert("Add voucher successful!");
-                    }
+            // let apiUrl = '/api/create-user-voucher?user_id=' + user_id + '&voucher_id=' + voucher_id;
+            // fetch(apiUrl, {method: 'POST',})
+            // .then(response => response.json())
+            // .then(
+            //     response => {
+            //         if (response.message == "user had this voucher"){
+            //             alert(response.message);
+            //         }else{
+            //             window.location.reload();
+            //             alert("Add voucher successful!");
+            //         }
                         
-                }
-            )
+            //     }
+            // )
         });
     });
 
