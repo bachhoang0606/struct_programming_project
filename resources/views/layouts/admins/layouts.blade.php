@@ -180,7 +180,7 @@
 
             </div>
 
-            <div class="main h-100 col-md-10">
+            <div class="main h-100 col-md-10 bacground-color">
                 @yield('content')
 
             </div>

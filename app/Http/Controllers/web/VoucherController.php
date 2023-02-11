@@ -26,16 +26,18 @@ class VoucherController extends Controller
      */
     public function index()
     {
+
+        $coin_cards = CoinCard::all();
         $freeships = $this->repository->indexFreeship();
         $price_discounts = $this->repository->indexPriceDiscount();
         $percent_discounts = $this->repository->indexPercentDiscount();
-
         return view(
             "dashboards.admins.index",
             [
-                'freeships' => $freeships,
-                'price_discounts' => $price_discounts,
-                'percent_discounts' => $percent_discounts
+                'freeships' => $freeships, 
+                'price_discounts' => $price_discounts, 
+                'percent_discounts' => $percent_discounts,
+                'coin_cards' => $coin_cards,
             ]
         );
     }
