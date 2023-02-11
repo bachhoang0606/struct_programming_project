@@ -17,7 +17,7 @@ class DashboardController extends Controller
     public function index()
     {
         //get the number of vouchers generated on the days of the month
-        $voucher = Voucher::select(DB::raw("SUM(quantium) as count"), DB::raw("EXTRACT(day FROM created_at) as day_name"))
+        $voucher = Voucher::select(DB::raw("SUM(total) as count"), DB::raw("EXTRACT(day FROM created_at) as day_name"))
             ->whereMonth('created_at', date('m'))
             ->groupBy(DB::raw("EXTRACT(DAY FROM created_at)"))
             ->pluck('count', 'day_name');
