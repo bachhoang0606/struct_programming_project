@@ -23,7 +23,8 @@ class DashboardController extends Controller
 
     public function index()
     {
-        $users = $this->repository->voucherCreatedInMonth();
+
+        $voucher = $this->repository->voucherCreatedInMonth();
         $labels = $users->keys();
         $data = $users->values();
 
@@ -39,6 +40,7 @@ class DashboardController extends Controller
                 $result[++$key] = ["Percent discount", (int) $value->total, (int) $value->used];
             }
         }
+
 
         $freeship = $this->repository->freeshipCount();
         $percent = $this->repository->percentDiscountCount();
