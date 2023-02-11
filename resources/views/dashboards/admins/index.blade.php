@@ -5,7 +5,22 @@
   {{ session('message') }}
 </div>
 @endif
+<script type="text/javascript">
+google.charts.load('current', {'packages':['bar']});
+google.charts.setOnLoadCallback(drawChart);
+function drawChart() {
+  var data = google.visualization.arrayToDataTable({{ Js::from($result) }});
+  var options = {
+    chart: {
+      title: 'the number of vouchers generated and the remaining quantity',
+      subtitle: 'Total and quantium',
+    },
+  };
+  var chart = new google.charts.Bar(document.getElementById('barchart_material'));
+  chart.draw(data, google.charts.Bar.convertOptions(options));
+}
 
+</script>
 <div class="container-fluid px-4">
 
   <h1>Dashboard</h1>
@@ -17,7 +32,7 @@
           <div class="card-body-icon">
             <i class="fas fa-fw fa-list"></i>
           </div>
-          <div class="mr-5" style="font-size: 20px;">{{\App\Models\Freeship::count()}} Freeship Voucher</div>
+          <div class="mr-5" style="font-size: 20px;">{{$freeship}} Freeship Voucher</div>
         </div>
         <a class="card-footer text-white clearfix small z-1" href="{{route('freeship')}}">
           <span class="float-left">View Details</span>
@@ -33,7 +48,7 @@
           <div class="card-body-icon">
             <i class="fas fa-fw fa-address-card"></i>
           </div>
-          <div class="mr-5" style="font-size: 20px;">{{\App\Models\PercentDiscount::count()}} Percent Discount Voucher</div>
+          <div class="mr-5" style="font-size: 20px;">{{$percent}} Percent Discount Voucher</div>
         </div>
         <a class="card-footer text-white clearfix small z-1" href="{{route('percent_discount')}}">
           <span class="float-left">View Details</span>
@@ -49,7 +64,7 @@
           <div class="card-body-icon">
             <i class="fas fa-fw fa-comments"></i>
           </div>
-          <div class="mr-5" style="font-size: 20px;">{{\App\Models\PriceDiscount::count()}} Price Discount Voucher</div>
+          <div class="mr-5" style="font-size: 20px;">{{$price}} Price Discount Voucher</div>
         </div>
         <a class="card-footer text-white clearfix small z-1" href="{{route('price_discount')}}">
           <span class="float-left">View Details</span>
@@ -58,6 +73,10 @@
           </span>
         </a>
       </div>
+    </div>
+    
+    <div class="row" style="margin-top: 50px;">
+    <div id="barchart_material" style="width: 1300px; height: 500px;"></div>
     </div>
     <div class="row" style="margin-top: 50px;">
     <canvas id="myChart" height="600px"></canvas>
