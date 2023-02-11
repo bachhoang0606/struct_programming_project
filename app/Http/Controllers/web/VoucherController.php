@@ -27,7 +27,7 @@ class VoucherController extends Controller
     public function index()
     {
 
-        $coin_cards = CoinCard::all();
+        $coin_cards = $this->repository->coinCards();
         $freeships = $this->repository->indexFreeship();
         $price_discounts = $this->repository->indexPriceDiscount();
         $percent_discounts = $this->repository->indexPercentDiscount();
@@ -133,10 +133,12 @@ class VoucherController extends Controller
      */
     public function edit($id)
     {
+        $voucher = $this->repository->show($id);
+        
         return view(
             'vouchers.admins.edit',
             [
-                'id' => $id
+                'voucher' => $voucher
             ]
         );
     }
