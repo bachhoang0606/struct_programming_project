@@ -219,3 +219,7 @@
       transform: translateY(0);
     }
 }
+
+.disable{
+    opacity: 0.5;
+}
