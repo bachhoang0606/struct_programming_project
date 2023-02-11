@@ -48,7 +48,7 @@ class VoucherApiController extends Controller
             'title' => 'required',
             'content' => 'required',
             'minimun_price' => 'required|numeric|min:0',
-            'quantium' => 'required|numeric|gt:'.($voucher->total - $voucher->quantium).'min:0',
+            'quantium' => 'required|numeric|gt:'.($voucher->total - $voucher->quantium).'|min:0',
             'effective_date' => 'required',
             'expiration_date' => 'required|after_or_equal:effective_date',
         ], $messages);
