@@ -144,7 +144,7 @@
             return false;
         }
 
-        if (exp_date <= eff_date){
+        if (exp_date < eff_date){
             alert("error: expiration date lesser than effective date");
             return false;
         }
