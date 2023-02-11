@@ -2,6 +2,9 @@
 
 use App\Http\Controllers\api\CalulatorApiController;
 use App\Http\Controllers\api\CoinCardApiController;
+use App\Http\Controllers\api\FreeshipApiController;
+use App\Http\Controllers\api\PercentDiscountApiController;
+use App\Http\Controllers\api\PriceDiscountApiController;
 use App\Http\Controllers\api\ProductAttributeApiController;
 use App\Http\Controllers\api\UserVoucherApiController;
 use App\Http\Controllers\api\VoucherApiController;
@@ -19,6 +22,15 @@ Route::get('/refund', [CoinCardApiController::class, 'refund']);
 Route::post('/create-user-voucher', [UserVoucherApiController::class, 'store']);
 Route::get('/user-has-voucher', [UserVoucherApiController::class, 'userHasVoucher']);
 Route::get('/user-has-voucher/{id}', [UserVoucherApiController::class, 'userHasVoucherWithId']);
+
+// freeship voucher api controller
+Route::get('/freeship/{id}', [FreeshipApiController::class, 'show']);
+
+// price discount voucher api controller
+Route::get('/price-discount/{id}', [PriceDiscountApiController::class, 'show']);
+
+// percent discount voucher api controller
+Route::get('/percent-discount/{id}', [PercentDiscountApiController::class, 'show']);
 
 // caculator api controller
 Route::get('/discount-price', [CalulatorApiController::class, 'payment']);

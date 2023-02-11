@@ -38,7 +38,6 @@ class VoucherApiController extends Controller
 
         $request->effective_date .= ' 00:00:00';
         $request->expiration_date .= ' 00:00:00';
-
         // voucher need update
         $voucher = $this->repository->show($id);
 

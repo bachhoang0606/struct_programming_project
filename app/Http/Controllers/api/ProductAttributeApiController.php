@@ -15,7 +15,7 @@ class ProductAttributeApiController extends Controller
     /**
      * api get the number of coins and the percentage of products to be reduced by product id.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  $id
      * @return \App\Http\Resources\ProductAttributeResource
      */
     public function show( $id ){
@@ -27,7 +27,6 @@ class ProductAttributeApiController extends Controller
     /**
      * api get the number of coins and product percentage off of all products in stock.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @return \App\Http\Resources\ProductAttributeResource|\Illuminate\Http\Resources\Json\AnonymousResourceCollection
      */
     public function index(){
