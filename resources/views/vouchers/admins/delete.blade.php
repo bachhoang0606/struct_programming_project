@@ -33,13 +33,33 @@
 </form>
 </div>
 @endsection
+
+
 <script>
     let voucher_id;
+    let arr_voucher_id = [];
+    
 
     function getVoucherId(id){
         voucher_id = id;
         console.log(voucher_id);
-        document.getElementById("edit-tag").href = '/admins/edit-voucher/' + [voucher_id];
+
+        let checkBox = document.getElementById(id);
+        if (checkBox.checked == false){
+            console.log("checked false");
+            let index = arr_voucher_id.indexOf(id);
+            if (index !== -1)
+                arr_voucher_id.splice(index, 1);
+            else
+                console.log("khong tim thay id");
+
+            console.log(arr_voucher_id);
+        }else
+            arr_voucher_id.push(voucher_id);
+
+        //document.getElementById("edit-tag").href = '/admins/edit-voucher/' + arr_voucher_id[0];
+
+        document.getElementById("edit-tag").href = '/admins/edit-voucher/' + [arr_voucher_id[0]];
     }
 
     fetch('/api/vouchers').then((res) => res.json()).then(
@@ -55,7 +75,7 @@
                         <td>${response.data[i].quantium}</td>
                         <td>${response.data[i].expiration_date}</td>
                     <td>
-                        <input type="radio" name="voucher_id" value="${response.data[i].id}" onclick="getVoucherId(${response.data[i].id})">
+                        <input type="checkbox" name="voucher_id_${response.data[i].id}" id="${response.data[i].id}" value="${response.data[i].id}" onclick="getVoucherId(${response.data[i].id})">
                     </td>
                     </tr>
                 `;
@@ -66,37 +86,42 @@
 
     window.addEventListener("load", function(){
         document.getElementById("del-button").addEventListener("click", function(event){
-            event.preventDefault();
-
-            if (voucher_id == '' || voucher_id == undefined){
+            if (arr_voucher_id.length == 0){
+                event.preventDefault();
                 alert('Need to choose voucher first!');
             }else{
-                let apiUrl = '/api/vouchers/delete?' + http_build_query(array(1, 2, 3));
+                //construct params
+                event.preventDefault();
+                let params = '';
+                arr_voucher_id.forEach(Element => {
+                    params += `ids[]=${Element}&`;
+                })
+
+                let apiUrl = '/api/vouchers/delete?' + params.slice(0, -1);
+
+                //event.preventDefault(); //test 
+                //console.log(apiUrl);
+
                 fetch(apiUrl, {method: 'DELETE',})
                 .then(response => response.json())
                 .then(
                     response => {
                         console.log(response);
                     }
-                );
+                ).catch(error => {
+                    //alert('Cannot delete this voucher');
+                    console.log(error);
+                });
                 window.location.reload();
-                }
+            }
         });
 
         document.getElementById("edit-tag").addEventListener("click", function(event){
-            if (voucher_id == '' || voucher_id == undefined){
+            if (arr_voucher_id.length != 1){
                 event.preventDefault();
-                alert('Need to choose voucher first!');
+                alert('Please choose one voucher to edit');
             }
         });
     });
-
-    // window.addEventListener("load", function(){
-    //     document.getElementById("edit-button").addEventListener("click", function(event){
-    //         event.preventDefault();
-
-            
-    //     });
-    // });
 
 </script>

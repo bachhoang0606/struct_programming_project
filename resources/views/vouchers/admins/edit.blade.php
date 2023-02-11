@@ -2,20 +2,10 @@
 
 @section('content')
 
-@if (session('status'))
-    <div class="alert alert-success">
-        {{ session('status') }}
-    </div>
-@endif
-@if (session('error'))
-    <div class="alert alert-danger">
-        {{ session('status') }}
-    </div>
-@endif
 <form action="" method="POST" id="edit-form">
     @csrf
     <input type="hidden" name="_method" value="PUT">
-    <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
+    <input type="hidden" name="_token" value=" <?php echo csrf_token(); ?>">
     <!-- <input type="hidden" name="sent" value="1"> -->
 
     <div class="form-group">
@@ -40,11 +30,11 @@
     <p></p>    
     <div class="form-group">
         <label for="effective_date" class="form-label">Effective date: </label>
-        <input type="date" name="effective_date" id="input-eff-date" class="form-control" >
+        <input type="date" name="effective_date" id="input-eff-date" class="form-control" required>
     </div>
     <div class="form-group">
         <label for="expiration_date" class="form-label">Expiration date: </label>
-        <input type="date" name="expiration_date" id="input-exp-date" class="form-control">
+        <input type="date" name="expiration_date" id="input-exp-date" class="form-control" required>
     </div>
     <p></p>
     <div class="form-group">
@@ -85,7 +75,7 @@
         <label for="set_of_products" id="label_Vproduct" style="display:none">Please enter product's names: </label>
         <input type="text" id="input_Vproduct" name="set_of_products" style="display:none" class="form-control">
     </div> --}}
-    <p></p><input type="submit" id="submit_button" value="Update" class="btn btn-primary">
+    <p></p><input type="submit" id="submit_button" name="submit_btn" value="Update" class="btn btn-primary">
 </form>
 <br>
 @endsection
@@ -144,14 +134,52 @@
         input.required = false;
     }
 
+    function validateDate(){
+        let eff_date = Date.parse(document.getElementById("input-eff-date").value);
+        let exp_date = Date.parse(document.getElementById("input-exp-date").value);
+        let today = new Date;
+
+        if (exp_date <= today){
+            alert("error: expiration date lesser than current date");
+            return false;
+        }
+
+        if (exp_date <= eff_date){
+            alert("error: expiration date lesser than effective date");
+            return false;
+        }
+
+        return true;
+    }
+
+    
     window.addEventListener("load", function(){
-        let currentUrl = window.location.href
-        //console.log(currentUrl);
-        let str_arr = currentUrl.split("/");
-        //console.log(str_arr[str_arr.length -1]);
+        let current_url = window.location.href
+        let str_arr = current_url.split("/");
         getVoucherId(str_arr[str_arr.length -1]);
         console.log('voucher_id: ' + voucher_id);
-        document.getElementById("edit-form").action = `/api/vouchers/update/${voucher_id}`;
+        //document.getElementById("edit-form").action = `/api/vouchers/update/${voucher_id}`;
+        document.getElementById("edit-form").addEventListener("submit", function(event){
+        //document.getElementById("submit_button").addEventListener("click", function(event){
+            event.preventDefault();
+            
+            if (validateDate()){
+                let apiUrl = `/api/vouchers/update/${voucher_id}`;
+                let payload = new FormData(document.getElementById("edit-form"));
+                //console.log([...payload]);
+                fetch(apiUrl, {body: payload, method: 'POST',}).then((res)=>res.json()).then(msg=>{
+                    if (msg.message == 'Voucher update successful.'){
+                        alert('update thanh cong!');
+                        window.location.replace("http://localhost:8000/admins/del-voucher");
+                    }else{
+                        alert('khong update thanh cong!');
+                        console.log(msg.quantium);
+                    }
+                });
+            } 
+        });
+
+        //document.getElementById("input-exp-date").min = new Date;
 
         fetch('/api/vouchers').then((res) => res.json()).then(
             response => {
@@ -165,8 +193,9 @@
                 document.getElementById("input-content").value = response.data[i].content;
                 document.getElementById("input-min-price").value = response.data[i].minimun_price;
                 document.getElementById("input-quantium").value = response.data[i].quantium;
-                document.getElementById("input-eff-date").value = response.data[i].effective_date;
-                document.getElementById("input-exp-date").value = response.data[i].expiration_date;
+                document.getElementById("input-eff-date").value = response.data[i]["effective date"].split(" ")[0];
+                //console.log(response.data[i]["effective date"].split(" ")[0]);
+                document.getElementById("input-exp-date").value = response.data[i]["expiration_date"].split(" ")[0];
                 let type = response.data[i].type;
                 if (type == 1)
                     document.getElementById("free_ship").checked = true;
@@ -175,7 +204,7 @@
                 else
                     document.getElementById("price_discount").checked = true;
             }
-        )
-    })
+        );
+    });
     
 </script>
