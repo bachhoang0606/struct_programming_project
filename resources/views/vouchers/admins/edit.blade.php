@@ -171,8 +171,10 @@
                     if (msg.message == 'Voucher update successful.'){
                         alert('update thanh cong!');
                         window.location.replace("http://localhost:8000/admins/del-voucher");
-                    }else
+                    }else{
                         alert('khong update thanh cong!');
+                        console.log(msg.quantium);
+                    }
                 });
             } 
         });

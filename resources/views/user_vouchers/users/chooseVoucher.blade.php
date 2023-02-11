@@ -144,6 +144,10 @@
                                             <span>${response.data[i]["effective date"]} - ${response.data[i].expiration_date}</span>
                                         </div>
                                         <div class="voucher-detail-body-item">
+                                            <h6>Số lượng còn lại</h6>
+                                            <span>${response.data[i].quantium}</span>
+                                        </div>
+                                        <div class="voucher-detail-body-item">
                                             <h6>Sản Phẩm</h6>
                                             <span>Tất cả sản phẩm</span>
                                         </div>
@@ -164,8 +168,8 @@
                             </div>`;
                 }else{
                     if (response.data[i].type == "1"){ //freeship
-                        output += `<div class="voucher-wrapper">
-                            <div class="left">
+                        output += `<div class="voucher-wrapper ">
+                            <div class="left bg-secondary">
                                 <div class="left-title">${response.data[i].titlle}</div>
                             </div>
                             <div class="right">
@@ -184,7 +188,7 @@
                         </div>   `;
                     }else if (response.data[i].type == "2"){ //price discount
                         output += `<div class="voucher-wrapper">
-                            <div class="left price">
+                            <div class="left price bg-secondary">
                                 <div class="left-title">${response.data[i].titlle}</div>
                             </div>
                             <div class="right">
@@ -206,7 +210,7 @@
                         </div>`;
                     }else if (response.data[i].type == "3"){ //percent discount
                         output += `<div class="voucher-wrapper">
-                            <div class="left percent">
+                            <div class="left percent bg-secondary">
                                 <div class="left-title">${response.data[i].titlle}</div>
                             </div>
                             <div class="right">
@@ -241,6 +245,10 @@
                                         <div class="voucher-detail-body-item">
                                             <h6>Thời gian sử dụng mã</h6>
                                             <span>${response.data[i]["effective date"]} - ${response.data[i].expiration_date}</span>
+                                        </div>
+                                        <div class="voucher-detail-body-item">
+                                            <h6>Số lượng còn lại</h6>
+                                            <span>${response.data[i].quantium}</span>
                                         </div>
                                         <div class="voucher-detail-body-item">
                                             <h6>Sản Phẩm</h6>

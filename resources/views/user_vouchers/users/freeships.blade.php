@@ -6,13 +6,15 @@
             $string = json_encode($data);
             $object = json_decode($string);
             $voucherList = [];
+            $now = time();
+
             foreach ($object->voucher_list as $element) {
                 # code...
                 // print "$element->id";
                 $voucherList[] = $element->id;
             }
             foreach ($vouchers as $voucher) {
-                if(in_array($voucher->id, $voucherList)){
+                if(in_array($voucher->id, $voucherList) && (strtotime($voucher->expiration_date) - $now > 0)){
                 foreach ($freeships as $freeship) {
                     if($voucher->id == $freeship->voucher_id){
                         print "
@@ -26,7 +28,7 @@
                                         <span>$voucher->content</span>
                                     </div>
                                     <div class=\"date\">
-                                        Có hiệu lực từ $voucher->outdate_at
+                                        Có hiệu lực từ $voucher->effective_date
                                     </div>
                                 </div>
                                 <button class=\"right-footer\" onclick=\"displayIndex($voucher->id)\">
@@ -77,11 +79,13 @@
 @endsection
 
 <script>
+    // hien thi thong tin chi tiet
     function displayIndex(index){
         var let = document.getElementById(index);
         let.classList.add("show");
         console.log(let);
     }
+    // an thong tin chi tiet
     function hideIndex(index){
         var let = document.getElementById(index);
         let.classList.remove("show");
