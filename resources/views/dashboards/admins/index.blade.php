@@ -12,8 +12,8 @@ function drawChart() {
   var data = google.visualization.arrayToDataTable({{ Js::from($result) }});
   var options = {
     chart: {
-      title: 'the number of vouchers generated and the remaining quantity',
-      subtitle: 'Total and quantium',
+      title: 'Voucher number generated and voucher number used of voucher types',
+      subtitle: 'Create and Use',
     },
   };
   var chart = new google.charts.Bar(document.getElementById('barchart_material'));
@@ -92,7 +92,7 @@ function drawChart() {
       const data = {
         labels: labels,
         datasets: [{
-          label: 'Number of vouchers created',
+          label: 'Number of generated vouchers of the days of the month',
           backgroundColor: 'blue',
           borderColor: 'blue',
           data: users,
