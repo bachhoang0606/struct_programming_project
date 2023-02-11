@@ -6,7 +6,6 @@
 <!-- <h4>Choose vouchers: <a id="chosen-voucher"></a></h4> -->
 <!-- <form action="" method="GET"> -->
     <div id="result"></div>
-    <p></p>
     <!-- <button id="submit_button" class="btn btn-success">Submit</button> -->
 <!-- </form> -->
 </div>
@@ -75,11 +74,17 @@
     fetch('/api/vouchers').then((res) => res.json()).then(
         response => {
             //console.log(response.data);
-            let output = '';
+            let a = 0;
+            let output = '<div class="container">';
+
             for (let i = 0; i < response.data.length; i++){
+                if (i%3 == 0){
+                    output += '<div class="row">';
+                    a = i;
+                }
                 if (!user_vouchers.includes(response.data[i].id) && (checkExpDate(response.data[i]["expiration_date"].split(" ")[0]))){
                     if (response.data[i].type == "1"){ //freeship
-                        output += `<div class="voucher-wrapper">
+                        output += `<div class="voucher-wrapper col">
                             <div class="left">
                                 <div class="left-title">${response.data[i].titlle}</div>
                             </div>
@@ -96,9 +101,9 @@
                                     Chi tiết
                                 </button>
                             </div>
-                        </div>   `;
+                        </div>`;
                     }else if (response.data[i].type == "2"){ //price discount
-                        output += `<div class="voucher-wrapper">
+                        output += `<><div class="voucher-wrapper col">
                             <div class="left price">
                                 <div class="left-title">${response.data[i].titlle}</div>
                             </div>
@@ -120,7 +125,7 @@
                             </div>
                         </div>`;
                     }else if (response.data[i].type == "3"){ //percent discount
-                        output += `<div class="voucher-wrapper">
+                        output += `<div><div class="voucher-wrapper col">
                             <div class="left percent">
                                 <div class="left-title">${response.data[i].titlle}</div>
                             </div>
@@ -182,7 +187,7 @@
                             </div>`;
                 }else{
                     if (response.data[i].type == "1"){ //freeship
-                        output += `<div class="voucher-wrapper ">
+                        output += `<div class="voucher-wrapper col">
                             <div class="left bg-secondary">
                                 <div class="left-title">${response.data[i].titlle}</div>
                             </div>
@@ -199,9 +204,9 @@
                                     Chi tiết
                                 </button>
                             </div>
-                        </div>   `;
+                        </div>`;
                     }else if (response.data[i].type == "2"){ //price discount
-                        output += `<div class="voucher-wrapper">
+                        output += `<div class="voucher-wrapper col">
                             <div class="left price bg-secondary">
                                 <div class="left-title">${response.data[i].titlle}</div>
                             </div>
@@ -223,7 +228,7 @@
                             </div>
                         </div>`;
                     }else if (response.data[i].type == "3"){ //percent discount
-                        output += `<div class="voucher-wrapper">
+                        output += `<div class="voucher-wrapper col">
                             <div class="left percent bg-secondary">
                                 <div class="left-title">${response.data[i].titlle}</div>
                             </div>
@@ -284,7 +289,11 @@
                                 </div>
                             </div>`;
                 }
+                if (i == a + 2){
+                    output += '</div>'
+                }
             }
+            output += '</div>';
             document.getElementById("result").innerHTML = output;
         }
     ).catch(error => console.log(error));

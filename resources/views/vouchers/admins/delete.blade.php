@@ -40,7 +40,7 @@
     let arr_voucher_id = [];
     
 
-    function getVoucherId(id){
+    function getVoucherIdAndType(id){
         voucher_id = id;
         console.log(voucher_id);
 
@@ -98,7 +98,7 @@
                         <td>${response.data[i].quantium}</td>
                         <td>${response.data[i].expiration_date}</td>
                     <td>
-                        <input type="checkbox" name="voucher_id_${response.data[i].id}" id="${response.data[i].id}" value="${response.data[i].id}" onclick="getVoucherId(${response.data[i].id})">
+                        <input type="checkbox" name="voucher_id_${response.data[i].id}" id="${response.data[i].id}" value="${response.data[i].id}" onclick="getVoucherIdAndType(${response.data[i].id})">
                     </td>
                     </tr>
                 `;
