@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\web;
 
+use App\Contracts\Repositories\UserVoucherRepositoryInterface;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\UserVoucherResource;
 use App\Models\CoinCard;
@@ -12,31 +13,37 @@ use App\Models\Voucher;
 
 class UserVoucherController extends Controller
 {
-        /**
+
+    protected $repository;
+    public function __construct(UserVoucherRepositoryInterface $repository)
+    {
+        $this->repository = $repository;
+    }
+    /**
      * Display a listing of the resource belong to user by id.
      *
      * @param  int  $id
      * @return \Illuminate\Contracts\View\Factory
      */
-    public function displayAll( $id )
+    public function displayAll($id)
     {
-        $vouchers = Voucher::all();
-        $freeships = Freeship::all();
-        $price_discounts = PriceDiscount::all();
-        $percent_discounts = PercentDiscount::all();
-        $data = new UserVoucherResource( CoinCard::find( $id ) );
-        
+        $vouchers = $this->repository->indexVouchers();
+        $freeships = $this->repository->indexFreeships();
+        $price_discounts = $this->repository->indexPriceDiscounts();
+        $percent_discounts = $this->repository->indexPercentDiscounts();
+        $data = new UserVoucherResource($this->repository->showCoinCard($id));
+
         return view(
             "user_vouchers.users.all",
             [
-                'data' => $data, 
-                'freeships' => $freeships, 
-                'price_discounts' => $price_discounts, 
-                'vouchers' => $vouchers, 
-                'percent_discounts' => $percent_discounts, 
+                'data' => $data,
+                'freeships' => $freeships,
+                'price_discounts' => $price_discounts,
+                'vouchers' => $vouchers,
+                'percent_discounts' => $percent_discounts,
                 'id' => $id
             ]
-        );  
+        );
     }
 
     /**
@@ -45,20 +52,20 @@ class UserVoucherController extends Controller
      * @param  int  $id
      * @return \Illuminate\Contracts\View\Factory
      */
-    public function displayFreeships( $id )
+    public function displayFreeships($id)
     {
-        $freeships = Freeship::all();
-        $vouchers = Voucher::all();
-        $data = new UserVoucherResource( CoinCard::find( $id ) );
+        $freeships = $this->repository->indexFreeships();
+        $vouchers = $this->repository->indexVouchers();
+        $data = new UserVoucherResource($this->repository->showCoinCard($id));
 
         return view(
-            "user_vouchers.users.freeships", 
+            "user_vouchers.users.freeships",
             [
-                'data' => $data, 
+                'data' => $data,
                 'freeships' => $freeships
-            ], 
+            ],
             [
-                'vouchers' => $vouchers, 
+                'vouchers' => $vouchers,
                 'id' => $id
             ]
         );
@@ -70,20 +77,20 @@ class UserVoucherController extends Controller
      * @param  int  $id
      * @return \Illuminate\Contracts\View\Factory
      */
-    public function displayPercent( $id )
+    public function displayPercent($id)
     {
-        $percent_discounts = PercentDiscount::all();
-        $vouchers = Voucher::all();
-        $data = new UserVoucherResource( CoinCard::find( $id ) );
+        $percent_discounts = $this->repository->indexPercentDiscounts();
+        $vouchers = $this->repository->indexVouchers();
+        $data = new UserVoucherResource($this->repository->showCoinCard($id));
 
         return view(
-            "user_vouchers.users.percent", 
+            "user_vouchers.users.percent",
             [
-                'data' => $data, 
+                'data' => $data,
                 'percent_discounts' => $percent_discounts
-            ], 
+            ],
             [
-                'vouchers' => $vouchers, 
+                'vouchers' => $vouchers,
                 'id' => $id
             ]
         );
@@ -95,20 +102,20 @@ class UserVoucherController extends Controller
      * @param  int  $id
      * @return \Illuminate\Contracts\View\Factory
      */
-    public function displayPrice( $id )
+    public function displayPrice($id)
     {
-        $price_discounts = PriceDiscount::all();
-        $vouchers = Voucher::all();
-        $data = new UserVoucherResource( CoinCard::find( $id ) );
+        $price_discounts = $this->repository->indexPriceDiscounts();
+        $vouchers = $this->repository->indexVouchers();
+        $data = new UserVoucherResource($this->repository->showCoinCard($id));
 
         return view(
-            "user_vouchers.users.price", 
+            "user_vouchers.users.price",
             [
-                'data' => $data, 
+                'data' => $data,
                 'price_discounts' => $price_discounts
-            ], 
+            ],
             [
-                'vouchers' => $vouchers, 
+                'vouchers' => $vouchers,
                 'id' => $id
             ]
         );

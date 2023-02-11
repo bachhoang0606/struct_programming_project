@@ -2,23 +2,30 @@
 
 namespace App\Http\Controllers\api;
 
+use App\Contracts\Repositories\CoinCardRepositoryInterface;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\CoinCardResource;
-use App\Models\CoinCard;
 use Illuminate\Http\Request;
 
 class CoinCardApiController extends Controller
 {
+
+    protected $repository;
+
+    public function __construct(CoinCardRepositoryInterface $repository)
+    {
+        $this->repository = $repository;
+    }
     /**
      * api returns the number of coins of the existing user.
      *
      * @param  int $id
      * @return \App\Http\Resources\CoinCardResource
      */
-    public function show( $id ){
-        $user = CoinCard::where( 'user_id', $id )
-        ->first();
-        return new CoinCardResource( $user );
+    public function show($id)
+    {
+        $coin_card = $this->repository->show($id);
+        return new CoinCardResource($coin_card);
     }
 
     /**
@@ -27,30 +34,26 @@ class CoinCardApiController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\JsonResponse|\App\Http\Resources\CoinCardResource
      */
-    public function refund( Request $request ){
-        
-        $user = CoinCard::where( 'user_id', $request->user_id )
-        ->first();
+    public function refund(Request $request)
+    {
 
-        if( $user ){
-            $user_coin = $user->coin + $request->coin;
-            CoinCard::where( 'user_id', $request->user_id )
-            ->update(
-                [
-                    'coin'=> $user_coin
-                ]
-            );
-            
-            $user = CoinCard::where( 'user_id', $request->user_id )
-            ->first();
+        $user_id = $request->user_id;
+        $coin_card = $this->repository->show($user_id);
 
-            return new CoinCardResource($user);
-        }else {
+        if ($coin_card) {
+            $user_coin = $coin_card->coin + $request->coin;
+
+            $this->repository->update($user_id, $user_coin);
+
+            $coin_card = $this->repository->show($user_id);
+
+            return new CoinCardResource($coin_card);
+        } else {
             return response()->json(
-                [ 
-                    'error' => "user not exit", 
+                [
+                    'error' => "user not exit",
                 ]
             );
-        } 
+        }
     }
 }
