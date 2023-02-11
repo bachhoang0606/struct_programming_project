@@ -197,12 +197,36 @@
                 //console.log(response.data[i]["effective date"].split(" ")[0]);
                 document.getElementById("input-exp-date").value = response.data[i]["expiration_date"].split(" ")[0];
                 let type = response.data[i].type;
-                if (type == 1)
+                if (type == 1){
                     document.getElementById("free_ship").checked = true;
-                else if (type == 2)
+                    fetch(`/api/freeship/${voucher_id}`).then((res)=>res.json()).then(
+                        response => {
+                            console.log(response.data.price);
+                            document.getElementById("input_price").value = response.data.price;
+                        }
+                    );
+                }
+                else if (type == 3){
                     document.getElementById("percent_discount").checked = true;
-                else
+                    perDisOption();
+
+                    fetch(`/api/percent-discount/${voucher_id}`).then((res)=>res.json()).then(
+                        response => {
+                            console.log(response.data.percent);
+                            document.getElementById("set_max").value = response.data.max_price;
+                            document.getElementById("set_percent").value = response.data.percent;
+                        }
+                    );
+                }
+                else{
                     document.getElementById("price_discount").checked = true;
+                    fetch(`/api/price-discount/${voucher_id}`).then((res)=>res.json()).then(
+                        response => {
+                            console.log(response.data.price);
+                            document.getElementById("input_price").value = response.data.price;
+                        }
+                    );
+                }
             }
         );
     });
