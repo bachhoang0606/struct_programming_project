@@ -1,9 +1,10 @@
 <?php
 
-use App\Http\Controllers\ProductController;
+use App\Http\Controllers\web\CoinCardController;
+use App\Http\Controllers\web\ProductController;
+use App\Http\Controllers\web\UserVoucherController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\VoucherController;
-use App\Http\Controllers\ChartController;
+use App\Http\Controllers\web\VoucherController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -14,28 +15,39 @@ use App\Http\Controllers\ChartController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::resource('vouchers', VoucherController::class);
 
-Route::get('/users/ui/voucherList/all/{id}', [VoucherController::class, 'displayAll'])->name('displayAll');
-Route::get('/users/ui/voucherList/freeships/{id}', [VoucherController::class, 'displayFreeships'])->name('displayFreeships');
-Route::get('/users/ui/voucherList/percent/{id}', [VoucherController::class, 'displayPercent'])->name('displayPercent');
-Route::get('/users/ui/voucherList/price/{id}', [VoucherController::class, 'displayPrice'])->name('displayPrice');
 
 Route::get('/', [VoucherController::class, 'index'])->name('index');
-Route::get('vouchers', [VoucherController::class, 'create'])->name('create');
-Route::post('vouchers', [VoucherController::class, 'store'])->name('create');
-Route::get('coin_card', [VoucherController::class, 'coin_card'])->name('coin_card')->middleware('loadcoin');
 
-Route::get('/edit-voucher/{id}',[VoucherController::class, 'edit']);
+Route::group( ['prefix' => 'admins/'] , function () {
 
-Route::view('/del-voucher', 'vouchers.delete')->name('delete-voucher');
+    // products controller routes
+    Route::get('product.index', [ProductController::class, 'index'])->name('product.index');//->middleware('loadcoin');
+    Route::get('product.create', [ProductController::class, 'create'])->name('product.create');
+    Route::post('product.create', [ProductController::class, 'store'])->name('product.create');
+    Route::get('product.edit/{product_id}',[ProductController::class, 'edit'])->name('product.edit');
+    Route::put('product.update/{product_id}',[ProductController::class, 'update'])->name('product.update');
 
-Route::get('choose-voucher/{id}', function ($id) {
-    return view('vouchers.chooseVoucher', ['id' => $id]);
-})->name('choose-voucher');
+    // vouchers controller routes
+    Route::resource('vouchers', VoucherController::class);
+    Route::view('del-voucher', 'vouchers.admins.delete')->name('delete-voucher');
+    Route::get('edit-voucher/{id}',[VoucherController::class, 'edit']);
+    Route::get('vouchers', [VoucherController::class, 'create'])->name('create');
+    Route::post('vouchers', [VoucherController::class, 'store'])->name('create');
 
-Route::get('product.index', [ProductController::class, 'index'])->name('product.index')->middleware('loadcoin');
-Route::get('product.create', [ProductController::class, 'create'])->name('product.create');
-Route::post('product.create', [ProductController::class, 'store'])->name('product.create');
-Route::get('product.edit/{product_id}',[ProductController::class, 'edit'])->name('product.edit');
-Route::put('product.update/{product_id}',[ProductController::class, 'update'])->name('product.update');
+    // coin card controller routes
+    Route::get('coin_cards', [CoinCardController::class, 'index'])->name('coin_cards.index');//->middleware('loadcoin');
+});
+
+
+Route::group( ['prefix' => 'users/'] , function () {
+
+    // users vouchers controller routes
+    Route::get('voucherList.all/{id}', [UserVoucherController::class, 'displayAll'])->name('displayAll');
+    Route::get('voucherList.freeships/{id}', [UserVoucherController::class, 'displayFreeships'])->name('displayFreeships');
+    Route::get('voucherList.percent/{id}', [UserVoucherController::class, 'displayPercent'])->name('displayPercent');
+    Route::get('voucherList.price/{id}', [UserVoucherController::class, 'displayPrice'])->name('displayPrice');
+    Route::get('choose-voucher/{id}', function ($id) {
+        return view('user_vouchers.users.chooseVoucher', ['id' => $id]);
+    })->name('choose-voucher');
+});

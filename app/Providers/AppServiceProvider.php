@@ -14,6 +14,30 @@ class AppServiceProvider extends ServiceProvider
     public function register()
     {
         //
+        $this->app->bind(
+            'App\Contracts\Repositories\CoinCardRepositoryInterface',
+            'App\Repositories\CoinCardRepository'
+        );
+
+        $this->app->bind(
+            'App\Contracts\Repositories\ProductRepositoryInterface',
+            'App\Repositories\ProductRepository'
+        );
+
+        $this->app->bind(
+            'App\Contracts\Repositories\VoucherRepositoryInterface',
+            'App\Repositories\VoucherRepository'
+        );
+
+        $this->app->bind(
+            'App\Contracts\Repositories\UserVoucherRepositoryInterface',
+            'App\Repositories\UserVoucherRepository'
+        );
+
+        $this->app->bind(
+            'App\Contracts\Repositories\CaculatorRepositoryInterface',
+            'App\Repositories\CaculatorRepository'
+        );
     }
 
     /**

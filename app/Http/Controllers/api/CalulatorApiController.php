@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\api;
 
+use App\Contracts\Repositories\CaculatorRepositoryInterface;
 use App\Http\Controllers\Controller;
 use App\Models\Freeship;
 use App\Models\PercentDiscount;
@@ -13,35 +14,55 @@ use Illuminate\Http\Request;
 
 class CalulatorApiController extends Controller
 {
-    //
+    protected $repository;
+
+    public function __construct(CaculatorRepositoryInterface $repository)
+    {
+        $this->repository = $repository;
+    }
+    /**
+     * api supports calculation of order value to be reduced at checkout.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function payment(Request $request)
     {
         $discount_price = 0;
+        $user_id = $request->user_id;
+        $voucher_id = $request->voucher_id;
         if ($request->voucher_id) {
             // kiem tra nguoi dung co voucher chon khong
-            $user_voucher = UserVoucher::where('user_id', $request->user_id)->where('voucher_id', $request->voucher_id)->first();
+            $user_voucher = $this->repository->userVoucher($user_id, $voucher_id);
+
             // dd($user_voucher);
             if ($user_voucher == null) {
-                return response()->json([
-                    'error' => 'Nguoi dung khong co voucher nay'
-                ]);
+                return response()->json(
+                    [
+                        'error' => 'Nguoi dung khong co voucher nay'
+                    ]
+                );
             }
 
             // kiem tra gia tri don hang toi thieu
-            $voucher = Voucher::find($request->voucher_id);
+            $voucher = $this->repository->showVoucher($voucher_id);
+
+            // Tong so tien san pham
             $total = $request->shipping_fee + $request->product_price;
-            // dd($voucher);
+
             if ($voucher->minimun_price > $total) {
-                return response()->json([
-                    'error' => 'Gia tri toi thieu khong thoa man'
-                ]);
+                return response()->json(
+                    [
+                        'error' => 'Gia tri toi thieu khong thoa man'
+                    ]
+                );
             }
 
             // tinh so tien duoc tru khi dung voucher
             if ($voucher->type == 1) {
                 // neu la freeship
 
-                $voucher = Freeship::where('voucher_id', $request->voucher_id)->first();
+                $voucher = $this->repository->showFreeship($voucher_id);
 
                 $discount_price = $voucher->price;
 
@@ -54,13 +75,14 @@ class CalulatorApiController extends Controller
 
             } elseif ($voucher->type == 2) {
                 // neu la giam gia co dinh
+                $voucher = $this->repository->showPriceDiscount($voucher_id);
 
-                $voucher = PriceDiscount::where('voucher_id', $request->voucher_id)->first();
                 $discount_price = $voucher->price;
 
             } else {
                 // neu giam gia theo phan tram
-                $voucher = PercentDiscount::where('voucher_id', $request->voucher_id)->first();
+                $voucher = $this->repository->showPercentDiscount($voucher_id);
+
                 $discount_price = $request->product_price * $voucher->percent / 100;
 
                 if ($discount_price > $voucher->max_price) {
@@ -70,7 +92,7 @@ class CalulatorApiController extends Controller
                 }
             }
             // xoa voucher ra khoi bang voucher nguoi dung
-            $user_voucher = UserVoucher::where('user_id', $request->user_id)->where('voucher_id', $request->voucher_id)->delete();
+            $user_voucher = $this->repository->userVoucher($user_id, $voucher_id);
         }
 
 
@@ -79,19 +101,29 @@ class CalulatorApiController extends Controller
         $discount_price += $request->coin;
 
         // cap nhat lai xu cua nguoi dung
-        $user = CoinCard::where('user_id', $request->user_id)->first();
+        $user = $this->repository->coinCard($user_id);
+
         $user_coin = $user->coin - $request->coin;
         if ($user_coin < 0) {
-            return response()->json([
-                'error' => 'Nguoi dung khong du diem'
-            ]);
-        }
-        $user = CoinCard::where('user_id', $request->user_id)->update(['coin' => $user_coin]);
 
-        return response()->json([
-            'data' => [
-                'produc_discount' => $discount_price,
+            return response()->json(
+                [
+                    'error' => 'Nguoi dung khong du diem'
+                ]
+            );
+        }
+        $user = $this->repository->coinCardUpdate(
+            $user_id,
+            [
+                'coin' => $user_coin
             ]
-        ]);
+        );
+        return response()->json(
+            [
+                'data' => [
+                    'produc_discount' => $discount_price,
+                ]
+            ]
+        );
     }
 }
