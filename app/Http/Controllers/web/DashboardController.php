@@ -28,12 +28,13 @@ class DashboardController extends Controller
         ->get();
         $result[] = ['Type','Created','Used'];
         foreach ($count as $key => $value) {
+            // $result[++$key] = [$value->type, (int)$value->total1, (int)$value->used];
             if($value -> type == 1){
-            $result[1] = ["Freeship", (int)$value->total, (int)$value->used];}
+            $result[++$key] = ["Freeship", (int)$value->total, (int)$value->used];}
             elseif($value -> type == 2){
-            $result[2] = ["Price discount", (int)$value->total, (int)$value->used];}
+            $result[++$key] = ["Price discount", (int)$value->total, (int)$value->used];}
             elseif($value -> type == 3){
-            $result[3] = ["Percent discount", (int)$value->total, (int)$value->used];}
+            $result[++$key] = ["Percent discount", (int)$value->total, (int)$value->used];}
         }
 
         $freeship = \App\Models\Freeship::count();
