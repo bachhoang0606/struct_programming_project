@@ -8,8 +8,10 @@ use Illuminate\Support\Facades\DB;
 
 class DashboardController extends Controller
 {
-    /**
-     * Display dashboard of admin
+     /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Contracts\View\Factory
      */
 
     public function index()
@@ -21,12 +23,18 @@ class DashboardController extends Controller
         $labels = $users->keys();
         $data = $users->values();
 
-        $visitors = Voucher::select("id", "total", "quantium")
-        ->whereMonth('effective_date',date('m'))
+        $count = Voucher::select(DB::raw("type"), DB::raw("SUM(total) as total"), DB::raw("(SUM(total) - SUM(quantium)) as used"))
+        ->groupBy(DB::RAW("type"))
         ->get();
-        $result[] = ['Id','Total','Quantium'];
-        foreach ($visitors as $key => $value) {
-            $result[++$key] = [$value->id, (int)$value->total, (int)$value->quantium];
+        $result[] = ['Type','Created','Used'];
+        foreach ($count as $key => $value) {
+            // $result[++$key] = [$value->type, (int)$value->total1, (int)$value->used];
+            if($value -> type == 1){
+            $result[++$key] = ["Freeship", (int)$value->total, (int)$value->used];}
+            elseif($value -> type == 2){
+            $result[++$key] = ["Price discount", (int)$value->total, (int)$value->used];}
+            elseif($value -> type == 3){
+            $result[++$key] = ["Percent discount", (int)$value->total, (int)$value->used];}
         }
 
         $freeship = \App\Models\Freeship::count();
