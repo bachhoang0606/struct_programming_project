@@ -4,12 +4,7 @@ namespace App\Http\Controllers\web;
 
 use App\Contracts\Repositories\VoucherRepositoryInterface;
 use App\Http\Controllers\Controller;
-use App\Models\Freeship;
-use App\Models\PercentDiscount;
-use App\Models\PriceDiscount;
-use App\Models\Voucher;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
 
 class VoucherController extends Controller
@@ -50,7 +45,7 @@ class VoucherController extends Controller
      */
     public function freeship()
     {
-        $freeships = Freeship::all();
+        $freeships = $this->repository->indexFreeship();
         return view(
             "dashboards.admins.freeship", 
             [
@@ -66,7 +61,7 @@ class VoucherController extends Controller
      */
     public function price_discount()
     {
-        $price_discounts = PriceDiscount::all();
+        $price_discounts = $this->repository->indexPriceDiscount();
         return view(
             "dashboards.admins.price_discount", 
             [
@@ -83,7 +78,7 @@ class VoucherController extends Controller
      */
     public function percent_discount()
     {
-        $percent_discounts = PercentDiscount::all();
+        $percent_discounts = $this->repository->indexPercentDiscount();
         return view(
             "dashboards.admins.percent_discount", 
             [

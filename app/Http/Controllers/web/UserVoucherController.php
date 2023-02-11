@@ -5,12 +5,6 @@ namespace App\Http\Controllers\web;
 use App\Contracts\Repositories\UserVoucherRepositoryInterface;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\UserVoucherResource;
-use App\Models\CoinCard;
-use App\Models\Freeship;
-use App\Models\PercentDiscount;
-use App\Models\PriceDiscount;
-use App\Models\Voucher;
-
 class UserVoucherController extends Controller
 {
 

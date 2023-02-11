@@ -4,7 +4,6 @@ namespace App\Http\Controllers\web;
 
 use App\Contracts\Repositories\ProductRepositoryInterface;
 use App\Http\Controllers\Controller;
-use App\Models\ProductAttribute;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller

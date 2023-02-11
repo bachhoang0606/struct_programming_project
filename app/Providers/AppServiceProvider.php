@@ -53,6 +53,12 @@ class AppServiceProvider extends ServiceProvider
             'App\Contracts\Repositories\PriceDiscountRepositoryInterface',
             'App\Repositories\PriceDiscountRepository'
         );
+
+        $this->app->bind(
+            'App\Contracts\Repositories\DashbroardRepositoryInterface',
+            'App\Repositories\DashbroardRepository'
+        );
+        
     }
 
     /**

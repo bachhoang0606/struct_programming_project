@@ -4,12 +4,6 @@ namespace App\Http\Controllers\api;
 
 use App\Contracts\Repositories\CaculatorRepositoryInterface;
 use App\Http\Controllers\Controller;
-use App\Models\Freeship;
-use App\Models\PercentDiscount;
-use App\Models\CoinCard;
-use App\Models\PriceDiscount;
-use App\Models\UserVoucher;
-use App\Models\Voucher;
 use Illuminate\Http\Request;
 
 class CalulatorApiController extends Controller
