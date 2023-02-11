@@ -35,6 +35,10 @@ class VoucherApiController extends Controller
      */
     public function update(Request $request, $id)
     {
+
+        $request->effective_date .= ' 00:00:00';
+        $request->expiration_date .= ' 00:00:00';
+
         // voucher need update
         $voucher = $this->repository->show($id);
 
@@ -48,7 +52,7 @@ class VoucherApiController extends Controller
             'title' => 'required',
             'content' => 'required',
             'minimun_price' => 'required|numeric|min:0',
-            'quantium' => 'required|numeric|gt:'.($voucher->total - $voucher->quantium).'min:0',
+            'quantium' => 'required|numeric|gt:'.($voucher->total - $voucher->quantium).'|min:0',
             'effective_date' => 'required',
             'expiration_date' => 'required|after_or_equal:effective_date',
         ], $messages);
@@ -81,4 +85,5 @@ class VoucherApiController extends Controller
             ]
         );
     }
+
 }
