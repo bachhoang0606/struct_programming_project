@@ -133,10 +133,12 @@ class VoucherController extends Controller
      */
     public function edit($id)
     {
+        $voucher = $this->repository->show($id);
+        
         return view(
             'vouchers.admins.edit',
             [
-                'id' => $id
+                'voucher' => $voucher
             ]
         );
     }

@@ -39,6 +39,3 @@ Route::get('/discount-price', [CalulatorApiController::class, 'payment']);
 Route::get('/vouchers', [VoucherApiController::class, 'index']);
 Route::put('/vouchers/update/{id}', [VoucherApiController::class, 'update']);
 Route::delete('/vouchers/delete', [VoucherApiController::class, 'destroy']);
-
-
-
