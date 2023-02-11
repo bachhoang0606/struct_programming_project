@@ -48,4 +48,70 @@ class DashboardController extends Controller
         $price = $this->repository->priceDiscountCount();
         return view('dashboards.admins.index', compact('labels', 'data', 'result', 'freeship', 'percent', 'price'));
     }
+
+
+    /**
+     * Display a listing and chart of the freeship
+     * 
+     * @return \Illuminate\Contracts\View\Factory
+     */
+    public function freeship()
+    {
+
+        //get the number of vouchers created and used
+        $freeships = $this->repository->indexFreeship();
+        $result[] = ['Id', 'Create', 'Used'];
+        foreach ($freeships as $freeship) {
+            // $result[++$key] = [$value->type, (int)$value->total1, (int)$value->used];
+            $result[] = [$freeship->voucher_id, $freeship->voucher->total, $freeship->voucher->used];
+        }
+
+        return view(
+            "dashboards.admins.freeship", 
+            compact('result', 'freeships')
+        );
+    }
+
+    /**
+     * Display a listing and chart of the price discount
+     * 
+     * @return \Illuminate\Contracts\View\Factory
+     */
+    public function priceDiscount()
+    {
+        //get the number of vouchers created
+        $price_discounts = $this->repository->indexPriceDiscount();
+        $result[] = ['Id', 'Create', 'Used'];
+        foreach ($price_discounts as $price_discount) {
+            // $result[++$key] = [$value->type, (int)$value->total1, (int)$value->used];
+            $result[] = [$price_discount->voucher_id, $price_discount->voucher->total, $price_discount->voucher->used];
+        }
+
+        return view(
+            "dashboards.admins.price_discount", 
+            compact('result', 'price_discounts')
+        );
+    }
+    
+
+    /**
+     * Display a listing and chart of the percent discount
+     * 
+     * @return \Illuminate\Contracts\View\Factory
+     */
+    public function percentDiscount()
+    {
+        //get the number of vouchers created and used
+        $percent_discounts = $this->repository->indexPercentDiscount();
+        $result[] = ['Id', 'Create', 'Used'];
+        foreach ($percent_discounts as $percent_discount) {
+            // $result[++$key] = [$value->type, (int)$value->total1, (int)$value->used];
+            $result[] = [$percent_discount->voucher_id, $percent_discount->voucher->total, $percent_discount->voucher->used];
+        }
+
+        return view(
+            "dashboards.admins.percent_discount", 
+            compact('result', 'percent_discounts')
+        );
+    }
 }

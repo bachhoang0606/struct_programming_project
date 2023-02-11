@@ -9,21 +9,27 @@ use Illuminate\Http\Request;
 class ProductController extends Controller
 {
     protected $repository;
-    public function __construct( ProductRepositoryInterface $repository ){
+    public function __construct(ProductRepositoryInterface $repository)
+    {
         $this->repository = $repository;
     }
     /**
      * Display a listing of the resource.
      *
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Contracts\View\Factory
      */
-    public function index(){
+    public function index(Request $request)
+    {
 
         $products = $this->repository->index();
+        // get data from api
+        $products_api = $request->products['data'];
         return view(
-            'products.admins.index', 
+            'products.admins.index',
             [
-                'products' => $products
+                'products' => $products,
+                'products_api' => $products_api,
             ]
         );
     }
@@ -33,8 +39,9 @@ class ProductController extends Controller
      *
      * @return \Illuminate\Contracts\View\Factory
      */
-    public function create(){
-        return view( 'products.create' );
+    public function create()
+    {
+        return view('products.create');
     }
 
     /**
@@ -43,7 +50,8 @@ class ProductController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store( Request $request ){
+    public function store(Request $request)
+    {
 
         $update_array = [
             'coin' => $request->coin,
@@ -51,29 +59,31 @@ class ProductController extends Controller
         ];
 
         $id = $request->product_id;
-        $query = $this->repository->update( $id, $update_array );
+        $query = $this->repository->update($id, $update_array);
 
-        if( $query ){
-            return view( 'products.create' )
-            ->with( 'status', 'Update successful' );
-        }else{
-            return view( 'products.create' )
-            ->with( 'error', 'Some error occurred' );
+        if ($query) {
+            return view('products.create')
+                ->with('status', 'Update successful');
+        } else {
+            return view('products.create')
+                ->with('error', 'Some error occurred');
         }
     }
 
     /**
      * Show the form for editing the specified resource.
-     *
+     * 
+     * @param  \Illuminate\Http\Request  $request
      * @param  int  $product_id
      * @return \Illuminate\Contracts\View\Factory
      */
-    public function edit( $product_id )
+    public function edit(Request $request, $product_id)
     {
-        $products = $this->repository->show( $product_id );
+        $products = $this->repository->show($product_id);
+        $image_url = $request->image_url;
         return view(
             'products.admins.edit',
-            compact( 'products' )
+            compact('products', 'image_url')
         );
 
     }
@@ -85,12 +95,12 @@ class ProductController extends Controller
      * @param  int  $product_id
      * @return \Illuminate\Http\Response
      */
-    public function update( Request $request, $product_id )
+    public function update(Request $request, $product_id)
     {
         $request->validate(
-            [ 
-                'coin' => 'required|numeric|min:0', 
-                'discount' => 'required|numeric|min:0|max:100', 
+            [
+                'coin' => 'required|numeric|min:0',
+                'discount' => 'required|numeric|min:0|max:100',
             ]
         );
 
@@ -99,10 +109,10 @@ class ProductController extends Controller
             'discount' => $request->discount,
         ];
 
-        $this->repository->update( $product_id, $update_array );
+        $this->repository->update($product_id, $update_array);
 
-        return redirect( route('product.index') )
-        ->with( 'message','Product updated successfully' );
+        return redirect(route('product.index'))
+            ->with('message', 'Product updated successfully');
     }
 
 }

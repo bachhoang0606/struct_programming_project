@@ -9,10 +9,11 @@
         </ul>
     </div>
 @endif
-<div class="container-fluid px-4">
-    <div class="card mt-4">
+<div class="bg-image bg-opacity-50"  style="background-image:linear-gradient(rgba(255,255,255,0.5), rgba(255,255,255,0.5)), url('{{$image_url}}');height: 95vh;">
+<div class="container-fluid px-4 d-flex justify-content-center align-items-center h-100">
+    <div class="card mt-4 w-50" style="opacity: 1;">
         <div class="card-header">
-            <h4>Edit coin and discount</h4>
+            <h4 class="text-center">Edit coin and discount</h4>
         </div>
         <div class="card-body">
             <form action="{{url('/admins/product.update/'.$products->product_id)}}" method="POST" enctype="multipart/form-data">
@@ -44,5 +45,7 @@
             </form>
         </div>
     </div>
+    </div>
+</div>
 </div>
 @endsection

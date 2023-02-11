@@ -19,15 +19,15 @@ use App\Http\Controllers\web\VoucherController;
 
 
 Route::get('/', [DashboardController::class, 'index'])->name('index');
-Route::get('/freeship', [VoucherController::class, 'freeship'])->name('freeship');
-Route::get('/price_discount', [VoucherController::class, 'price_discount'])->name('price_discount');
-Route::get('/percent_discount', [VoucherController::class, 'percent_discount'])->name('percent_discount');
+Route::get('/freeship', [DashboardController::class, 'freeship'])->name('freeship');
+Route::get('/price_discount', [DashboardController::class, 'priceDiscount'])->name('price_discount');
+Route::get('/percent_discount', [DashboardController::class, 'percentDiscount'])->name('percent_discount');
 
 // Route::get('/', [ChartController::class, 'index'])->name('index');
 Route::group( ['prefix' => 'admins/'] , function () {
 
     // products controller routes
-    Route::get('product.index', [ProductController::class, 'index'])->name('product.index');//->middleware('loadcoin');
+    Route::get('product.index', [ProductController::class, 'index'])->name('product.index')->middleware('loadcoin');
     Route::get('product.create', [ProductController::class, 'create'])->name('product.create');
     Route::post('product.create', [ProductController::class, 'store'])->name('product.create');
     Route::get('product.edit/{product_id}',[ProductController::class, 'edit'])->name('product.edit');

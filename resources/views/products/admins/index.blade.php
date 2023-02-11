@@ -13,17 +13,29 @@
         <th>Description</th>
         <th>Edit</th>
 
-        <?php foreach ($products as $products) : ?>
+        <?php foreach ($products as $product) : ?>
             <tr>
                 <td>
-                    <img src="https://routine.vn/media/catalog/product/cache/5de180fdba0e830d350bd2803a0413e8/1/0/10f20pol002cr1_honey_gold_2__1.jpg" alt="" width="180px" height="230px"> 
+                    @foreach ($products_api as $product_api)
+                        @if ($product_api['id']  == $product->product_id)
+                            @php
+                                $sub_products = $product_api['sub_products'];
+                                foreach ($sub_products as $key => $value) {
+                                    $image_url = $value['image_url'];
+                                    break;
+                                }
+                            @endphp
+                            <img src={{ $image_url }} alt="" width="180px" height="230px"> 
+                            @break
+                        @endif
+                    @endforeach
                 <td>
-                <h5>ID: <?= $products->product_id; ?></h5>
-                <h5>Product name: <?=$products->name; ?> </h5>
-                <h5>Product coin: <?= $products->coin; ?> </h5>
-                <h5>Percent discount: <?= $products->discount; ?>%</td><h5>
+                <h5>ID: <?= $product->product_id; ?></h5>
+                <h5>Product name: <?=$product->name; ?> </h5>
+                <h5>Product coin: <?= $product->coin; ?> </h5>
+                <h5>Percent discount: <?= $product->discount; ?>%</td><h5>
                </td>
-                <td><a href="{{url('admins/product.edit/'.$products->product_id)}}" class="btn btn-success">Edit</a></td>
+                <td><a href="{{url('admins/product.edit/'.$product->product_id.'?image_url='.$image_url)}}" class="btn btn-success">Edit</a></td>
             </tr>
         <?php endforeach; ?>
 
