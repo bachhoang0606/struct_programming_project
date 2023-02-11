@@ -16,13 +16,15 @@ class DashboardController extends Controller
 
     public function index()
     {
-        $users = Voucher::select(DB::raw("SUM(quantium) as count"), DB::raw("EXTRACT(day FROM created_at) as day_name"))
+        //get the number of vouchers generated on the days of the month
+        $voucher = Voucher::select(DB::raw("SUM(quantium) as count"), DB::raw("EXTRACT(day FROM created_at) as day_name"))
             ->whereMonth('created_at', date('m'))
             ->groupBy(DB::raw("EXTRACT(DAY FROM created_at)"))
             ->pluck('count', 'day_name');
-        $labels = $users->keys();
-        $data = $users->values();
+        $labels = $voucher->keys();
+        $data = $voucher->values();
 
+        //get the number of vouchers created and used of the voucher types
         $count = Voucher::select(DB::raw("type"), DB::raw("SUM(total) as total"), DB::raw("(SUM(total) - SUM(quantium)) as used"))
         ->groupBy(DB::RAW("type"))
         ->get();
@@ -37,6 +39,7 @@ class DashboardController extends Controller
             $result[++$key] = ["Percent discount", (int)$value->total, (int)$value->used];}
         }
 
+        //get the number of vouchers
         $freeship = \App\Models\Freeship::count();
         $percent = \App\Models\PercentDiscount::count();
         $price = \App\Models\PriceDiscount::count();

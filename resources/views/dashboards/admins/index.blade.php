@@ -5,6 +5,7 @@
   {{ session('message') }}
 </div>
 @endif
+<!-- display the result on a chart -->
 <script type="text/javascript">
 google.charts.load('current', {'packages':['bar']});
 google.charts.setOnLoadCallback(drawChart);
@@ -83,7 +84,7 @@ function drawChart() {
     </div>
   </div>
 </div>
-
+<!-- display the result on a chart -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" ></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script type="text/javascript">
