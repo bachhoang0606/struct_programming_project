@@ -38,6 +38,27 @@ class AppServiceProvider extends ServiceProvider
             'App\Contracts\Repositories\CaculatorRepositoryInterface',
             'App\Repositories\CaculatorRepository'
         );
+
+        $this->app->bind(
+            'App\Contracts\Repositories\FreeshipRepositoryInterface',
+            'App\Repositories\FreeshipRepository'
+        );
+
+        $this->app->bind(
+            'App\Contracts\Repositories\PercentDiscountRepositoryInterface',
+            'App\Repositories\PercentDiscountRepository'
+        );
+
+        $this->app->bind(
+            'App\Contracts\Repositories\PriceDiscountRepositoryInterface',
+            'App\Repositories\PriceDiscountRepository'
+        );
+
+        $this->app->bind(
+            'App\Contracts\Repositories\DashbroardRepositoryInterface',
+            'App\Repositories\DashbroardRepository'
+        );
+        
     }
 
     /**

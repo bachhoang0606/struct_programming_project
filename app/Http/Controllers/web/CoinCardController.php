@@ -4,7 +4,6 @@ namespace App\Http\Controllers\web;
 
 use App\Contracts\Repositories\CoinCardRepositoryInterface;
 use App\Http\Controllers\Controller;
-use App\Models\CoinCard;
 
 class CoinCardController extends Controller
 {
