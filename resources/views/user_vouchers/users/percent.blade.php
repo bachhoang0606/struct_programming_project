@@ -8,17 +8,23 @@
             $voucherList = [];
             $now = time();
 
+            //lay cac id voucher ma nguoi dung co
             foreach ($object->voucher_list as $element) {
                 # code...
                 // print "$element->id";
                 $voucherList[] = $element->id;
             }
+            //lay ra thong tin voucher ma nguoi dung co
             foreach ($vouchers as $voucher) {
-                if(in_array($voucher->id, $voucherList) && (strtotime($voucher->expiration_date) - $now > 0)){
+                $disable = (strtotime($voucher->expiration_date) - $now > 0);
+                if(in_array($voucher->id, $voucherList)){
                 foreach ($percent_discounts as $percent_discount) {
                     if($voucher->id == $percent_discount->voucher_id){
                         print "
-                        <div class=\"voucher-wrapper\">
+                        <div class=\"voucher-wrapper ";
+                        if($disable) print "\">";
+                        else print "disable\">";
+                            print "
                             <div class=\"left percent\">
                                 <div class=\"left-title\">$voucher->title</div>
                             </div>

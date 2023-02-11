@@ -9,19 +9,25 @@
             $voucherList = [];
             $now = time();
             
+            //lay cac id voucher ma nguoi dung co
             foreach ($object->voucher_list as $element) {
                 # code...
                 // print "$element->id";
                 $voucherList[] = $element->id;
             }
+            //lay ra thong tin voucher ma nguoi dung co
             foreach ($vouchers as $voucher) {
-                if(in_array($voucher->id, $voucherList) && (strtotime($voucher->expiration_date) - $now > 0)){
+                $disable = (strtotime($voucher->expiration_date) - $now > 0);
+                if(in_array($voucher->id, $voucherList)){
                 # freeship...
                 foreach ($freeships as $freeship) {
-                    
+                    // $disable = (strtotime($voucher->expiration_date) - $now > 0);
                     if($voucher->id == $freeship->voucher_id){
                         print "
-                        <div class=\"voucher-wrapper\">
+                        <div class=\"voucher-wrapper ";
+                        if($disable) print "\">";
+                        else print "disable\">";
+                            print "
                             <div class=\"left\">
                                 <div class=\"left-title\">$voucher->title</div>
                             </div>
@@ -78,10 +84,14 @@
                 }
                 # percent...
                 foreach ($percent_discounts as $percent_discount) {
+                    // $disable = (strtotime($voucher->expiration_date) - $now > 0);
                     print "";
                     if($voucher->id == $percent_discount->voucher_id){
                         print "
-                        <div class=\"voucher-wrapper\">
+                        <div class=\"voucher-wrapper ";
+                        if($disable) print "\">";
+                        else print "disable\">";
+                            print "
                             <div class=\"left percent\">
                                 <div class=\"left-title\">$voucher->title</div>
                             </div>
@@ -142,9 +152,13 @@
                 }
                 # price...
                 foreach ($price_discounts as $price_discount) {
+                    // $disable = (strtotime($voucher->expiration_date) - $now > 0);
                     if($voucher->id == $price_discount->voucher_id){
                         print "
-                        <div class=\"voucher-wrapper\">
+                        <div class=\"voucher-wrapper ";
+                        if($disable) print "\">";
+                        else print "disable\">";
+                            print "
                             <div class=\"left price\">
                                 <div class=\"left-title\">$voucher->title</div>
                             </div>
