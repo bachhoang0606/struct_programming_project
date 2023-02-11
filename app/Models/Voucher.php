@@ -14,6 +14,7 @@ class Voucher extends Model
         'content',
         'minimun_price',
         'quantium',
+        'total',
         'effective_date',
         'expiration_date',
     ];

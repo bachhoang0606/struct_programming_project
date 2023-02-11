@@ -8,7 +8,7 @@ use App\Http\Controllers\api\VoucherApiController;
 use Illuminate\Support\Facades\Route;
 
 // product api controller
-Route::get('/product-coin/{id}', [ProductAttributeApiController::class, 'show_coin']);
+Route::get('/product-coin/{id}', [ProductAttributeApiController::class, 'show']);
 Route::get('/products-sale-price', [ProductAttributeApiController::class, 'index']);
 
 // coin card api controller
@@ -26,7 +26,7 @@ Route::get('/discount-price', [CalulatorApiController::class, 'payment']);
 // voucher api controller
 Route::get('/vouchers', [VoucherApiController::class, 'index']);
 Route::put('/vouchers/update/{id}', [VoucherApiController::class, 'update']);
-Route::delete('/vouchers/delete/{id}', [VoucherApiController::class, 'destroy']);
+Route::delete('/vouchers/delete', [VoucherApiController::class, 'destroy']);
 
 
 
