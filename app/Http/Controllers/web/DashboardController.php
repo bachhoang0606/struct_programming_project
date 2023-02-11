@@ -25,8 +25,8 @@ class DashboardController extends Controller
     {
 
         $voucher = $this->repository->voucherCreatedInMonth();
-        $labels = $users->keys();
-        $data = $users->values();
+        $labels = $voucher->keys();
+        $data = $voucher->values();
 
         $count = $this->repository->getTotalUsed();
         $result[] = ['Type', 'Created', 'Used'];
