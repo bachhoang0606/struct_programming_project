@@ -15,7 +15,8 @@
 
     <!-- Bootstrap Core CSS RTL-->
     <link href="css/bootstrap-rtl.min.css" rel="stylesheet">
-    
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
     <title>P02-Ads SP_12</title>
 
     <style>
@@ -180,7 +181,7 @@
 
             </div>
 
-            <div class="main h-100 col-md-10">
+            <div class="main h-100 col-md-10 bacground-color">
                 @yield('content')
 
             </div>

@@ -94,7 +94,7 @@ class VoucherRepository implements VoucherRepositoryInterface
         // destroy mutiple voucher
         foreach ($ids as $id) {
             $voucher = Voucher::find($id);
-            if($voucher == null){
+            if ($voucher == null) {
                 continue;
             }
             if ($voucher->type == 1) {
@@ -136,12 +136,12 @@ class VoucherRepository implements VoucherRepositoryInterface
 
         $params['total'] = $params['quantium'];
         $params['quantium'] = $voucher->quantium;
-        if($params['quantium'] < $voucher->total){
+        if ($params['quantium'] < $voucher->total) {
             // Tính số lượng voucher còn lại sau khi cập nhật tổng lượng voucher mới
             $params['total'] = $params['quantium'];
             $params['quantium'] = $params['total'] - ($voucher->total - $voucher->quantium);
         }
-        
+
         Voucher::where('id', $id)->update($params);
 
         $type = $attributes->Vtype;
