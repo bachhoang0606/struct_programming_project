@@ -60,10 +60,10 @@ class DashboardController extends Controller
 
         //get the number of vouchers created and used
         $freeships = $this->repository->indexFreeship();
-        $result[] = ['Id', 'Create', 'Used'];
-        foreach ($freeships as $freeship) {
+        $result[] = ['Id', 'Created', 'Used'];
+        foreach ($freeships as $key => $freeship) {
             // $result[++$key] = [$value->type, (int)$value->total1, (int)$value->used];
-            $result[] = [$freeship->voucher_id, $freeship->voucher->total, $freeship->voucher->used];
+            $result[++$key] = [$freeship->voucher_id, $freeship->voucher->total, $freeship->voucher->quantium];
         }
 
         return view(
@@ -81,10 +81,10 @@ class DashboardController extends Controller
     {
         //get the number of vouchers created
         $price_discounts = $this->repository->indexPriceDiscount();
-        $result[] = ['Id', 'Create', 'Used'];
-        foreach ($price_discounts as $price_discount) {
+        $result[] = ['Id', 'Created', 'Used'];
+        foreach ($price_discounts as $key => $price_discount) {
             // $result[++$key] = [$value->type, (int)$value->total1, (int)$value->used];
-            $result[] = [$price_discount->voucher_id, $price_discount->voucher->total, $price_discount->voucher->used];
+            $result[++$key] = [$price_discount->voucher_id, $price_discount->voucher->total, $price_discount->voucher->quantium];
         }
 
         return view(
@@ -103,10 +103,10 @@ class DashboardController extends Controller
     {
         //get the number of vouchers created and used
         $percent_discounts = $this->repository->indexPercentDiscount();
-        $result[] = ['Id', 'Create', 'Used'];
-        foreach ($percent_discounts as $percent_discount) {
+        $result[] = ['Id', 'Created', 'Used'];
+        foreach ($percent_discounts as $key => $percent_discount) {
             // $result[++$key] = [$value->type, (int)$value->total1, (int)$value->used];
-            $result[] = [$percent_discount->voucher_id, $percent_discount->voucher->total, $percent_discount->voucher->used];
+            $result[++$key] = [$percent_discount->voucher_id, $percent_discount->voucher->total, $percent_discount->voucher->quantium];
         }
 
         return view(
