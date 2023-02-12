@@ -63,7 +63,7 @@ class DashboardController extends Controller
         $result[] = ['Id', 'Created', 'Used'];
         foreach ($freeships as $key => $freeship) {
             // $result[++$key] = [$value->type, (int)$value->total1, (int)$value->used];
-            $result[++$key] = [$freeship->voucher_id, $freeship->voucher->total, $freeship->voucher->quantium];
+            $result[++$key] = [$freeship->voucher_id, $freeship->voucher->total, $freeship->voucher->total - $freeship->voucher->quantium];
         }
 
         return view(
@@ -84,7 +84,7 @@ class DashboardController extends Controller
         $result[] = ['Id', 'Created', 'Used'];
         foreach ($price_discounts as $key => $price_discount) {
             // $result[++$key] = [$value->type, (int)$value->total1, (int)$value->used];
-            $result[++$key] = [$price_discount->voucher_id, $price_discount->voucher->total, $price_discount->voucher->quantium];
+            $result[++$key] = [$price_discount->voucher_id, $price_discount->voucher->total, $price_discount->voucher->total - $price_discount->voucher->quantium];
         }
 
         return view(
@@ -106,7 +106,7 @@ class DashboardController extends Controller
         $result[] = ['Id', 'Created', 'Used'];
         foreach ($percent_discounts as $key => $percent_discount) {
             // $result[++$key] = [$value->type, (int)$value->total1, (int)$value->used];
-            $result[++$key] = [$percent_discount->voucher_id, $percent_discount->voucher->total, $percent_discount->voucher->quantium];
+            $result[++$key] = [$percent_discount->voucher_id, $percent_discount->voucher->total, $percent_discount->voucher->total - $percent_discount->voucher->quantium];
         }
 
         return view(

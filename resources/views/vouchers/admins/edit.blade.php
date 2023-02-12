@@ -139,10 +139,10 @@
         let exp_date = Date.parse(document.getElementById("input-exp-date").value);
         let today = new Date;
 
-        if (exp_date <= today){
-            alert("error: expiration date lesser than current date");
-            return false;
-        }
+        // if (exp_date <= today){
+        //     alert("error: expiration date lesser than current date");
+        //     return false;
+        // }
 
         if (exp_date < eff_date){
             alert("error: expiration date lesser than effective date");
@@ -170,7 +170,7 @@
                 fetch(apiUrl, {body: payload, method: 'POST',}).then((res)=>res.json()).then(msg=>{
                     if (msg.message == 'Voucher update successful.'){
                         alert('update thanh cong!');
-                        window.location.replace("http://localhost:8000/admins/del-voucher");
+                        window.location.replace( route("delete-voucher") );
                     }else{
                         alert('khong update thanh cong!');
                         console.log(msg.quantium);
