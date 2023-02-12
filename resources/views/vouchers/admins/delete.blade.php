@@ -21,6 +21,7 @@
             <th>Content</th>
             <th>Minimum price</th>
             <th>Quantium</th>
+            <th>Total</th>
             <th>Expire at</th>
             <th>Choose this</th>
         </thead>
@@ -96,6 +97,7 @@
                         <td>${response.data[i].content}</td>
                         <td>${response.data[i].minimun_price}</td>
                         <td>${response.data[i].quantium}</td>
+                        <td>${response.data[i].total}</td>
                         <td>${response.data[i].expiration_date}</td>
                     <td>
                         <input type="checkbox" name="voucher_id_${response.data[i].id}" id="${response.data[i].id}" value="${response.data[i].id}" onclick="getVoucherIdAndType(${response.data[i].id})">

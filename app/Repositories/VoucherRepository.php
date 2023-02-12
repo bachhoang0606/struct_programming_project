@@ -136,10 +136,9 @@ class VoucherRepository implements VoucherRepositoryInterface
         $voucher = Voucher::find($id);
 
         $params['total'] = $params['quantium'];
-        $params['quantium'] = $voucher->quantium;
+        $params['quantium'] = $voucher->quantium + $params['total'] - $voucher->total;
         if ($params['quantium'] < $voucher->total) {
             // Tính số lượng voucher còn lại sau khi cập nhật tổng lượng voucher mới
-            $params['total'] = $params['quantium'];
             $params['quantium'] = $params['total'] - ($voucher->total - $voucher->quantium);
         }
 

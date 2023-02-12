@@ -24,7 +24,7 @@
     </div>
     <p></p>
     <div class="form-group">
-        <label for="quantium" class="form-label">Amount of vouchers:</label><br>
+        <label for="quantium" class="form-label">Total of vouchers:</label><br>
         <input type="number" name="quantium" id="input-quantium" value="1" min="1" class="form-control" required>
     </div>
     <p></p>    
@@ -192,7 +192,7 @@
                 document.getElementById("input-title").value = response.data[i].titlle;
                 document.getElementById("input-content").value = response.data[i].content;
                 document.getElementById("input-min-price").value = response.data[i].minimun_price;
-                document.getElementById("input-quantium").value = response.data[i].quantium;
+                document.getElementById("input-quantium").value = response.data[i].total;
                 document.getElementById("input-eff-date").value = response.data[i]["effective date"].split(" ")[0];
                 //console.log(response.data[i]["effective date"].split(" ")[0]);
                 document.getElementById("input-exp-date").value = response.data[i]["expiration_date"].split(" ")[0];
