@@ -103,7 +103,7 @@
                             </div>
                         </div>`;
                     }else if (response.data[i].type == "2"){ //price discount
-                        output += `<><div class="voucher-wrapper col-3">
+                        output += `<div class="voucher-wrapper col-3">
                             <div class="left price">
                                 <div class="left-title">${response.data[i].titlle}</div>
                             </div>
