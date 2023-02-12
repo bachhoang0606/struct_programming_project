@@ -84,7 +84,7 @@
                 }
                 if (!user_vouchers.includes(response.data[i].id) && (checkExpDate(response.data[i]["expiration_date"].split(" ")[0]))){
                     if (response.data[i].type == "1"){ //freeship
-                        output += `<div class="voucher-wrapper col">
+                        output += `<div class="voucher-wrapper col-3">
                             <div class="left">
                                 <div class="left-title">${response.data[i].titlle}</div>
                             </div>
@@ -103,7 +103,7 @@
                             </div>
                         </div>`;
                     }else if (response.data[i].type == "2"){ //price discount
-                        output += `<><div class="voucher-wrapper col">
+                        output += `<><div class="voucher-wrapper col-3">
                             <div class="left price">
                                 <div class="left-title">${response.data[i].titlle}</div>
                             </div>
@@ -125,7 +125,7 @@
                             </div>
                         </div>`;
                     }else if (response.data[i].type == "3"){ //percent discount
-                        output += `<div><div class="voucher-wrapper col">
+                        output += `<div><div class="voucher-wrapper col-3">
                             <div class="left percent">
                                 <div class="left-title">${response.data[i].titlle}</div>
                             </div>
@@ -185,115 +185,121 @@
                                     </div>
                                 </div>
                             </div>`;
-                }else{
-                    if (response.data[i].type == "1"){ //freeship
-                        output += `<div class="voucher-wrapper col">
-                            <div class="left bg-secondary">
-                                <div class="left-title">${response.data[i].titlle}</div>
-                            </div>
-                            <div class="right">
-                                <div class="right-body">
-                                    <div class="content">
-                                        <span>${response.data[i].content}</span>
-                                    </div>
-                                    <div class="date">
-                                        Có hiệu lực từ ${response.data[i]["effective date"]}
-                                    </div>
-                                </div>
-                                <button class="right-footer" onclick="displayIndex(${response.data[i].id})">
-                                    Chi tiết
-                                </button>
-                            </div>
-                        </div>`;
-                    }else if (response.data[i].type == "2"){ //price discount
-                        output += `<div class="voucher-wrapper col">
-                            <div class="left price bg-secondary">
-                                <div class="left-title">${response.data[i].titlle}</div>
-                            </div>
-                            <div class="right">
-                                <div class="right-body">
-                                <!--<div class="content">
-                                        <div class="price-text">Giảm $price_discount->price</div>
-                                    </div>-->
-                                    <div class="content">
-                                        <span>${response.data[i].content}</span>
-                                    </div>
-                                    <div class="date">
-                                        Có hiệu lực từ ${response.data[i]["effective date"]}
-                                    </div>
-                                </div>
-                                <button class="right-footer" onclick="displayIndex(${response.data[i].id})">
-                                    Chi tiết
-                                </button>
-                            </div>
-                        </div>`;
-                    }else if (response.data[i].type == "3"){ //percent discount
-                        output += `<div class="voucher-wrapper col">
-                            <div class="left percent bg-secondary">
-                                <div class="left-title">${response.data[i].titlle}</div>
-                            </div>
-                            <div class="right">
-                                <div class="right-body">
-                                    <!-- <div class="content">
-                                        <div class="percent-text">Giảm $percent_discount->percent %</div>
-                                        <div class="percent-price-max">tối đa $percent_discount->max_price</div>
-                                    </div> -->
-                                    <div class="content">
-                                        <span>${response.data[i].content}</span>
-                                    </div>
-                                    <div class="date">
-                                        Có hiệu lực từ ${response.data[i]["effective date"]}
-                                    </div>
-                                </div>
-                                <button class="right-footer" onclick="displayIndex(${response.data[i].id})">
-                                    Chi tiết
-                                </button>
-                            </div>
-                        </div>`;
-                    }
-                    output += `<div id="${response.data[i].id}" class="voucher-detail-wrapper">
-                                <div class="voucher-detail">
-                                    <div class="voucher-detail-header">
-                                        <h4 class="voucher-detail-header-text">Voucher ${response.data[i].id}</h4>
-                                    </div>
-                                    <div class="voucher-detail-body">
-                                        <div class="voucher-detail-body-item">
-                                            <h6>Ưu đãi</h6>
-                                            <span>Lượt sử dụng có hạn. Nhanh tay kẻo lỡ bạn nhé!</span>
-                                        </div>
-                                        <div class="voucher-detail-body-item">
-                                            <h6>Thời gian sử dụng mã</h6>
-                                            <span>${response.data[i]["effective date"]} - ${response.data[i].expiration_date}</span>
-                                        </div>
-                                        <div class="voucher-detail-body-item">
-                                            <h6>Số lượng còn lại</h6>
-                                            <span>${response.data[i].quantium}</span>
-                                        </div>
-                                        <div class="voucher-detail-body-item">
-                                            <h6>Sản Phẩm</h6>
-                                            <span>Tất cả sản phẩm</span>
-                                        </div>
-                                        <div class="voucher-detail-body-item">
-                                            <h6>Xem chi tiết</h6>
-                                            <span>
-                                            <!--Sử dụng mã hỗ trợ phí vận chuyển (Giảm $freeship->price trên 1 đơn hàng) <br> -->
-                                                HSD: ${response.data[i].expiration_date} <br>
-                                                Số lượt sử dụng có hạn, chương trình và mã có thể kết thúc khi hết lượt ưu đãi hoặc khi hết hạn ưu đãi, tuỳ điều kiện nào đến trước.
-                                            </span>
-                                        </div>
-                                    </div>
-                                    <div class="voucher-detail-footer">
-                                        <button class="voucher-detail-footer-btn btn-secondary" >Chọn voucher này</button>
-                                        <button class="voucher-detail-footer-btn" onclick="hideIndex(${response.data[i].id})">Đồng ý</button>
-                                    </div>
-                                </div>
-                            </div>`;
                 }
+                // else{
+                //     if (response.data[i].type == "1"){ //freeship
+                //         output += `<div class="voucher-wrapper col-3">
+                //             <div class="left bg-secondary">
+                //                 <div class="left-title">${response.data[i].titlle}</div>
+                //             </div>
+                //             <div class="right">
+                //                 <div class="right-body">
+                //                     <div class="content">
+                //                         <span>${response.data[i].content}</span>
+                //                     </div>
+                //                     <div class="date">
+                //                         Có hiệu lực từ ${response.data[i]["effective date"]}
+                //                     </div>
+                //                 </div>
+                //                 <button class="right-footer" onclick="displayIndex(${response.data[i].id})">
+                //                     Chi tiết
+                //                 </button>
+                //             </div>
+                //         </div>`;
+                //     }else if (response.data[i].type == "2"){ //price discount
+                //         output += `<div class="voucher-wrapper col-3">
+                //             <div class="left price bg-secondary">
+                //                 <div class="left-title">${response.data[i].titlle}</div>
+                //             </div>
+                //             <div class="right">
+                //                 <div class="right-body">
+                //                 <!--<div class="content">
+                //                         <div class="price-text">Giảm $price_discount->price</div>
+                //                     </div>-->
+                //                     <div class="content">
+                //                         <span>${response.data[i].content}</span>
+                //                     </div>
+                //                     <div class="date">
+                //                         Có hiệu lực từ ${response.data[i]["effective date"]}
+                //                     </div>
+                //                 </div>
+                //                 <button class="right-footer" onclick="displayIndex(${response.data[i].id})">
+                //                     Chi tiết
+                //                 </button>
+                //             </div>
+                //         </div>`;
+                //     }else if (response.data[i].type == "3"){ //percent discount
+                //         output += `<div class="voucher-wrapper col-3">
+                //             <div class="left percent bg-secondary">
+                //                 <div class="left-title">${response.data[i].titlle}</div>
+                //             </div>
+                //             <div class="right">
+                //                 <div class="right-body">
+                //                     <!-- <div class="content">
+                //                         <div class="percent-text">Giảm $percent_discount->percent %</div>
+                //                         <div class="percent-price-max">tối đa $percent_discount->max_price</div>
+                //                     </div> -->
+                //                     <div class="content">
+                //                         <span>${response.data[i].content}</span>
+                //                     </div>
+                //                     <div class="date">
+                //                         Có hiệu lực từ ${response.data[i]["effective date"]}
+                //                     </div>
+                //                 </div>
+                //                 <button class="right-footer" onclick="displayIndex(${response.data[i].id})">
+                //                     Chi tiết
+                //                 </button>
+                //             </div>
+                //         </div>`;
+                //     }
+                //     output += `<div id="${response.data[i].id}" class="voucher-detail-wrapper">
+                //                 <div class="voucher-detail">
+                //                     <div class="voucher-detail-header">
+                //                         <h4 class="voucher-detail-header-text">Voucher ${response.data[i].id}</h4>
+                //                     </div>
+                //                     <div class="voucher-detail-body">
+                //                         <div class="voucher-detail-body-item">
+                //                             <h6>Ưu đãi</h6>
+                //                             <span>Lượt sử dụng có hạn. Nhanh tay kẻo lỡ bạn nhé!</span>
+                //                         </div>
+                //                         <div class="voucher-detail-body-item">
+                //                             <h6>Thời gian sử dụng mã</h6>
+                //                             <span>${response.data[i]["effective date"]} - ${response.data[i].expiration_date}</span>
+                //                         </div>
+                //                         <div class="voucher-detail-body-item">
+                //                             <h6>Số lượng còn lại</h6>
+                //                             <span>${response.data[i].quantium}</span>
+                //                         </div>
+                //                         <div class="voucher-detail-body-item">
+                //                             <h6>Sản Phẩm</h6>
+                //                             <span>Tất cả sản phẩm</span>
+                //                         </div>
+                //                         <div class="voucher-detail-body-item">
+                //                             <h6>Xem chi tiết</h6>
+                //                             <span>
+                //                             <!--Sử dụng mã hỗ trợ phí vận chuyển (Giảm $freeship->price trên 1 đơn hàng) <br> -->
+                //                                 HSD: ${response.data[i].expiration_date} <br>
+                //                                 Số lượt sử dụng có hạn, chương trình và mã có thể kết thúc khi hết lượt ưu đãi hoặc khi hết hạn ưu đãi, tuỳ điều kiện nào đến trước.
+                //                             </span>
+                //                         </div>
+                //                     </div>
+                //                     <div class="voucher-detail-footer">
+                //                         <button class="voucher-detail-footer-btn btn-secondary" >Chọn voucher này</button>
+                //                         <button class="voucher-detail-footer-btn" onclick="hideIndex(${response.data[i].id})">Đồng ý</button>
+                //                     </div>
+                //                 </div>
+                //             </div>`;
+                // }
+                
                 if (i == a + 2){
                     output += '</div>'
                 }
             }
+            if (output.length < 92){
+                output += '<h3>Hiện tại không có voucher nào khả dụng</h3>';
+            }
             output += '</div>';
+            
             document.getElementById("result").innerHTML = output;
         }
     ).catch(error => console.log(error));
