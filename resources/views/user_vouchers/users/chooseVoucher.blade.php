@@ -55,7 +55,7 @@
         if (exp_date > today)
             return true;
     
-        return false;
+        return true;
     }
 
     setUser({{$id}});

@@ -139,10 +139,10 @@
         let exp_date = Date.parse(document.getElementById("input-exp-date").value);
         let today = new Date;
 
-        // if (exp_date <= today){
-        //     alert("error: expiration date lesser than current date");
-        //     return false;
-        // }
+        if (exp_date <= today){
+            alert("error: expiration date lesser than current date");
+            return false;
+        }
 
         if (exp_date < eff_date){
             alert("error: expiration date lesser than effective date");

@@ -131,12 +131,13 @@
                 .then(
                     response => {
                         console.log(response);
+                        window.location.reload();
                     }
                 ).catch(error => {
                     //alert('Cannot delete this voucher');
                     console.log(error);
                 });
-                window.location.reload();
+                
             }
         });
 
