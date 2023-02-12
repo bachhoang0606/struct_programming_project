@@ -19,12 +19,14 @@ use App\Http\Controllers\web\VoucherController;
 
 
 Route::get('/', [DashboardController::class, 'index'])->name('index');
-Route::get('/freeship', [DashboardController::class, 'freeship'])->name('freeship');
-Route::get('/price_discount', [DashboardController::class, 'priceDiscount'])->name('price_discount');
-Route::get('/percent_discount', [DashboardController::class, 'percentDiscount'])->name('percent_discount');
 
-// Route::get('/', [ChartController::class, 'index'])->name('index');
+
 Route::group( ['prefix' => 'admins/'] , function () {
+
+    // Dashboard controller routes
+    Route::get('/freeship', [DashboardController::class, 'freeship'])->name('freeship');
+    Route::get('/price_discount', [DashboardController::class, 'priceDiscount'])->name('price_discount');
+    Route::get('/percent_discount', [DashboardController::class, 'percentDiscount'])->name('percent_discount');
 
     // products controller routes
     Route::get('product.index', [ProductController::class, 'index'])->name('product.index')->middleware('loadcoin');
@@ -41,7 +43,7 @@ Route::group( ['prefix' => 'admins/'] , function () {
     Route::post('vouchers', [VoucherController::class, 'store'])->name('create');
 
     // coin card controller routes
-    Route::get('coin_cards', [CoinCardController::class, 'index'])->name('coin_cards.index');//->middleware('loadcoin');
+    Route::get('coin_cards', [CoinCardController::class, 'index'])->name('coin_cards.index')->middleware('loadcoin');
 });
 
 

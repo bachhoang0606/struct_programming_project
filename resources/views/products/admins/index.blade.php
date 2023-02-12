@@ -35,7 +35,7 @@
                 <h5>Product coin: <?= $product->coin; ?> </h5>
                 <h5>Percent discount: <?= $product->discount; ?>%</td><h5>
                </td>
-                <td><a href="{{url('admins/product.edit/'.$product->product_id.'?image_url='.$image_url)}}" class="btn btn-success">Edit</a></td>
+                <td><a href="{{ url('admins/product.edit/'.$product->product_id.'?image_url='.$image_url)}}" class="btn btn-success">Edit</a></td>
             </tr>
         <?php endforeach; ?>
 

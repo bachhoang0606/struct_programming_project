@@ -23,7 +23,7 @@ class autoLoadCoin
      */
     public function handle(Request $request, Closure $next)
     {
-        // $users =  $this->createUserPoin();
+        $users =  $this->createUserPoin();
         $products = $this->productCoin();
         $request->merge(compact('products'));
         return $next($request);
