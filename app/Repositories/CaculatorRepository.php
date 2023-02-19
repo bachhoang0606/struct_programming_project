@@ -8,6 +8,7 @@ use App\Models\PercentDiscount;
 use App\Models\PriceDiscount;
 use App\Models\UserVoucher;
 use App\Models\Voucher;
+use App\Models\ProductAttribute;
 
 class CaculatorRepository implements CaculatorRepositoryInterface
 {
@@ -54,5 +55,9 @@ class CaculatorRepository implements CaculatorRepositoryInterface
         $coin_card = CoinCard::where('user_id', $id)
             ->update($attribute);
         return $coin_card;
+    }
+    public function product($id)
+    {
+        return ProductAttribute::where( 'product_id', $id )->first();
     }
 }

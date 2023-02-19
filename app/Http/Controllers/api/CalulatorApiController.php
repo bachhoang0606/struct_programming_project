@@ -5,6 +5,8 @@ namespace App\Http\Controllers\api;
 use App\Contracts\Repositories\CaculatorRepositoryInterface;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Http\Resources\CoinCardResource;
+use App\Http\Resources\VoucherResource;
 
 class CalulatorApiController extends Controller
 {
@@ -117,6 +119,63 @@ class CalulatorApiController extends Controller
                 'data' => [
                     'produc_discount' => $discount_price,
                 ]
+            ]
+        );
+    }
+
+    /**
+     * api update database coin, voucher when user payment.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function handlerPayment(Request $request)
+    {
+        $user_id = $request->user_id;
+        $coin = $request->coin;
+        $products = $request->products;
+        $voucher_id = $request->voucher_id;
+        if ($voucher_id) {
+            $user_voucher = $this->repository->userVoucher($user_id, $voucher_id);
+        }
+
+        // tinh toan so tien duoc tru khi dung diem
+        $coin_total = -$coin;
+        foreach( $products as $product_id ){
+            $product = $this->repository->product($product_id);
+            $coin_total += $product->coin;
+        }
+
+        $user = $this->repository->coinCard($user_id);
+
+        $user_coin = $user->coin + $coin_total;
+
+        // cap nhat lai xu cua nguoi dung
+        $user = $this->repository->coinCardUpdate(
+            $user_id,
+            [
+                'coin' => $user_coin
+            ]
+        );
+        $coin_card = $this->repository->coinCard($user_id);
+        return new CoinCardResource($coin_card);
+    }
+
+        /**
+     * api lisy vouchers for user select when payment.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function vouchersPayment(Request $request)
+    {
+        $user_id = $request->user_id;
+        $user = $this->repository->coinCard($user_id);
+        return response()->json(
+            [
+                "user_id" => $user->user_id,
+                "coin" => $user->coin,
+                "voucher_list" => VoucherResource::collection($user->vouchersPayment),
             ]
         );
     }

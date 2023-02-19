@@ -54,7 +54,9 @@ Route::group( ['prefix' => 'users/'] , function () {
     Route::get('voucherList.freeships/{id}', [UserVoucherController::class, 'displayFreeships'])->name('displayFreeships');
     Route::get('voucherList.percent/{id}', [UserVoucherController::class, 'displayPercent'])->name('displayPercent');
     Route::get('voucherList.price/{id}', [UserVoucherController::class, 'displayPrice'])->name('displayPrice');
-    Route::get('choose-voucher/{id}', function ($id) {
-        return view('user_vouchers.users.chooseVoucher', ['id' => $id]);
-    })->name('choose-voucher');
+    
 });
+
+Route::get('choose-voucher/{id}', function ($id) {
+    return view('user_vouchers.users.chooseVoucher', ['id' => $id]);
+})->name('choose-voucher');

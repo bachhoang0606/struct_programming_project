@@ -15,6 +15,7 @@ class PercentDiscountResource extends JsonResource
     public function toArray($request)
     {
         return [
+            'type' => 'percent discount',
             'percent' => $this->percent,
             'max_price' => $this->max_price,
         ];

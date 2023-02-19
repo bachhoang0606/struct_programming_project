@@ -16,6 +16,7 @@ class UserVoucherResource extends JsonResource
     {
         return [
             "user_id" => $this->user_id,
+            "coin" => $this->coin,
             "voucher_list" => VoucherResource::collection($this->vouchers),
         ];
     }

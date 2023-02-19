@@ -26,4 +26,8 @@ class CoinCard extends Model
     public function vouchers(){
         return $this->belongsToMany(Voucher::class, 'user_vouchers', 'user_id', 'voucher_id');
     }
+
+    public function vouchersPayment(){
+        return $this->belongsToMany(Voucher::class, 'user_vouchers', 'user_id', 'voucher_id')->where('expiration_date', '>=', now());
+    }
 }

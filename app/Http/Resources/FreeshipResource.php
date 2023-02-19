@@ -15,6 +15,7 @@ class FreeshipResource extends JsonResource
     public function toArray($request)
     {
         return [
+            'type' => 'freeship',
             'price' => $this->price,
         ];
     }

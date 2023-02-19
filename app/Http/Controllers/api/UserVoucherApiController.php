@@ -65,6 +65,7 @@ class UserVoucherApiController extends Controller
      */
     public function userHasVoucher()
     {
+        $user_vouchers = $this->repository->indexCoinCards();
         return UserVoucherResource::collection($this->repository->indexCoinCards());
     }
 
@@ -76,7 +77,6 @@ class UserVoucherApiController extends Controller
      */
     public function userHasVoucherWithId($id)
     {
-
         return new UserVoucherResource($this->repository->showCoinCard($id));
     }
 }

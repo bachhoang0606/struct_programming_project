@@ -15,6 +15,7 @@ class PriceDiscountResource extends JsonResource
     public function toArray($request)
     {
         return [
+            'type' => 'price discount',
             'price' => $this->price,
         ];
     }

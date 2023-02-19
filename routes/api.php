@@ -34,6 +34,8 @@ Route::get('/percent-discount/{id}', [PercentDiscountApiController::class, 'show
 
 // caculator api controller
 Route::get('/discount-price', [CalulatorApiController::class, 'payment']);
+Route::get('/handler-payment', [CalulatorApiController::class, 'handlerPayment']);
+Route::get('/vouchers-payment', [CalulatorApiController::class, 'vouchersPayment']);
 
 // voucher api controller
 Route::get('/vouchers', [VoucherApiController::class, 'index']);
